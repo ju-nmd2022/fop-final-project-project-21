@@ -15,3 +15,8 @@
 .playerGrid {
   grid-template-rows: 1fr 1fr;
 }
+
+.game-logo {
+  height: 400pt;
+  width: auto;
+}
