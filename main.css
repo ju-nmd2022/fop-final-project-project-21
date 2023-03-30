@@ -44,3 +44,7 @@
 .levels {
   color: aliceblue;
 }
+
+.key-images {
+  max-width: 20em;
+}
