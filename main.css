@@ -13,10 +13,34 @@
 }
 
 .playerGrid {
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 6fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "playerOne playerTwo"
+    "startButton startButton";
+}
+
+.playerOne {
+  grid-area: playerOne;
+  height: 80vh;
+  color: aliceblue;
+}
+
+.playerTwo {
+  grid-area: playerTwo;
+  height: 80vh;
+  color: aliceblue;
+}
+
+.startButton {
+  grid-area: startButton;
 }
 
 .game-logo {
   height: 400pt;
   width: auto;
+}
+
+.levels {
+  color: aliceblue;
 }
