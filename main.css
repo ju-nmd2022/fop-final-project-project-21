@@ -27,17 +27,29 @@
 }
 
 .playerOne {
+  display: grid;
   grid-area: playerOne;
+  justify-content: center;
   color: aliceblue;
 }
 
 .playerTwo {
+  display: grid;
   grid-area: playerTwo;
+  justify-content: center;
   color: aliceblue;
 }
 
+.player-heading {
+  justify-self: center;
+}
+
 .startButton {
+  display: grid;
   grid-area: startButton;
+  font-size: 20pt;
+  height: 30pt;
+  width: 70pt;
 }
 
 .levels {
