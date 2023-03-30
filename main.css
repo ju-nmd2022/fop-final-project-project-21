@@ -5,16 +5,22 @@
 
 .container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   height: 100vh;
   color: aliceblue;
 }
 
 .game-logo {
-  height: 400pt;
+  height: 200pt;
   width: auto;
+}
+
+.description-text {
+  font-size: 14pt;
+  margin-top: 5rem;
+  width: 55vw;
 }
 
 .playerGrid {
@@ -50,6 +56,8 @@
   font-size: 20pt;
   height: 30pt;
   width: 70pt;
+  color: aliceblue;
+  margin-top: 1rem;
 }
 
 .levels {
