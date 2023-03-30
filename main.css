@@ -1,0 +1,17 @@
+* {
+  padding: 0;
+  background-color: #191919;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  color: aliceblue;
+}
+
+.playerGrid {
+  grid-template-rows: 1fr 1fr;
+}
