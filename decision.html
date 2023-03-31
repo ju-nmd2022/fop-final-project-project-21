@@ -6,65 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Character details</title>
     <link rel="stylesheet" href="main.css" />
+    <script src="akarush.js" defer></script>
   </head>
   <body>
     <main>
       <div class="playerGrid">
         <div class="playerOne">
           <h2 class="player-heading">Player one</h2>
-          <div class="playerOne">
-            <h2>Player one</h2>
-            <!-- source for the carousel https://www.youtube.com/watch?v=VYsVOamdB0g -->
-            <div class="carousel">
-              <button class="carousel-button carousel-button-left">
-                left arrow
-              </button>
 
-              <div class="carousel-track-container">
-                <ul class="carousel-track">
-                  <li class="carousel-slide">
-                    <img
-                      class="carousel-image"
-                      src="images/yellow-character/aka-rush-caracter-yellow-01.png"
-                      alt=""
-                    />
-                  </li>
-                  <li class="carousel-slide">
-                    <img
-                      class="carousel-image"
-                      src="images/yellow-character/aka-rush-caracter-yellow-02.png"
-                      alt=""
-                    />
-                  </li>
-                  <li class="carousel-slide">
-                    <img
-                      class="carousel-image"
-                      src="images/yellow-character/aka-rush-caracter-yellow-03.png"
-                      alt=""
-                    />
-                  </li>
-                  <li class="carousel-slide">
-                    <img
-                      class="carousel-image"
-                      src="images/yellow-character/aka-rush-caracter-yellow-04.png"
-                      alt=""
-                    />
-                  </li>
-                  <li class="carousel-slide">
-                    <img
-                      class="carousel-image"
-                      src="images/yellow-character/aka-rush-caracter-yellow-05.png"
-                      alt=""
-                    />
-                  </li>
-                </ul>
-              </div>
+          <!-- source for the carousel https://www.youtube.com/watch?v=VYsVOamdB0g -->
+          <div class="carousel">
+            <button class="carousel-button carousel-button-left">
+              <img src="images/arrow-buttons/left-arrow.svg" alt="" />
+            </button>
 
-              <button class="carousel-button carousel-button-right">
-                right arrow
-              </button>
+            <div class="carousel-track-container">
+              <ul class="carousel-track" id="track">
+                <li class="carousel-slide current-slide">
+                  <img
+                    class="carousel-image"
+                    src="images/yellow-character/aka-rush-caracter-yellow-01.png"
+                    alt=""
+                  />
+                </li>
+                <li class="carousel-slide">
+                  <img
+                    class="carousel-image"
+                    src="images/yellow-character/aka-rush-caracter-yellow-02.png"
+                    alt=""
+                  />
+                </li>
+                <li class="carousel-slide">
+                  <img
+                    class="carousel-image"
+                    src="images/yellow-character/aka-rush-caracter-yellow-03.png"
+                    alt=""
+                  />
+                </li>
+                <li class="carousel-slide">
+                  <img
+                    class="carousel-image"
+                    src="images/yellow-character/aka-rush-caracter-yellow-04.png"
+                    alt=""
+                  />
+                </li>
+                <li class="carousel-slide">
+                  <img
+                    class="carousel-image"
+                    src="images/yellow-character/aka-rush-caracter-yellow-05.png"
+                    alt=""
+                  />
+                </li>
+              </ul>
             </div>
+
+            <button class="carousel-button carousel-button-right">
+              <img src="images/arrow-buttons/right-arrow.svg" alt="" />
+            </button>
           </div>
+
           <img
             class="key-images"
             src="images/Keys/akarush-keys-01.png"
@@ -73,6 +73,7 @@
         </div>
         <div class="playerTwo">
           <h2 class="player-heading">Player two</h2>
+          <div id="secondPlayerCarousel"></div>
           <img
             class="key-images"
             src="images/Keys/akarush-keys-02.png"

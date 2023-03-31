@@ -1,6 +1,7 @@
 * {
   padding: 0;
   background-color: #191919;
+  /* background-color: darkgray; */
 }
 
 .container {
@@ -71,11 +72,51 @@
 /* image carousel */
 .carousel {
   position: relative;
-  height: 600px;
+  height: 400px;
   width: 80%;
   margin: 0 auto;
 }
 
 .carousel-image {
-  max-width: 10em;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.carousel-track-container {
+  height: 100%;
+  background-color: blue;
+  position: relative;
+  overflow: hidden;
+}
+.carousel-track {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+  height: 100%;
+  transition: transform 250ms ease-in;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.carousel-button-left {
+  left: -50px;
+}
+.carousel-button-right {
+  right: -50px;
 }
