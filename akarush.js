@@ -8,7 +8,8 @@ const previousButtonElement = document.querySelector(".carousel-button-left");
 const nextButtonElement = document.querySelector(".carousel-button-right");
 
 // getting the width of the slide wich can depend on the width of the window
-const slideWidth = slideElements[0].getBoundingClientRect().width;
+// const slideWidth = slideElements[0].getBoundingClientRect().width;
+const slideWidth = 250;
 
 // positioning the slides next to each other
 const slidePosition = (slideElements, index) => {

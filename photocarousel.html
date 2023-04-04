@@ -1,0 +1,45 @@
+<!-- a working document for trying out things with the photo carousel without messing up the existing code :))  -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="left">left arrow</button>
+
+    <img id="slide" width="400" height="800" />
+    <button id="right">right arrow</button>
+
+    <script>
+      let i = 0;
+      let images = [];
+
+      images[0] = "images/ovve-colours/ovve-colours-01.png";
+      images[1] = "images/ovve-colours/ovve-colours-02.png";
+      images[2] = "images/ovve-colours/ovve-colours-03.png";
+      images[3] = "images/ovve-colours/ovve-colours-04.png";
+      images[4] = "images/ovve-colours/ovve-colours-05.png";
+
+      function changeImage() {
+        const slideElementNew = document.getElementById("slide");
+        slideElementNew.src = images[i];
+
+        const leftButtonElement = document.getElementById("left");
+        // const rightButtonElement = document.getElementById("right");
+
+        if (i < images.length - 1) {
+          i++;
+        } else {
+          i = 0;
+        }
+        setTimeout("changeImage()", 3000);
+      }
+
+      window.onload = changeImage;
+    </script>
+  </body>
+</html>
