@@ -38,3 +38,38 @@ nextButtonElement.addEventListener("click", (e) => {
 
   moveToSlide(trackElement, currentSlide, nextSlide);
 });
+
+//Choose player name
+//Source => https://stackoverflow.com/questions/54270979/javascript-how-to-have-the-name-of-the-players-with-queryselector
+
+var button = document.getElementById("second_button");
+var firsttext;
+console.log(button);
+
+button.addEventListener("click", function () {
+  var player1 = document.getElementById("firsttext");
+
+  if (player1.value != "") {
+    firsttext = player1.value;
+    alert(firsttext);
+    return firsttext;
+  } else {
+    alert("Enter player's name");
+  }
+});
+
+var button2 = document.getElementById("second_button2");
+var secondtext;
+console.log(button2);
+
+button2.addEventListener("click", function () {
+  var player2 = document.getElementById("secondtext");
+
+  if (player2.value != "") {
+    secondtext = player2.value;
+    alert(secondtext);
+    return firsttext;
+  } else {
+    alert("Enter player's name");
+  }
+});
