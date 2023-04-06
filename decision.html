@@ -12,81 +12,111 @@
     <main>
       <div class="playerGrid">
         <div class="playerOne">
+          <h2>Player one</h2>
           <section id="first_section" class="first_section">
-            <input type="text" placeholder="Player one" id="firsttext" /><br />
+            <input
+              class="inputField"
+              type="text"
+              placeholder="Player one"
+              id="firsttext"
+            />
           </section>
-
           <section id="button">
             <button type="button" id="second_button">Choose></button>
           </section>
 
           <!-- source for the carousel https://www.youtube.com/watch?v=VYsVOamdB0g -->
           <div class="carousel">
-            <button class="carousel-button carousel-button-left">
+            <!-- button to move images right  -->
+            <button
+              onclick="firstPlayerMoveImageRight();"
+              id="firstPlayerLeft"
+              class="carousel-button carousel-button-left"
+            >
               <img src="images/arrow-buttons/left-arrow.svg" alt="" />
             </button>
 
             <div class="carousel-track-container">
-              <ul class="carousel-track" id="track">
-                <li class="carousel-slide current-slide">
+              <ul class="carousel-track">
+                <li class="carousel-slide">
+                  <!-- the overall dispalyed for palyer one  -->
                   <img
+                    id="firstPlayerOverall"
                     class="carousel-image"
+                    width="400"
+                    height="800"
                     src="images/ovve-colours/ovve-colours-01.png"
-                    alt=""
-                  />
-                </li>
-                <li class="carousel-slide">
-                  <img
-                    class="carousel-image"
-                    src="images/ovve-colours/ovve-colours-02.png"
-                    alt=""
-                  />
-                </li>
-                <li class="carousel-slide">
-                  <img
-                    class="carousel-image"
-                    src="images/ovve-colours/ovve-colours-03.png"
-                    alt=""
-                  />
-                </li>
-                <li class="carousel-slide">
-                  <img
-                    class="carousel-image"
-                    src="images/ovve-colours/ovve-colours-04.png"
-                    alt=""
-                  />
-                </li>
-                <li class="carousel-slide">
-                  <img
-                    class="carousel-image"
-                    src="images/ovve-colours/ovve-colours-05.png"
-                    alt=""
                   />
                 </li>
               </ul>
             </div>
-
-            <button class="carousel-button carousel-button-right">
+            <!-- button to move images left -->
+            <button
+              onclick="firstPlayerMoveImageLeft();"
+              id="firstPlayerRight"
+              class="carousel-button carousel-button-right"
+            >
               <img src="images/arrow-buttons/right-arrow.svg" alt="" />
             </button>
           </div>
 
+          <!-- image of the keys the player one shoud use  -->
           <img
             class="key-images"
             src="images/Keys/akarush-keys-01.png"
             alt="wasd-keys"
           />
         </div>
-        <div class="playerTwo">
-          <section id="second_section" class="second_section">
-            <input type="text" placeholder="Player two" id="secondtext" /><br />
-          </section>
 
+        <div class="playerTwo">
+          <h2>Player two</h2>
+          <section id="second_section" class="second_section">
+            <input
+              class="inputField"
+              type="text"
+              placeholder="Player two"
+              id="secondtext"
+            />
+          </section>
           <section id="button">
             <button type="button" id="second_button2">Choose ></button>
           </section>
 
-          <div id="secondPlayerCarousel"></div>
+          <div class="carousel">
+            <!-- button to move images right  -->
+            <button
+              onclick="secondPlayerMoveImageRight();"
+              id="secondPlayerLeft"
+              class="carousel-button carousel-button-left"
+            >
+              <img src="images/arrow-buttons/left-arrow.svg" alt="" />
+            </button>
+
+            <div class="carousel-track-container">
+              <ul class="carousel-track" id="track">
+                <li class="carousel-slide">
+                  <!-- overall color displayed for palyer two  -->
+                  <img
+                    id="secondPlayerOverall"
+                    class="carousel-image"
+                    width="400"
+                    height="800"
+                    src="images/ovve-colours/ovve-colours-01.png"
+                  />
+                </li>
+              </ul>
+            </div>
+
+            <!-- button to move images left -->
+            <button
+              onclick="secondPlayerMoveImageLeft();"
+              id="secondPlayerRight"
+              class="carousel-button carousel-button-right"
+            >
+              <img src="images/arrow-buttons/right-arrow.svg" alt="" />
+            </button>
+          </div>
+          <!-- image of the keys player two should use  -->
           <img
             class="key-images"
             src="images/Keys/akarush-keys-02.png"

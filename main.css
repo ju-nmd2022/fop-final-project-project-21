@@ -2,6 +2,7 @@
   padding: 0;
   background-color: #191919;
   /* background-color: darkgray; */
+  font-family: "Josefin Sans", sans-serif;
 }
 
 .container {
@@ -57,12 +58,18 @@
   font-size: 20pt;
   height: 30pt;
   width: 70pt;
-  color: aliceblue;
+  color: white;
   margin-top: 1rem;
 }
 
 .key-images {
   max-width: 20em;
+}
+
+.inputField {
+  padding: 0.25em 0.5em;
+  background-color: white;
+  font-size: 1em;
 }
 
 /* image carousel */
@@ -117,6 +124,7 @@
   right: -50px;
 }
 
+/* levels screen  */
 .levelFlex {
   display: flex;
   flex-direction: row;
