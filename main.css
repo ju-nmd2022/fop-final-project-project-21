@@ -61,10 +61,6 @@
   margin-top: 1rem;
 }
 
-.levels {
-  color: aliceblue;
-}
-
 .key-images {
   max-width: 20em;
 }
@@ -119,4 +115,39 @@
 }
 .carousel-button-right {
   right: -50px;
+}
+
+.levelFlex {
+  display: flex;
+  flex-direction: row;
+  gap: 12rem;
+  margin-left: 3rem;
+}
+
+.container-levels {
+  display: grid;
+  grid-template-rows: 3fr 1fr 0.5fr;
+}
+
+.little-game-logo {
+  width: 8rem;
+  height: auto;
+  margin-top: 1rem;
+  justify-content: center;
+  grid-row: 1/2;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.levels {
+  color: aliceblue;
+  font-size: 50pt;
+  grid-row: 2/3;
+}
+
+.stars-stroke {
+  width: 200px;
+  height: auto;
+  grid-row: 3/4;
+  margin-left: 3rem;
 }
