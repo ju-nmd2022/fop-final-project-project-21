@@ -65,6 +65,7 @@ button.addEventListener("click", function () {
 
   if (player1.value != "") {
     firsttext = player1.value;
+    sessionStorage.setItem("name", JSON.stringify(firsttext));
     alert(firsttext);
     return firsttext;
   } else {
@@ -81,8 +82,9 @@ button2.addEventListener("click", function () {
 
   if (player2.value != "") {
     secondtext = player2.value;
+    sessionStorage.setItem("name2", JSON.stringify(secondtext));
     alert(secondtext);
-    return firsttext;
+    return secondtext;
   } else {
     alert("Enter player's name");
   }
