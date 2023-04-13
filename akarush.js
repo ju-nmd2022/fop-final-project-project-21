@@ -28,6 +28,7 @@ function firstPlayerMoveImageLeft() {
     i = -1;
   }
 }
+console.log(i);
 
 // photo carousel for the second player
 let e = 0;
