@@ -13,7 +13,7 @@ function firstPlayerMoveImageRight() {
   if (i > 0) {
     i = i - 1;
     slideElement.src = images[i];
-    console.log(i);
+    rememberColor();
   } else if (i === 0) {
     i = 5;
   }
@@ -23,12 +23,41 @@ function firstPlayerMoveImageLeft() {
   if (i < 4) {
     i = i + 1;
     slideElement.src = images[i];
-    console.log(i);
+    rememberColor();
   } else if (i === 4) {
     i = -1;
   }
 }
-console.log(i);
+
+function rememberColor() {
+  if (i === 0) {
+    sessionStorage.setItem("color", "yellow");
+  } else if (i === 1) {
+    sessionStorage.setItem("color", "green");
+  } else if (i === 2) {
+    sessionStorage.setItem("color", "blue");
+  } else if (i === 3) {
+    sessionStorage.setItem("color", "red");
+  } else {
+    sessionStorage.setItem("color", "white");
+  }
+  return;
+}
+
+function rememberColor2() {
+  if (e === 0) {
+    sessionStorage.setItem("color2", "yellow");
+  } else if (e === 1) {
+    sessionStorage.setItem("color2", "green");
+  } else if (e === 2) {
+    sessionStorage.setItem("color2", "blue");
+  } else if (e === 3) {
+    sessionStorage.setItem("color2", "red");
+  } else {
+    sessionStorage.setItem("color2", "white");
+  }
+  return;
+}
 
 // photo carousel for the second player
 let e = 0;
@@ -38,7 +67,7 @@ function secondPlayerMoveImageRight() {
   if (e > 0) {
     e = e - 1;
     secondPlayerSlideElement.src = images[e];
-    console.log(e);
+    rememberColor2();
   } else if (e === 0) {
     e = 5;
   }
@@ -48,7 +77,7 @@ function secondPlayerMoveImageLeft() {
   if (e < 4) {
     e = e + 1;
     secondPlayerSlideElement.src = images[e];
-    console.log(e);
+    rememberColor2();
   } else if (e === 4) {
     e = -1;
   }
