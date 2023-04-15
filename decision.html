@@ -10,22 +10,27 @@
   <body>
     <main>
       <div class="playerGrid">
-        <div class="playerOne">
-          <h2 id="playerone">Player one</h2>
-          <section id="first_section" class="first_section">
-            <input
-              class="inputField"
-              type="text"
-              placeholder="Player one"
-              id="firsttext"
-            />
-          </section>
-          <section id="button">
-            <button type="button" id="second_button">Choose></button>
-          </section>
+        <div class="player">
+          <h2 class="playerone" id="playerone">Player one</h2>
+          <div class="input_section input1">
+            <section id="first_section" class="first_input">
+              <input
+                class="inputField"
+                type="text"
+                placeholder="Player one"
+                id="firsttext"
+              />
+            </section>
+
+            <section id="button">
+              <button type="button" class="second_button" id="second_button">
+                Choose
+              </button>
+            </section>
+          </div>
 
           <!-- source for the carousel https://www.youtube.com/watch?v=VYsVOamdB0g -->
-          <div class="carousel">
+          <div class="carousel courosel1-grid">
             <!-- button to move images right  -->
             <button
               onclick="firstPlayerMoveImageRight();"
@@ -61,27 +66,32 @@
 
           <!-- image of the keys the player one shoud use  -->
           <img
-            class="key-images"
+            class="key-images key1"
             src="images/Keys/akarush-keys-01.png"
             alt="wasd-keys"
           />
         </div>
 
-        <div class="playerTwo">
+        <div class="player">
           <h2 id="playertwo">Player two</h2>
-          <section id="second_section" class="second_section">
-            <input
-              class="inputField"
-              type="text"
-              placeholder="Player two"
-              id="secondtext"
-            />
-          </section>
-          <section id="button">
-            <button type="button" id="second_button2">Choose ></button>
-          </section>
+          <div class="input_section input2">
+            <section id="second_section" class="second_section">
+              <input
+                class="inputField"
+                type="text"
+                placeholder="Player two"
+                id="secondtext"
+              />
 
-          <div class="carousel">
+              <section id="button">
+                <button type="button" class="second_button" id="second_button2">
+                  Choose
+                </button>
+              </section>
+            </section>
+          </div>
+
+          <div class="carousel courosel1-grid">
             <!-- button to move images right  -->
             <button
               onclick="secondPlayerMoveImageRight();"
@@ -117,12 +127,12 @@
           </div>
           <!-- image of the keys player two should use  -->
           <img
-            class="key-images"
+            class="key-images key2"
             src="images/Keys/akarush-keys-02.png"
             alt="arrow-keys"
           />
         </div>
-        <a href="levels.html"> <button class="startButton">Start</button></a>
+        <a href="levels.html"> <button class="startButton2">Start</button></a>
       </div>
     </main>
     <script src="akarush.js" defer></script>

@@ -34,22 +34,47 @@
     "startButton startButton";
 }
 
-.playerOne {
+.playerone,
+.input1,
+.carousel1-grid,
+.key1 {
   display: grid;
   grid-area: playerOne;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   color: aliceblue;
 }
 
-.playerTwo {
+.playertwo,
+.input2,
+.carousel2-grid,
+.key2 {
   display: grid;
   grid-area: playerTwo;
-  justify-content: center;
-  color: aliceblue;
 }
 
 .player-heading {
   justify-self: center;
+}
+
+.startButton2 {
+  display: grid;
+  grid-area: startButton;
+  align-items: center;
+  justify-content: center;
+  font-size: 20pt;
+  height: 30pt;
+  width: 70pt;
+  color: white;
+  background-color: gold;
+  outline: 2px solid white;
+  outline-offset: 3.2px;
+  margin-top: 1rem;
 }
 
 .startButton {
@@ -63,7 +88,7 @@
 }
 
 .key-images {
-  max-width: 20em;
+  max-width: 15em;
 }
 
 .inputField {
@@ -72,11 +97,25 @@
   font-size: 1em;
 }
 
+.input_section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.second_button {
+  outline: 1px solid white;
+  outline-offset: 3.2px;
+  background-color: gold;
+  color: white;
+}
+
 /* image carousel */
 .carousel {
   position: relative;
-  height: 400px;
-  width: 80%;
+  height: 380px;
+  width: 60%;
   margin: 0 auto;
 }
 
