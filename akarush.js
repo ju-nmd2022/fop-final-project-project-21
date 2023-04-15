@@ -87,34 +87,38 @@ function secondPlayerMoveImageLeft() {
 //Source => https://stackoverflow.com/questions/54270979/javascript-how-to-have-the-name-of-the-players-with-queryselector
 
 let button = document.getElementById("second_button");
-let firsttext;
-console.log(button);
+let player1 = document.getElementById("firsttext");
+let setName = document.getElementById("playerone");
+
+if (sessionStorage.getItem("name")) {
+  setName.innerHTML = sessionStorage.getItem("name");
+}
 
 button.addEventListener("click", function () {
-  let player1 = document.getElementById("firsttext");
-
   if (player1.value != "") {
-    firsttext = player1.value;
-    sessionStorage.setItem("name", JSON.stringify(firsttext));
+    let firsttext = player1.value;
+    sessionStorage.setItem("name", firsttext);
     alert(firsttext);
-    return firsttext;
+    setName.innerHTML = firsttext;
   } else {
     alert("Enter player's name");
   }
 });
 
 let button2 = document.getElementById("second_button2");
-let secondtext;
-console.log(button2);
+let setName2 = document.getElementById("playertwo");
+let player2 = document.getElementById("secondtext");
+
+if (sessionStorage.getItem("name2")) {
+  setName2.innerHTML = sessionStorage.getItem("name2");
+}
 
 button2.addEventListener("click", function () {
-  let player2 = document.getElementById("secondtext");
-
   if (player2.value != "") {
-    secondtext = player2.value;
-    sessionStorage.setItem("name2", JSON.stringify(secondtext));
+    let secondtext = player2.value;
+    sessionStorage.setItem("name2", secondtext);
     alert(secondtext);
-    return secondtext;
+    setName2.innerHTML = secondtext;
   } else {
     alert("Enter player's name");
   }
