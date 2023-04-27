@@ -1,6 +1,13 @@
-//player object
+const canvas = document.querySelector("canvas");
+//c = context
+const c = canvas.getContext("2d");
+
+canvas.width = 1024;
+canvas.height = 576;
+
 const gravity = 0.5;
 
+//player object
 export default class Player {
   constructor(position) {
     this.position = position;

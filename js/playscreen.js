@@ -23,6 +23,12 @@ const keys = {
   a: {
     pressed: false,
   },
+  ArrowRight: {
+    pressed: false,
+  },
+  ArrowLeft: {
+    pressed: false,
+  },
 };
 
 //creating an always repeating animation
@@ -40,6 +46,13 @@ function animate() {
     player.velocity.x = 4;
   } else if (keys.a.pressed === true) {
     player.velocity.x = -4;
+  }
+
+  player2.velocity.x = 0;
+  if (keys.ArrowRight.pressed === true) {
+    player2.velocity.x = 4;
+  } else if (keys.ArrowLeft.pressed === true) {
+    player2.velocity.x = -4;
   }
 }
 
@@ -67,6 +80,32 @@ window.addEventListener("keyup", (event) => {
       break;
     case "a":
       keys.a.pressed = false;
+      break;
+  }
+});
+
+//player2 keys
+window.addEventListener("keydown", (event) => {
+  switch (event.key) {
+    case "ArrowRight":
+      keys.ArrowRight.pressed = true;
+      break;
+    case "ArrowLeft":
+      keys.ArrowLeft.pressed = true;
+      break;
+    case "ArrowUp":
+      player2.velocity.y = -15;
+      break;
+  }
+});
+
+window.addEventListener("keyup", (event) => {
+  switch (event.key) {
+    case "ArrowRight":
+      keys.ArrowRight.pressed = false;
+      break;
+    case "ArrowLeft":
+      keys.ArrowLeft.pressed = false;
       break;
   }
 });
