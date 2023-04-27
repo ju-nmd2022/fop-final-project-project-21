@@ -9,12 +9,12 @@ canvas.height = 730;
 export default class Platform {
   constructor(position) {
     this.position = position;
-    this.height = 100;
-    this.width = 200;
+    this.width = 100;
+    this.height = 15;
   }
 
   draw() {
     c.fillStyle = "white";
-    c.fillRect(this.position.x, this.position.y, this.height, this.width);
+    c.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 }

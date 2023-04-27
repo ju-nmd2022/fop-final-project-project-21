@@ -32,12 +32,28 @@ const keys = {
   },
 };
 
+const platform = new Platform({
+  x: 0,
+  y: 150,
+});
+
+const platform2 = new Platform({
+  x: 1300,
+  y: 150,
+});
+
+function platformDraw() {
+  platform.draw();
+  platform2.draw();
+}
+
 //creating an always repeating animation
 function animate() {
   window.requestAnimationFrame(animate);
 
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
+  platformDraw();
 
   player.update();
   player2.update();
@@ -110,14 +126,3 @@ window.addEventListener("keyup", (event) => {
       break;
   }
 });
-
-const platform = new Platform({
-  x: 100,
-  y: 100,
-});
-
-function platformDraw() {
-  platform.draw();
-}
-
-platformDraw();
