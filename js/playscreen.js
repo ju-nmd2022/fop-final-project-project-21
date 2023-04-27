@@ -1,4 +1,5 @@
 import Player from "./player.js";
+import Platform from "./platform.js";
 
 const canvas = document.querySelector("canvas");
 //c = context
@@ -13,6 +14,11 @@ const player = new Player({
 });
 const player2 = new Player({
   x: 924,
+  y: 0,
+});
+
+const platform = new Platform({
+  x: 0,
   y: 0,
 });
 
