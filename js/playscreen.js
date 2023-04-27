@@ -5,20 +5,15 @@ const canvas = document.querySelector("canvas");
 //c = context
 const c = canvas.getContext("2d");
 
-canvas.width = 1024;
-canvas.height = 576;
+canvas.width = 1400;
+canvas.height = 730;
 
 const player = new Player({
   x: 0,
   y: 0,
 });
 const player2 = new Player({
-  x: 924,
-  y: 0,
-});
-
-const platform = new Platform({
-  x: 0,
+  x: 1300,
   y: 0,
 });
 
@@ -41,7 +36,7 @@ const keys = {
 function animate() {
   window.requestAnimationFrame(animate);
 
-  c.fillStyle = "white";
+  c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
 
   player.update();
@@ -116,8 +111,13 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
-function platform() {
-  platfrom.update();
+const platform = new Platform({
+  x: 100,
+  y: 100,
+});
+
+function platformDraw() {
+  platform.draw();
 }
 
-platform();
+platformDraw();

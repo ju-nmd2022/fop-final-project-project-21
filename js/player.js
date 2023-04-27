@@ -2,8 +2,8 @@ const canvas = document.querySelector("canvas");
 //c = context
 const c = canvas.getContext("2d");
 
-canvas.width = 1024;
-canvas.height = 576;
+canvas.width = 1400;
+canvas.height = 730;
 
 const gravity = 0.5;
 
