@@ -115,3 +115,9 @@ window.addEventListener("keyup", (event) => {
       break;
   }
 });
+
+function platform() {
+  platfrom.update();
+}
+
+platform();
