@@ -1,14 +1,3 @@
-function draw() {
-  firstPerson();
-  translate(100, 0);
-  secondPerson();
-  translate(100, 0);
-  thirdPerson();
-  translate(100, 0);
-  fourthPerson();
-  translate(100, 0);
-  fifthPerson();
-}
 function firstPerson() {
   push();
   scale(0.1, 0.1);
@@ -635,4 +624,96 @@ function fifthPerson() {
   pop();
 }
 
-draw();
+let state = 0;
+let frameSpeed = 3;
+function walkingAnimation(x, y) {
+  background(0, 0, 0);
+  translate(x, y);
+  if (state === 0) {
+    // first drawing
+    firstPerson();
+
+    // display the next frame of the animation
+    if (frameCount % frameSpeed === 0) {
+      state = 1;
+    }
+  }
+
+  // second drawing
+  else if (state === 1) {
+    // Draw the second drawing
+    secondPerson();
+
+    // display the next frame of the animation
+    if (frameCount % frameSpeed === 0) {
+      state = 2;
+    }
+  }
+
+  // third drawing
+  else if (state === 2) {
+    // Draw the third drawing
+    thirdPerson();
+
+    // display the next frame of the animation
+    if (frameCount % frameSpeed === 0) {
+      state = 3;
+    }
+  }
+
+  // fourth drawing
+  else if (state === 3) {
+    // Draw the third drawing
+    fourthPerson();
+
+    // display the next frame
+    if (frameCount % frameSpeed === 0) {
+      state = 4;
+    }
+    // fifth drawing
+  } else if (state === 4) {
+    // Draw the fifth drawing
+    fifthPerson();
+
+    // display the first frame of the animation again
+    if (frameCount % frameSpeed === 0) {
+      state = 0;
+    }
+  }
+}
+
+const canvas = document.querySelector("canvas");
+//c = context
+const c = canvas.getContext("2d");
+
+canvas.width = 1400;
+canvas.height = 730;
+
+const gravity = 0.5;
+
+//player object
+export default class Player {
+  constructor(position) {
+    this.position = position;
+    this.velocity = {
+      x: 0,
+      y: 1,
+    };
+    this.height = 100;
+  }
+
+  draw() {
+    walkingAnimation(this.position.x, this.position.y);
+  }
+
+  update() {
+    this.draw();
+    this.position.x += this.velocity.x;
+    this.position.y += this.velocity.y;
+    if (this.position.y + this.height + this.velocity.y < canvas.height) {
+      this.velocity.y += gravity;
+    } else {
+      this.velocity.y = 0;
+    }
+  }
+}
