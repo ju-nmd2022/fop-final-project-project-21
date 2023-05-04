@@ -2,8 +2,8 @@ const canvas = document.querySelector("canvas");
 //c = context
 const c = canvas.getContext("2d");
 
-canvas.width = 1400;
-canvas.height = 730;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
 const gravity = 0.5;
 
@@ -16,11 +16,12 @@ export default class Player {
       y: 1,
     };
     this.height = 100;
+    this.width = 100;
   }
 
   draw() {
     c.fillStyle = "red";
-    c.fillRect(this.position.x, this.position.y, 100, this.height);
+    c.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 
   update() {

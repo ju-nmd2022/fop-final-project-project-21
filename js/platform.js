@@ -1,8 +1,8 @@
 // inner width and height
 // resize canvas function
 
-canvas.width = 1400;
-canvas.height = 730;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
 // an object for the platform
 export default class Platform {
