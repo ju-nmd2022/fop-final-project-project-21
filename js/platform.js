@@ -2,8 +2,8 @@ const canvas = document.querySelector("canvas");
 //c = context
 const c = canvas.getContext("2d");
 
-canvas.width = 1400;
-canvas.height = 730;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
 // an object for the platform
 export default class Platform {
