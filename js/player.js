@@ -16,11 +16,12 @@ export default class Player {
       y: 1,
     };
     this.height = 100;
+    this.width = 100;
   }
 
   draw() {
     c.fillStyle = "red";
-    c.fillRect(this.position.x, this.position.y, 100, this.height);
+    c.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 
   update() {
