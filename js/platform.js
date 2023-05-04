@@ -1,5 +1,10 @@
 // inner width and height
 // resize canvas function
+const canvas = document.querySelector("canvas");
+//c = context
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -13,7 +18,7 @@ export default class Platform {
   }
 
   draw() {
-    c.fillStyle = "white";
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    fill(255, 255, 255);
+    rect(this.position.x, this.position.y, this.width, this.height);
   }
 }

@@ -2,11 +2,14 @@ import Player from "./player.js";
 import Platform from "./platform.js";
 
 const canvas = document.querySelector("canvas");
-//c = context
-const c = canvas.getContext("2d");
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
+
+function setup() {
+  createCanvas(innerWidth, innerHeight);
+}
+window.setup = setup;
 
 const player = new Player({
   x: 0,
@@ -48,12 +51,11 @@ function platformDraw() {
 }
 
 //creating an always repeating animation
-function animate() {
-  window.requestAnimationFrame(animate);
-
-  c.fillStyle = "black";
-  c.fillRect(0, 0, canvas.width, canvas.height);
-  platformDraw();
+function draw() {
+  // window.requestAnimationFrame(animate);
+  background(0, 0, 0);
+  //rect(0, 0, canvas.width, canvas.height);
+  // platformDraw();
 
   player.update();
   player2.update();
@@ -72,8 +74,7 @@ function animate() {
     player2.velocity.x = -4;
   }
 }
-
-animate();
+window.draw = draw;
 
 //player1 keys
 window.addEventListener("keydown", (event) => {

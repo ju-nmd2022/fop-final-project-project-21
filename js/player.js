@@ -1,6 +1,6 @@
 const canvas = document.querySelector("canvas");
 //c = context
-const c = canvas.getContext("2d");
+// const c = canvas.getContext("2d");
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -20,8 +20,12 @@ export default class Player {
   }
 
   draw() {
-    c.fillStyle = "red";
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    push();
+    fill(255, 0, 0);
+    rect(this.position.x, this.position.y, this.width, this.height);
+    pop();
+    // c.fillStyle = "red";
+    // c.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 
   update() {
