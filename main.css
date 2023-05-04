@@ -113,9 +113,10 @@
 
 .second_button {
   outline: 1px solid white;
-  outline-offset: 3.2px;
   background-color: gold;
   color: white;
+  padding: 0.5em;
+  cursor: pointer;
 }
 
 /* image carousel */

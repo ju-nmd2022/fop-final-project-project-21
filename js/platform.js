@@ -1,6 +1,5 @@
-const canvas = document.querySelector("canvas");
-//c = context
-const c = canvas.getContext("2d");
+// inner width and height
+// resize canvas function
 
 canvas.width = 1400;
 canvas.height = 730;
