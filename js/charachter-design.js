@@ -1,10 +1,29 @@
+const lightYellow = "#fff100";
+const darkYellow = "#d7c700";
+
+const lightGreen = "#009245";
+const darkGreen = "#005129";
+
+const lightBlue = "#3F54A0";
+const darkBlue = "#263169";
+
+const lightRed = "#C1272D";
+const darkRed = "#821E19";
+
+const lightWhite = "#FFFFFF";
+const darkWhite = "#BEBEBE";
+
+const lightOvveColor = lightRed;
+const darkOvveColor = darkRed;
+
 function firstPerson() {
   push();
   scale(0.1, 0.1);
+  translate(0, 10);
   stroke("rgba(0,0,0,0)");
   strokeCap(PROJECT);
   strokeJoin(MITER);
-  fill("#d7c700");
+  fill(darkOvveColor);
   beginShape();
   vertex(43.842, 1462.402);
   vertex(109.908, 1525.165);
@@ -14,7 +33,7 @@ function firstPerson() {
   vertex(237.085, 1198.138);
   vertex(43.842, 1462.402);
   endShape();
-  fill("#fff100");
+  fill(lightOvveColor);
   beginShape();
   vertex(341.139, 798.439);
   bezierVertex(341.139, 798.439, 327.926, 947.088, 430.328, 956.997);
@@ -114,10 +133,11 @@ function firstPerson() {
 function secondPerson() {
   push();
   scale(0.1, 0.1);
+  translate(0, 90);
   stroke("rgba(0,0,0,0)");
   strokeCap(PROJECT);
   strokeJoin(MITER);
-  fill("#d7c700");
+  fill(darkOvveColor);
   beginShape();
   vertex(68.95, 1295.527);
   vertex(110.054, 1406.507);
@@ -127,7 +147,7 @@ function secondPerson() {
   vertex(258.027, 1205.099);
   vertex(68.95, 1295.527);
   endShape();
-  fill("#fff100");
+  fill(lightOvveColor);
   beginShape();
   vertex(229.254, 785.842);
   bezierVertex(
@@ -237,10 +257,11 @@ function secondPerson() {
 function thirdPerson() {
   push();
   scale(0.1, 0.1);
+  translate(0, -20);
   stroke("rgba(0,0,0,0)");
   strokeCap(PROJECT);
   strokeJoin(MITER);
-  fill("#d7c700");
+  fill(darkOvveColor);
   beginShape();
   vertex(119.29, 1256.272);
   vertex(129.882, 1340.816);
@@ -250,7 +271,7 @@ function thirdPerson() {
   vertex(325.842, 1168.69);
   vertex(119.29, 1256.272);
   endShape();
-  fill("#fff100");
+  fill(lightOvveColor);
   beginShape();
   vertex(166.956, 790.01);
   bezierVertex(166.956, 790.01, 160.66, 875.556, 200.882, 926.7909999999999);
@@ -358,10 +379,11 @@ function thirdPerson() {
 function fourthPerson() {
   push();
   scale(0.1, 0.1);
+  translate(0, -50);
   stroke("rgba(0,0,0,0)");
   strokeCap(PROJECT);
   strokeJoin(MITER);
-  fill("#d7c700");
+  fill(darkOvveColor);
   beginShape();
   vertex(483.227, 1493.757);
   vertex(579.139, 1493.757);
@@ -371,7 +393,7 @@ function fourthPerson() {
   vertex(527.758, 1202.597);
   vertex(483.227, 1493.757);
   endShape();
-  fill("#fff100");
+  fill(lightOvveColor);
   beginShape();
   vertex(257.15, 808.675);
   bezierVertex(257.15, 808.675, 243.44799999999998, 899.554, 274.277, 941.463);
@@ -495,10 +517,11 @@ function fourthPerson() {
 function fifthPerson() {
   push();
   scale(0.1, 0.1);
+  translate(0, 30);
   stroke("rgba(0,0,0,0)");
   strokeCap(PROJECT);
   strokeJoin(MITER);
-  fill("#d7c700");
+  fill(darkOvveColor);
   beginShape();
   vertex(685.13, 1543.895);
   vertex(766.688, 1479.888);
@@ -506,7 +529,7 @@ function fifthPerson() {
   vertex(404.998, 940.9);
   vertex(685.13, 1543.895);
   endShape();
-  fill("#fff100");
+  fill(lightOvveColor);
   beginShape();
   vertex(295.073, 795.515);
   bezierVertex(295.073, 795.515, 273.79699999999997, 830.975, 309.257, 898.348);
@@ -624,91 +647,31 @@ function fifthPerson() {
   pop();
 }
 
-let state = 0;
-let frameSpeed = 3;
-function walkingAnimation() {
+const animationFrameFunctions = [
+  firstPerson,
+  secondPerson,
+  thirdPerson,
+  fourthPerson,
+  fifthPerson,
+];
+
+let currentFrame = 0;
+
+function characterAnimation() {
+  // background to arraze the previous drawing
   background(0, 0, 0);
-  // translate(x, y);
-  if (state === 0) {
-    // first drawing
-    firstPerson();
+  // walking forward
+  translate(15, 0);
+  // calling one of the functtions from the array
+  animationFrameFunctions[currentFrame]();
 
-    // display the next frame of the animation
-    if (frameCount % frameSpeed === 0) {
-      state = 1;
-    }
-  }
+  // increase the frame count
+  currentFrame++;
 
-  // second drawing
-  else if (state === 1) {
-    // Draw the second drawing
-    secondPerson();
-
-    // display the next frame of the animation
-    if (frameCount % frameSpeed === 0) {
-      state = 2;
-    }
-  }
-
-  // third drawing
-  else if (state === 2) {
-    // Draw the third drawing
-    thirdPerson();
-
-    // display the next frame of the animation
-    if (frameCount % frameSpeed === 0) {
-      state = 3;
-    }
-  }
-
-  // fourth drawing
-  else if (state === 3) {
-    // Draw the third drawing
-    fourthPerson();
-
-    // display the next frame
-    if (frameCount % frameSpeed === 0) {
-      state = 4;
-    }
-    // fifth drawing
-  } else if (state === 4) {
-    // Draw the fifth drawing
-    fifthPerson();
-
-    // display the first frame of the animation again
-    if (frameCount % frameSpeed === 0) {
-      state = 0;
-    }
+  // looping the animation
+  if (currentFrame >= animationFrameFunctions.length) {
+    currentFrame = 0;
   }
 }
 
-walkingAnimation();
-
-// const gravity = 0.5;
-
-// //player object
-// export default class Player {
-//   constructor(position) {
-//     this.position = position;
-//     this.velocity = {
-//       x: 0,
-//       y: 1,
-//     };
-//     this.height = 100;
-//   }
-
-//   draw() {
-//     walkingAnimation(this.position.x, this.position.y);
-//   }
-
-//   update() {
-//     this.draw();
-//     this.position.x += this.velocity.x;
-//     this.position.y += this.velocity.y;
-//     if (this.position.y + this.height + this.velocity.y < canvas.height) {
-//       this.velocity.y += gravity;
-//     } else {
-//       this.velocity.y = 0;
-//     }
-//   }
-// }
+setInterval(characterAnimation, 200);

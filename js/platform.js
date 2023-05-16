@@ -1,6 +1,3 @@
-// inner width and height
-// resize canvas function
-
 // an object for the platform
 export default class Platform {
   constructor(position) {
