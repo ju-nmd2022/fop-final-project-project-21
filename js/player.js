@@ -1,10 +1,4 @@
-const canvas = document.querySelector("canvas");
-//c = context
-// const c = canvas.getContext("2d");
-
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-
+let canvasHeight = window.innerHeight;
 const gravity = 0.5;
 
 //player object
@@ -32,7 +26,7 @@ export default class Player {
     this.draw();
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
-    if (this.position.y + this.height + this.velocity.y < canvas.height) {
+    if (this.position.y + this.height + this.velocity.y < canvasHeight) {
       this.velocity.y += gravity;
     } else {
       this.velocity.y = 0;

@@ -1,23 +1,37 @@
+// importing elements needed to build the game
 import Player from "./player.js";
 import Platform from "./platform.js";
 
-const canvas = document.querySelector("canvas");
+// styling the body element to get rid of scroll bars and wiggling of the sreen
+const documentBody = document.querySelector("body");
+documentBody.style.overflow = "hidden";
+documentBody.style.padding = "0px";
+documentBody.style.margin = "0px";
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+// getting the proportions of the window
+var canvasWidth = window.innerWidth;
+var canvasHeight = window.innerHeight;
 
+// setting up a canvas
 function setup() {
-  createCanvas(innerWidth, innerHeight);
+  createCanvas(canvasWidth, canvasHeight);
 }
+
 window.setup = setup;
 
+// listening for window resizing to addjust the canvas
+window.addEventListener("resize", setup);
+
+// first players starting possition
 const player = new Player({
   x: 0,
-  y: 0,
+  y: canvasHeight - 100,
 });
+
+// second players starting possition
 const player2 = new Player({
-  x: 1300,
-  y: 0,
+  x: canvasWidth - 100,
+  y: canvasHeight - 100,
 });
 
 const keys = {
@@ -73,7 +87,10 @@ function draw() {
   } else if (keys.ArrowLeft.pressed === true) {
     player2.velocity.x = -4;
   }
+
+  platformDraw();
 }
+
 window.draw = draw;
 
 //player1 keys
