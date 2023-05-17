@@ -65,16 +65,40 @@ function platformDraw() {
   platform2.draw();
 }
 
-// function collision() {
-//   if (
-//     platform.position.x + platform.width >= player.position.x &&
-//     player.position.x + player.width >= platform.position.x &&
-//     platform.position.y + platform.height >= player.postion.y &&
-//     player.position.y + player.height >= platform.position.y
-//   ) {
-//     console.log("Game over");
-//   }
-// }
+/*function collision() {
+  if (
+    platform.position.x + platform.width >= player.position.x &&
+    player.position.x + player.width >= platform.position.x &&
+    platform.position.y + platform.height >= player.postion.y &&
+    player.position.y + player.height >= platform.position.y
+  ) {
+    console.log("Game over");
+  }
+}*/
+
+let name1 = sessionStorage.getItem("name");
+if (name1 === null) {
+  name1 = "";
+}
+
+function firstPlayer() {
+  textSize(20);
+  text(name1, player.position.x + 15, player.position.y - 10);
+
+  player.update();
+}
+
+let name2 = sessionStorage.getItem("name2");
+if (name2 === null) {
+  name2 = "";
+}
+
+function secondPlayer() {
+  textSize(20);
+  text(name2, player2.position.x + 15, player2.position.y - 10);
+
+  player2.update();
+}
 
 //creating an always repeating animation
 function draw() {
@@ -82,9 +106,8 @@ function draw() {
   background(0, 0, 0);
   //rect(0, 0, canvas.width, canvas.height);
   // platformDraw();
-
-  player.update();
-  player2.update();
+  firstPlayer();
+  secondPlayer();
 
   player.velocity.x = 0;
   if (keys.d.pressed === true) {
@@ -99,7 +122,7 @@ function draw() {
   } else if (keys.ArrowLeft.pressed === true) {
     player2.velocity.x = -4;
   }
-  // collision();
+  collision();
   platformDraw();
 }
 
