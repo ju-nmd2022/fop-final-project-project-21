@@ -52,7 +52,7 @@ const walkingRight = "0.1";
 walkingDirection = walkingLeft;
 
 if (walkingDirection === walkingLeft) {
-  heightOfCharacter = "-400";
+  heightOfCharacter = "-600";
 }
 
 function firstPerson() {
@@ -725,10 +725,6 @@ export default class Player {
     };
     this.height = 100;
     this.width = 100;
-    this.color = {
-      lightColor: lightOvveColor,
-      darkColor: darkOvveColor,
-    };
   }
 
   draw() {
@@ -743,17 +739,17 @@ export default class Player {
     this.draw();
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
-    if (this.position.y + this.height + this.velocity.y < canvasHeight - 75) {
+    if (
+      this.position.y + this.height + this.velocity.y <
+      canvasHeight - 75
+      //|| this.position.x < 0 ||
+      //this.position.y < 0 ||
+      //this.position.x + this.width + this.velocity.x < canvasWidth
+    ) {
       this.velocity.y += gravity;
     } else {
       this.velocity.y = 0;
     }
     requestAnimationFrame(characterAnimation);
-
-    if (this.velocity.x < 0) {
-      walkingDirection = walkingLeft;
-    } else if (this.velocity.x > 0) {
-      walkingDirection = walkingRight;
-    }
   }
 }
