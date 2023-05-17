@@ -25,14 +25,14 @@ window.addEventListener("resize", setup);
 
 // first players starting possition
 const player = new Player({
-  x: 0,
-  y: 0,
+  x: 50,
+  y: canvasHeight - 200,
 });
 
 // second players starting possition
 const player2 = new Player({
-  x: 0,
-  y: 0,
+  x: canvasWidth - 150,
+  y: canvasHeight - 200,
 });
 
 const keys = {
