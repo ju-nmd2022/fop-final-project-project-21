@@ -19,12 +19,24 @@ const darkRed = "#821E19";
 const lightWhite = "#FFFFFF";
 const darkWhite = "#BEBEBE";
 
-const lightOvveColor = lightRed;
-const darkOvveColor = darkRed;
+var lightOvveColor;
+var darkOvveColor;
 
 if (firtPlayerColor === "yellow") {
   lightOvveColor = lightYellow;
   darkOvveColor = darkYellow;
+} else if (firtPlayerColor === "green") {
+  lightOvveColor = lightGreen;
+  darkOvveColor = darkGreen;
+} else if (firtPlayerColor === "blue") {
+  lightOvveColor = lightBlue;
+  darkOvveColor = darkBlue;
+} else if (firtPlayerColor === "red") {
+  lightOvveColor = lightRed;
+  darkOvveColor = darkRed;
+} else if (firtPlayerColor === "white") {
+  lightOvveColor = lightWhite;
+  darkOvveColor = darkWhite;
 }
 
 let heightOfCharacter = "";
