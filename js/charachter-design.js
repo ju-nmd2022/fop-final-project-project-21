@@ -674,4 +674,4 @@ function characterAnimation() {
   }
 }
 
-setInterval(characterAnimation, 200);
+setInterval(characterAnimation, 100);

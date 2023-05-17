@@ -729,5 +729,6 @@ export default class Player {
       this.velocity.y = 0;
     }
     // requestAnimationFrame(characterAnimation);
+    // characterAnimation();
   }
 }
