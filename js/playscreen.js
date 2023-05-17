@@ -122,7 +122,7 @@ function draw() {
   } else if (keys.ArrowLeft.pressed === true) {
     player2.velocity.x = -4;
   }
-  collision();
+  // collision();
   platformDraw();
 }
 
@@ -179,3 +179,52 @@ window.addEventListener("keyup", (event) => {
       break;
   }
 });
+
+const lightYellow = "#fff100";
+const darkYellow = "#d7c700";
+
+const lightGreen = "#009245";
+const darkGreen = "#005129";
+
+const lightBlue = "#3F54A0";
+const darkBlue = "#263169";
+
+const lightRed = "#C1272D";
+const darkRed = "#821E19";
+
+const lightWhite = "#FFFFFF";
+const darkWhite = "#BEBEBE";
+
+function ovveColorOfFirstPlayer() {
+  // overall color information
+  const firtPlayerColor = sessionStorage.getItem("color");
+
+  if (firtPlayerColor === null) {
+    lightOvveColor = lightYellow;
+    darkOvveColor = darkYellow;
+  } else if (firtPlayerColor === "yellow") {
+    lightOvveColor = lightYellow;
+    darkOvveColor = darkYellow;
+  } else if (firtPlayerColor === "green") {
+    lightOvveColor = lightGreen;
+    darkOvveColor = darkGreen;
+  } else if (firtPlayerColor === "blue") {
+    lightOvveColor = lightBlue;
+    darkOvveColor = darkBlue;
+  } else if (firtPlayerColor === "red") {
+    lightOvveColor = lightRed;
+    darkOvveColor = darkRed;
+  } else if (firtPlayerColor === "white") {
+    lightOvveColor = lightWhite;
+    darkOvveColor = darkWhite;
+  }
+
+  player.color.darkColor = darkOvveColor;
+  player.color.lightColor = lightOvveColor;
+
+  player.update();
+}
+
+ovveColorOfFirstPlayer();
+
+const secondPlayerColor = sessionStorage.getItem("color2");

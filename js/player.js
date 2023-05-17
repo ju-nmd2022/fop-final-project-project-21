@@ -52,7 +52,7 @@ const walkingRight = "0.1";
 walkingDirection = walkingLeft;
 
 if (walkingDirection === walkingLeft) {
-  heightOfCharacter = "-600";
+  heightOfCharacter = "-400";
 }
 
 function firstPerson() {
@@ -725,6 +725,10 @@ export default class Player {
     };
     this.height = 100;
     this.width = 100;
+    this.color = {
+      lightColor: lightOvveColor,
+      darkColor: darkOvveColor,
+    };
   }
 
   draw() {
@@ -745,5 +749,11 @@ export default class Player {
       this.velocity.y = 0;
     }
     requestAnimationFrame(characterAnimation);
+
+    if (this.velocity.x < 0) {
+      walkingDirection = walkingLeft;
+    } else if (this.velocity.x > 0) {
+      walkingDirection = walkingRight;
+    }
   }
 }
