@@ -42,13 +42,23 @@ if (firtPlayerColor === null) {
   darkOvveColor = darkWhite;
 }
 
-let heightOfCharacter = "";
+let heightOfCharacter = "0";
 let widthOfCharacter = "";
+
+let walkingDirection;
+const walkingLeft = "-0.1";
+const walkingRight = "0.1";
+
+walkingDirection = walkingLeft;
+
+if (walkingDirection === walkingLeft) {
+  heightOfCharacter = "-600";
+}
 
 function firstPerson() {
   push();
-  scale(0.1, 0.1);
-  translate(0 + heightOfCharacter, 10 + widthOfCharacter);
+  scale(walkingDirection, 0.1);
+  translate(heightOfCharacter, 10 + widthOfCharacter);
   stroke("rgba(0,0,0,0)");
   strokeCap(PROJECT);
   strokeJoin(MITER);
@@ -161,8 +171,8 @@ function firstPerson() {
 
 function secondPerson() {
   push();
-  scale(0.1, 0.1);
-  translate(0, 90);
+  scale(walkingDirection, 0.1);
+  translate(heightOfCharacter, 90);
   stroke("rgba(0,0,0,0)");
   strokeCap(PROJECT);
   strokeJoin(MITER);
@@ -285,8 +295,8 @@ function secondPerson() {
 
 function thirdPerson() {
   push();
-  scale(0.1, 0.1);
-  translate(0, -20);
+  scale(walkingDirection, 0.1);
+  translate(heightOfCharacter, -20);
   stroke("rgba(0,0,0,0)");
   strokeCap(PROJECT);
   strokeJoin(MITER);
@@ -407,8 +417,8 @@ function thirdPerson() {
 
 function fourthPerson() {
   push();
-  scale(0.1, 0.1);
-  translate(0, -50);
+  scale(walkingDirection, 0.1);
+  translate(heightOfCharacter, -50);
   stroke("rgba(0,0,0,0)");
   strokeCap(PROJECT);
   strokeJoin(MITER);
@@ -545,8 +555,8 @@ function fourthPerson() {
 
 function fifthPerson() {
   push();
-  scale(0.1, 0.1);
-  translate(0, 30);
+  scale(walkingDirection, 0.1);
+  translate(heightOfCharacter, 30);
   stroke("rgba(0,0,0,0)");
   strokeCap(PROJECT);
   strokeJoin(MITER);
@@ -721,6 +731,7 @@ export default class Player {
     push();
     translate(this.position.x, this.position.y);
     animationFrameFunctions[currentFrame]();
+
     pop();
   }
 

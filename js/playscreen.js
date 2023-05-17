@@ -65,16 +65,16 @@ function platformDraw() {
   platform2.draw();
 }
 
-function collision() {
-  if (
-    platform.position.x + platform.width >= player.position.x &&
-    player.position.x + player.width >= platform.position.x &&
-    platform.position.y + platform.height >= player.postion.y &&
-    player.position.y + player.height >= platform.position.y
-  ) {
-    console.log("Game over");
-  }
-}
+// function collision() {
+//   if (
+//     platform.position.x + platform.width >= player.position.x &&
+//     player.position.x + player.width >= platform.position.x &&
+//     platform.position.y + platform.height >= player.postion.y &&
+//     player.position.y + player.height >= platform.position.y
+//   ) {
+//     console.log("Game over");
+//   }
+// }
 
 //creating an always repeating animation
 function draw() {
@@ -99,7 +99,7 @@ function draw() {
   } else if (keys.ArrowLeft.pressed === true) {
     player2.velocity.x = -4;
   }
-  collision();
+  // collision();
   platformDraw();
 }
 
