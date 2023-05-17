@@ -127,6 +127,8 @@ function draw() {
 }
 
 window.draw = draw;
+let isWKeyPressed = false;
+let isUpKeyPressed = false;
 
 //player1 keys
 window.addEventListener("keydown", (event) => {
@@ -138,7 +140,10 @@ window.addEventListener("keydown", (event) => {
       keys.a.pressed = true;
       break;
     case "w":
-      player.velocity.y = -15;
+      if (player.velocity.y === 0 && !isWKeyPressed) {
+        player.velocity.y = -15;
+        isWKeyPressed = true;
+      }
       break;
   }
 });
@@ -151,6 +156,10 @@ window.addEventListener("keyup", (event) => {
     case "a":
       keys.a.pressed = false;
       break;
+    case "w":
+      if (event.key === "w") {
+        isWKeyPressed = false;
+      }
   }
 });
 
@@ -164,7 +173,10 @@ window.addEventListener("keydown", (event) => {
       keys.ArrowLeft.pressed = true;
       break;
     case "ArrowUp":
-      player2.velocity.y = -15;
+      if (player2.velocity.y === 0 && !isUpKeyPressed) {
+        player2.velocity.y = -15;
+        isUpKeyPressed = true;
+      }
       break;
   }
 });
@@ -177,5 +189,9 @@ window.addEventListener("keyup", (event) => {
     case "ArrowLeft":
       keys.ArrowLeft.pressed = false;
       break;
+    case "ArrowUp":
+      if (event.key === "ArrowUp") {
+        isUpKeyPressed = false;
+      }
   }
 });
