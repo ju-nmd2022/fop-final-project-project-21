@@ -15,6 +15,7 @@ var canvasHeight = window.innerHeight;
 // setting up a canvas
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
+  frameRate(30);
 }
 
 window.setup = setup;
@@ -25,13 +26,13 @@ window.addEventListener("resize", setup);
 // first players starting possition
 const player = new Player({
   x: 0,
-  y: canvasHeight - 100,
+  y: 0,
 });
 
 // second players starting possition
 const player2 = new Player({
-  x: canvasWidth - 100,
-  y: canvasHeight - 100,
+  x: 0,
+  y: 0,
 });
 
 const keys = {
