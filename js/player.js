@@ -22,7 +22,10 @@ const darkWhite = "#BEBEBE";
 var lightOvveColor;
 var darkOvveColor;
 
-if (firtPlayerColor === "yellow") {
+if (firtPlayerColor === null) {
+  lightOvveColor = lightYellow;
+  darkOvveColor = darkYellow;
+} else if (firtPlayerColor === "yellow") {
   lightOvveColor = lightYellow;
   darkOvveColor = darkYellow;
 } else if (firtPlayerColor === "green") {
@@ -682,16 +685,19 @@ const animationFrameFunctions = [
 ];
 
 let currentFrame = 0;
+let frameChangeCounter = 0;
+let animationFrameRate = 10;
 
 function characterAnimation() {
-  // background to arraze the previous drawing
-  // background(0, 0, 0);
-  // walking forward
   // calling one of the functtions from the array
-  animationFrameFunctions[currentFrame]();
+  // animationFrameFunctions[currentFrame]();
 
-  // increase the frame count
-  currentFrame++;
+  frameChangeCounter++;
+
+  if (frameChangeCounter >= animationFrameRate) {
+    currentFrame++;
+    frameChangeCounter = 0; // Reset the counter
+  }
 
   // looping the animation
   if (currentFrame >= animationFrameFunctions.length) {
@@ -713,7 +719,6 @@ export default class Player {
 
   draw() {
     push();
-
     translate(this.position.x, this.position.y);
     animationFrameFunctions[currentFrame]();
     pop();
@@ -728,7 +733,6 @@ export default class Player {
     } else {
       this.velocity.y = 0;
     }
-    // requestAnimationFrame(characterAnimation);
-    // characterAnimation();
+    requestAnimationFrame(characterAnimation);
   }
 }
