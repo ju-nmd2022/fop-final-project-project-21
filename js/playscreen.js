@@ -51,18 +51,60 @@ const keys = {
 };
 
 const platform = new Platform({
-  x: 0,
-  y: 150,
+  x: 300,
+  y: 500,
 });
 
 const platform2 = new Platform({
-  x: 1300,
-  y: 150,
+  x: 800,
+  y: 550,
 });
 
 function platformDraw() {
   platform.draw();
   platform2.draw();
+}
+
+let platformArray = [platform, platform2];
+
+function collision() {
+  for (let i = 0; i < platformArray.length; i++) {
+    const platform = platformArray[i];
+
+    if (
+      player.position.x + player.width >= platform.position.x &&
+      player.position.x <= platform.position.x + platform.width &&
+      player.position.y + player.height >= platform.position.y &&
+      player.position.y <= platform.position.y + platform.height
+    ) {
+      if (
+        player.position.y + player.height <=
+        platform.position.y + player.velocity.y
+      ) {
+        player.position.y = platform.position.y - player.height;
+        player.velocity.y = 0;
+      } else {
+        player.position.y = platform.position.y + platform.height;
+      }
+    }
+
+    if (
+      player2.position.x + player2.width >= platform.position.x &&
+      player2.position.x <= platform.position.x + platform.width &&
+      player2.position.y + player2.height >= platform.position.y &&
+      player2.position.y <= platform.position.y + platform.height
+    ) {
+      if (
+        player2.position.y + player2.height <=
+        platform.position.y + player2.velocity.y
+      ) {
+        player2.position.y = platform.position.y - player2.height;
+        player2.velocity.y = 0;
+      } else {
+        player2.position.y = platform.position.y + platform.height;
+      }
+    }
+  }
 }
 
 /*function collision() {
@@ -122,7 +164,7 @@ function draw() {
   } else if (keys.ArrowLeft.pressed === true) {
     player2.velocity.x = -4;
   }
-  //collision();
+  collision();
   platformDraw();
 }
 
@@ -141,7 +183,7 @@ window.addEventListener("keydown", (event) => {
       break;
     case "w":
       if (player.velocity.y === 0 && !isWKeyPressed) {
-        player.velocity.y = -15;
+        player.velocity.y = -30;
         isWKeyPressed = true;
       }
       break;
@@ -174,7 +216,7 @@ window.addEventListener("keydown", (event) => {
       break;
     case "ArrowUp":
       if (player2.velocity.y === 0 && !isUpKeyPressed) {
-        player2.velocity.y = -15;
+        player2.velocity.y = -30;
         isUpKeyPressed = true;
       }
       break;
