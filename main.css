@@ -193,6 +193,13 @@
   height: auto;
 }
 
+.null,
+.one,
+.two,
+.three {
+  display: none;
+}
+
 /* horizontal scroll source https://www.youtube.com/watch?v=pNPkVQD7vlM  */
 .levelFlexContainer {
   width: 100%;
