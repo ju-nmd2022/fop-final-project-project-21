@@ -2,35 +2,6 @@
 let canvasHeight = window.innerHeight;
 const gravity = 1;
 
-// const animationFrameFunctions = [
-//   firstPerson,
-//   secondPerson,
-//   thirdPerson,
-//   fourthPerson,
-//   fifthPerson,
-// ];
-
-// let currentFrame = 0;
-// let frameChangeCounter = 0;
-// let animationFrameRate = 10;
-
-// function characterAnimation() {
-//   // calling one of the functtions from the array
-//   // animationFrameFunctions[currentFrame]();
-
-//   frameChangeCounter++;
-
-//   if (frameChangeCounter >= animationFrameRate) {
-//     currentFrame++;
-//     frameChangeCounter = 0; // Reset the counter
-//   }
-
-//   // looping the animation
-//   if (currentFrame >= animationFrameFunctions.length) {
-//     currentFrame = 0;
-//   }
-// }
-
 //player object
 export default class Player {
   constructor(position, firstColor, secondColor) {

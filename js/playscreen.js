@@ -23,49 +23,68 @@ window.setup = setup;
 // listening for window resizing to addjust the canvas
 window.addEventListener("resize", setup);
 
-// color
+// getting the information on what color ovve the player has chosen
 const firtPlayerColor = sessionStorage.getItem("color");
 const secondPlayerColor = sessionStorage.getItem("color2");
 
-const lightYellow = "#fff100";
-const darkYellow = "#d7c700";
+// all the color options
+const colorOptions = {
+  yellow: { light: "#fff100", dark: "#d7c700" },
+  green: { light: "#009245", dark: "#005129" },
+  blue: { light: "#3F54A0", dark: "#263169" },
+  red: { light: "#C1272D", dark: "#821E19" },
+  white: { light: "#FFFFFF", dark: "#BEBEBE" },
+};
 
-const lightGreen = "#009245";
-const darkGreen = "#005129";
-
-const lightBlue = "#3F54A0";
-const darkBlue = "#263169";
-
-const lightRed = "#C1272D";
-const darkRed = "#821E19";
-
-const lightWhite = "#FFFFFF";
-const darkWhite = "#BEBEBE";
-
+// variables that need to be changes to change the color
 let firstPlayerLightColor;
 let firstPlayerDarkColor;
+let secondPlayerDarkColor;
+let secondPlayerLightColor;
 
+// function asking what the first person chose and applying the corresponding color
 if (firtPlayerColor === null) {
-  firstPlayerLightColor = lightYellow;
-  firstPlayerDarkColor = darkYellow;
+  firstPlayerLightColor = colorOptions.yellow.light;
+  firstPlayerDarkColor = colorOptions.yellow.dark;
 } else if (firtPlayerColor === "yellow") {
-  firstPlayerLightColor = lightYellow;
-  firstPlayerDarkColor = darkYellow;
+  firstPlayerLightColor = colorOptions.yellow.light;
+  firstPlayerDarkColor = colorOptions.yellow.dark;
 } else if (firtPlayerColor === "green") {
-  firstPlayerLightColor = lightGreen;
-  firstPlayerDarkColor = darkGreen;
+  firstPlayerLightColor = colorOptions.green.light;
+  firstPlayerDarkColor = colorOptions.green.dark;
 } else if (firtPlayerColor === "blue") {
-  firstPlayerLightColor = lightBlue;
-  firstPlayerDarkColor = darkBlue;
+  firstPlayerLightColor = colorOptions.blue.light;
+  firstPlayerDarkColor = colorOptions.blue.dark;
 } else if (firtPlayerColor === "red") {
-  firstPlayerLightColor = lightRed;
-  firstPlayerDarkColor = darkRed;
+  firstPlayerLightColor = colorOptions.red.light;
+  firstPlayerDarkColor = colorOptions.red.dark;
 } else if (firtPlayerColor === "white") {
-  firstPlayerLightColor = lightWhite;
-  firstPlayerDarkColor = darkWhite;
+  firstPlayerLightColor = colorOptions.white.light;
+  firstPlayerDarkColor = colorOptions.white.dark;
 }
 
-// first players starting possition
+// function asking what the first person chose and applying the corresponding color
+if (secondPlayerColor === null) {
+  secondPlayerLightColor = colorOptions.yellow.light;
+  secondPlayerDarkColor = colorOptions.yellow.dark;
+} else if (secondPlayerColor === "yellow") {
+  secondPlayerLightColor = colorOptions.yellow.light;
+  secondPlayerDarkColor = colorOptions.yellow.dark;
+} else if (secondPlayerColor === "green") {
+  secondPlayerLightColor = colorOptions.green.light;
+  secondPlayerDarkColor = colorOptions.green.dark;
+} else if (secondPlayerColor === "blue") {
+  secondPlayerLightColor = colorOptions.blue.light;
+  secondPlayerDarkColor = colorOptions.blue.dark;
+} else if (secondPlayerColor === "red") {
+  secondPlayerLightColor = colorOptions.red.light;
+  secondPlayerDarkColor = colorOptions.red.dark;
+} else if (secondPlayerColor === "white") {
+  secondPlayerLightColor = colorOptions.white.light;
+  secondPlayerDarkColor = colorOptions.white.dark;
+}
+
+// first players starting possition, and color
 const player = new Player(
   {
     x: 50,
@@ -75,30 +94,7 @@ const player = new Player(
   firstPlayerLightColor
 );
 
-let secondPlayerDarkColor;
-let secondPlayerLightColor;
-
-if (secondPlayerColor === null) {
-  secondPlayerLightColor = lightYellow;
-  secondPlayerDarkColor = darkYellow;
-} else if (secondPlayerColor === "yellow") {
-  secondPlayerLightColor = lightYellow;
-  secondPlayerDarkColor = darkYellow;
-} else if (secondPlayerColor === "green") {
-  secondPlayerLightColor = lightGreen;
-  secondPlayerDarkColor = darkGreen;
-} else if (secondPlayerColor === "blue") {
-  secondPlayerLightColor = lightBlue;
-  secondPlayerDarkColor = darkBlue;
-} else if (secondPlayerColor === "red") {
-  secondPlayerLightColor = lightRed;
-  secondPlayerDarkColor = darkRed;
-} else if (secondPlayerColor === "white") {
-  secondPlayerLightColor = lightWhite;
-  secondPlayerDarkColor = darkWhite;
-}
-
-// second players starting possition
+// second players starting possition, and color
 const player2 = new Player(
   {
     x: canvasWidth - 150,
