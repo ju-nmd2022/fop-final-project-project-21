@@ -23,17 +23,90 @@ window.setup = setup;
 // listening for window resizing to addjust the canvas
 window.addEventListener("resize", setup);
 
+// color
+const firtPlayerColor = sessionStorage.getItem("color");
+const secondPlayerColor = sessionStorage.getItem("color2");
+
+const lightYellow = "#fff100";
+const darkYellow = "#d7c700";
+
+const lightGreen = "#009245";
+const darkGreen = "#005129";
+
+const lightBlue = "#3F54A0";
+const darkBlue = "#263169";
+
+const lightRed = "#C1272D";
+const darkRed = "#821E19";
+
+const lightWhite = "#FFFFFF";
+const darkWhite = "#BEBEBE";
+
+let firstPlayerLightColor;
+let firstPlayerDarkColor;
+
+if (firtPlayerColor === null) {
+  firstPlayerLightColor = lightYellow;
+  firstPlayerDarkColor = darkYellow;
+} else if (firtPlayerColor === "yellow") {
+  firstPlayerLightColor = lightYellow;
+  firstPlayerDarkColor = darkYellow;
+} else if (firtPlayerColor === "green") {
+  firstPlayerLightColor = lightGreen;
+  firstPlayerDarkColor = darkGreen;
+} else if (firtPlayerColor === "blue") {
+  firstPlayerLightColor = lightBlue;
+  firstPlayerDarkColor = darkBlue;
+} else if (firtPlayerColor === "red") {
+  firstPlayerLightColor = lightRed;
+  firstPlayerDarkColor = darkRed;
+} else if (firtPlayerColor === "white") {
+  firstPlayerLightColor = lightWhite;
+  firstPlayerDarkColor = darkWhite;
+}
+
 // first players starting possition
-const player = new Player({
-  x: 50,
-  y: canvasHeight - 200,
-});
+const player = new Player(
+  {
+    x: 50,
+    y: canvasHeight - 200,
+  },
+  firstPlayerDarkColor,
+  firstPlayerLightColor
+);
+
+let secondPlayerDarkColor;
+let secondPlayerLightColor;
+
+if (secondPlayerColor === null) {
+  secondPlayerLightColor = lightYellow;
+  secondPlayerDarkColor = darkYellow;
+} else if (secondPlayerColor === "yellow") {
+  secondPlayerLightColor = lightYellow;
+  secondPlayerDarkColor = darkYellow;
+} else if (secondPlayerColor === "green") {
+  secondPlayerLightColor = lightGreen;
+  secondPlayerDarkColor = darkGreen;
+} else if (secondPlayerColor === "blue") {
+  secondPlayerLightColor = lightBlue;
+  secondPlayerDarkColor = darkBlue;
+} else if (secondPlayerColor === "red") {
+  secondPlayerLightColor = lightRed;
+  secondPlayerDarkColor = darkRed;
+} else if (secondPlayerColor === "white") {
+  secondPlayerLightColor = lightWhite;
+  secondPlayerDarkColor = darkWhite;
+}
 
 // second players starting possition
-const player2 = new Player({
-  x: canvasWidth - 150,
-  y: canvasHeight - 200,
-});
+const player2 = new Player(
+  {
+    x: canvasWidth - 150,
+    y: canvasHeight - 200,
+  },
+  secondPlayerDarkColor,
+  secondPlayerLightColor
+);
 
 const keys = {
   d: {
