@@ -23,6 +23,75 @@ window.setup = setup;
 // listening for window resizing to addjust the canvas
 window.addEventListener("resize", setup);
 
+const starsContainer = document.getElementById("stars");
+const starsCount = 3;
+const imageSources = [
+  "images/star-filling.png",
+  "images/star-filling.png",
+  "images/star-filling.png",
+];
+
+//dataset - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
+
+const stars = [];
+let starsCollected = 0;
+
+for (let i = 0; i < starsCount; i++) {
+  const star = document.createElement("img");
+  star.src = imageSources[i];
+
+  const randomX = Math.floor(Math.random() * canvasWidth);
+  const randomY = Math.floor(Math.random() * canvasHeight);
+
+  star.style.position = "absolute";
+
+  star.style.left = randomX + "px";
+  star.style.top = randomY + "px";
+  star.style.width = "30px";
+  star.style.height = "30px";
+
+  star.dataset.x = randomX;
+  star.dataset.y = randomY;
+
+  starsContainer.appendChild(star);
+
+  // Store the star object in the array
+  stars.push(star);
+}
+
+function collectStars() {
+  for (let i = 0; i < stars.length; i++) {
+    const star = stars[i];
+
+    if (
+      star.dataset.x < player.position.x + player.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player.position.x &&
+      star.dataset.y < player.position.y + player.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) > player.position.y
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollected++;
+      sessionStorage.setItem("starsCollected", starsCollected);
+      i--;
+    } else if (
+      star.dataset.x < player2.position.x + player2.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player2.position.x &&
+      star.dataset.y < player2.position.y + player2.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) >
+        player2.position.y
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollected++;
+      sessionStorage.setItem("starsCollected", starsCollected);
+      i--;
+    }
+  }
+}
+
 // getting the information on what color ovve the player has chosen
 const firtPlayerColor = sessionStorage.getItem("color");
 const secondPlayerColor = sessionStorage.getItem("color2");
@@ -176,17 +245,6 @@ function collision() {
   }
 }
 
-/*function collision() {
-  if (
-    platform.position.x + platform.width >= player.position.x &&
-    player.position.x + player.width >= platform.position.x &&
-    platform.position.y + platform.height >= player.postion.y &&
-    player.position.y + player.height >= platform.position.y
-  ) {
-    console.log("Game over");
-  }
-}*/
-
 let name1 = sessionStorage.getItem("name");
 if (name1 === null) {
   name1 = "";
@@ -235,6 +293,7 @@ function draw() {
   }
   collision();
   platformDraw();
+  collectStars();
 }
 
 window.draw = draw;
