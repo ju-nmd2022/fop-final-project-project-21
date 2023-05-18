@@ -13,9 +13,7 @@ export default class Player {
     this.height = 100;
     this.width = 100;
 
-    // this.darkColor = "";
-    // this.lightColor = "";
-
+    // a string with all the animation frames needed with their color as a parameter
     this.animationFrameFunctions = [
       this.firstPerson.bind(this, firstColor, secondColor),
       this.secondPerson.bind(this, firstColor, secondColor),
@@ -23,15 +21,154 @@ export default class Player {
       this.fourthPerson.bind(this, firstColor, secondColor),
       this.fifthPerson.bind(this, firstColor, secondColor),
     ];
+
+    // string for the still staying image
+    // a sring for one value only, becuase the parameters don't work if not
+    this.stillAnimationFrame = [
+      this.stillPerson.bind(this, firstColor, secondColor),
+    ];
+
+    // values needed for the speed of the animation
     this.currentFrame = 0;
     this.frameChangeCounter = 0;
-    this.animationFrameRate = 3;
+    // speed of the animation
+    this.animationFrameRate = 4;
+
+    // flipping the animation when walking to the left, changin the x value of "scale" to a negative to mirror the drawing, correcting the placement of the image after mirroring
+    this.direction = 0.1;
+    this.placeCorrection = 0;
   }
 
-  firstPerson(firstColor, secondColor) {
+  // drawing of the still person
+  stillPerson(firstColor, secondColor) {
     push();
     scale(0.1, 0.1);
-    translate(0, 10);
+    stroke("rgba(0,0,0,0)");
+    strokeCap(PROJECT);
+    strokeJoin(MITER);
+    fill("#ffffff");
+    stroke("#000000");
+    beginShape();
+    vertex(102.044, 842.022);
+    bezierVertex(102.044, 842.022, 49.867, 268.361, 205.867, 281.361);
+    bezierVertex(
+      205.867,
+      281.361,
+      352.86699999999996,
+      244.361,
+      320.86699999999996,
+      842.361
+    );
+    vertex(102.04399999999995, 842.0219999999999);
+    endShape();
+    fill("#ffffff");
+    stroke("#000000");
+    beginShape();
+    vertex(205.448, 0.5);
+    bezierVertex(
+      264.59493528312885,
+      0.5,
+      312.543,
+      55.14230313740114,
+      312.543,
+      122.547
+    );
+    bezierVertex(
+      312.543,
+      189.95169686259885,
+      264.59493528312885,
+      244.594,
+      205.448,
+      244.594
+    );
+    bezierVertex(
+      146.30106471687117,
+      244.594,
+      98.35300000000001,
+      189.95169686259885,
+      98.35300000000001,
+      122.547
+    );
+    bezierVertex(
+      98.35300000000001,
+      55.14230313740114,
+      146.30106471687117,
+      0.5,
+      205.448,
+      0.5
+    );
+    endShape();
+    fill(firstColor);
+    beginShape();
+    vertex(99.589, 816.861);
+    vertex(211.278, 817.287);
+    vertex(211.278, 993.941);
+    vertex(186.908, 1636.654);
+    vertex(85.949, 1636.654);
+    vertex(99.589, 816.861);
+    endShape();
+    fill(secondColor);
+    beginShape();
+    vertex(322.614, 816.946);
+    vertex(210.925, 817.372);
+    vertex(210.925, 994.026);
+    vertex(235.296, 1636.739);
+    vertex(336.254, 1636.739);
+    vertex(322.614, 816.946);
+    endShape();
+    fill("#ffffff");
+    stroke("#000000");
+    beginShape();
+    vertex(171.576, 1636.654);
+    vertex(107.779, 1637.257);
+    vertex(107.779, 1655.181);
+    vertex(70.61699999999999, 1655.181);
+    bezierVertex(
+      70.61699999999999,
+      1655.181,
+      -7.083000000000013,
+      1653.073,
+      1.103999999999985,
+      1715.249
+    );
+    bezierVertex(
+      1.103999999999985,
+      1715.249,
+      17.477999999999984,
+      1741.595,
+      53.29499999999999,
+      1736.326
+    );
+    vertex(159.724, 1726.842);
+    vertex(171.575, 1636.6550000000002);
+    endShape();
+    fill("#ffffff");
+    stroke("#000000");
+    beginShape();
+    vertex(250.308, 1636.311);
+    vertex(314.105, 1636.914);
+    vertex(314.105, 1654.838);
+    vertex(351.267, 1654.838);
+    bezierVertex(351.267, 1654.838, 428.967, 1652.73, 420.78, 1714.906);
+    bezierVertex(
+      420.78,
+      1714.906,
+      404.40599999999995,
+      1741.252,
+      368.58899999999994,
+      1735.983
+    );
+    vertex(262.15999999999997, 1726.499);
+    vertex(250.30899999999997, 1636.3120000000001);
+    endShape();
+    pop();
+  }
+
+  // the five drawings for the animation
+  firstPerson(firstColor, secondColor) {
+    push();
+    scale(this.direction, 0.1);
+    translate(this.placeCorrection, 10);
     stroke("rgba(0,0,0,0)");
     strokeCap(PROJECT);
     strokeJoin(MITER);
@@ -144,8 +281,8 @@ export default class Player {
 
   secondPerson(firstColor, secondColor) {
     push();
-    scale(0.1, 0.1);
-    translate(0, 90);
+    scale(this.direction, 0.1);
+    translate(this.placeCorrection, 90);
     stroke("rgba(0,0,0,0)");
     strokeCap(PROJECT);
     strokeJoin(MITER);
@@ -275,8 +412,8 @@ export default class Player {
 
   thirdPerson(firstColor, secondColor) {
     push();
-    scale(0.1, 0.1);
-    translate(0, -20);
+    scale(this.direction, 0.1);
+    translate(this.placeCorrection, -20);
     stroke("rgba(0,0,0,0)");
     strokeCap(PROJECT);
     strokeJoin(MITER);
@@ -411,8 +548,8 @@ export default class Player {
 
   fourthPerson(firstColor, secondColor) {
     push();
-    scale(0.1, 0.1);
-    translate(0, -50);
+    scale(this.direction, 0.1);
+    translate(this.placeCorrection, -50);
     stroke("rgba(0,0,0,0)");
     strokeCap(PROJECT);
     strokeJoin(MITER);
@@ -563,8 +700,8 @@ export default class Player {
 
   fifthPerson(firstColor, secondColor) {
     push();
-    scale(0.1, 0.1);
-    translate(0, 30);
+    scale(this.direction, 0.1);
+    translate(this.placeCorrection, 30);
     stroke("rgba(0,0,0,0)");
     strokeCap(PROJECT);
     strokeJoin(MITER);
@@ -708,60 +845,54 @@ export default class Player {
     pop();
   }
 
+  // timing the animation
   characterAnimation() {
+    // add to the counter
     this.frameChangeCounter++;
 
+    // reset the counter
     if (this.frameChangeCounter >= this.animationFrameRate) {
       this.currentFrame++;
-      this.frameChangeCounter = 0; // Reset the counter
+      this.frameChangeCounter = 0;
     }
 
+    // looping the animation
     if (this.currentFrame >= this.animationFrameFunctions.length) {
-      this.currentFrame = 0; // Loop the animation
+      this.currentFrame = 0;
     }
   }
 
+  // drawing the animation
   animation() {
     const currentAnimationFunction =
       this.animationFrameFunctions[this.currentFrame];
     currentAnimationFunction();
     this.characterAnimation();
   }
-  // animation() {
-  //   animationFrameFunctions = [
-  //     this.firstPerson(this.darkColor, this.lightColor),
-  //     this.secondPerson(this.darkColor, this.lightColor),
-  //     this.thirdPerson(this.darkColor, this.lightColor),
-  //     this.fourthPerson(this.darkColor, this.lightColor),
-  //     this.fifthPerson(this.darkColor, this.lightColor),
-  //   ];
 
-  //   currentFrame = 0;
-  //   let frameChangeCounter = 0;
-  //   let animationFrameRate = 10;
-
-  //   function characterAnimation() {
-  //     // calling one of the functtions from the array
-  //     // animationFrameFunctions[currentFrame]();
-  //     frameChangeCounter++;
-
-  //     if (frameChangeCounter >= animationFrameRate) {
-  //       currentFrame++;
-  //       frameChangeCounter = 0; // Reset the counter
-  //     }
-
-  //     // looping the animation
-  //     if (currentFrame >= animationFrameFunctions.length) {
-  //       currentFrame = 0;
-  //     }
-  //   }
-  //   characterAnimation();
-  // }
+  // drawing the still person
+  stayingStill() {
+    const stillAnimationFunction = this.stillAnimationFrame[0];
+    stillAnimationFunction();
+  }
 
   draw() {
     push();
+    // moving with the arrows
     translate(this.position.x, this.position.y);
-    this.animation();
+
+    // asking if the charachter is moving left, right or staying still and displaying the corresponding drawing
+    if (this.velocity.x > 0) {
+      this.animation();
+      this.direction = 0.1;
+      this.placeCorrection = 0;
+    } else if (this.velocity.x < 0) {
+      this.animation();
+      this.direction = -0.1;
+      this.placeCorrection = -350;
+    } else {
+      this.stayingStill();
+    }
     pop();
   }
 
