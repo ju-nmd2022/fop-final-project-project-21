@@ -205,6 +205,10 @@ function platformDraw() {
 
 let platformArray = [platform, platform2];
 
+// let firstPlayerHeight = player.getBoundingClientRect();
+
+// console.log(firstPlayerHeight);
+
 function collision() {
   for (let i = 0; i < platformArray.length; i++) {
     const platform = platformArray[i];
@@ -280,16 +284,16 @@ function draw() {
 
   player.velocity.x = 0;
   if (keys.d.pressed === true) {
-    player.velocity.x = 4;
+    player.velocity.x = 6;
   } else if (keys.a.pressed === true) {
-    player.velocity.x = -4;
+    player.velocity.x = -6;
   }
 
   player2.velocity.x = 0;
   if (keys.ArrowRight.pressed === true) {
-    player2.velocity.x = 4;
+    player2.velocity.x = 6;
   } else if (keys.ArrowLeft.pressed === true) {
-    player2.velocity.x = -4;
+    player2.velocity.x = -6;
   }
   collision();
   platformDraw();
