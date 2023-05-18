@@ -23,7 +23,10 @@ window.setup = setup;
 // listening for window resizing to addjust the canvas
 window.addEventListener("resize", setup);
 
+// creating container for the images of the stars
 const starsContainer = document.getElementById("stars");
+
+// defining the number of the images and the source
 const starsCount = 3;
 const imageSources = [
   "images/star-filling.png",
@@ -31,11 +34,11 @@ const imageSources = [
   "images/star-filling.png",
 ];
 
-//dataset - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
-
+// creating an array to store the star object and a counter for the number of stars collected
 const stars = [];
 let starsCollected = 0;
 
+// a loop to create the stars and to display them on random positions
 for (let i = 0; i < starsCount; i++) {
   const star = document.createElement("img");
   star.src = imageSources[i];
@@ -44,21 +47,25 @@ for (let i = 0; i < starsCount; i++) {
   const randomY = Math.floor(Math.random() * canvasHeight);
 
   star.style.position = "absolute";
-
   star.style.left = randomX + "px";
   star.style.top = randomY + "px";
   star.style.width = "30px";
   star.style.height = "30px";
 
+  //dataset - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
   star.dataset.x = randomX;
   star.dataset.y = randomY;
 
   starsContainer.appendChild(star);
 
-  // Store the star object in the array
+  // store the star object in the array
   stars.push(star);
 }
 
+// creating a function to detect collision between the player and the star object
+// removing a star from the array if the player collects the star
+// updating the starsCollected counter
+// saving the information to sessionStorage
 function collectStars() {
   for (let i = 0; i < stars.length; i++) {
     const star = stars[i];
@@ -173,21 +180,7 @@ const player2 = new Player(
   secondPlayerLightColor
 );
 
-const keys = {
-  d: {
-    pressed: false,
-  },
-  a: {
-    pressed: false,
-  },
-  ArrowRight: {
-    pressed: false,
-  },
-  ArrowLeft: {
-    pressed: false,
-  },
-};
-
+//  seting values for the platforms
 const platform = new Platform({
   x: 300,
   y: 500,
@@ -198,17 +191,16 @@ const platform2 = new Platform({
   y: 550,
 });
 
+//drawing the platforms
 function platformDraw() {
   platform.draw();
   platform2.draw();
 }
 
+// creating an array for the platforms
 let platformArray = [platform, platform2];
 
-// let firstPlayerHeight = player.getBoundingClientRect();
-
-// console.log(firstPlayerHeight);
-
+// creating a function to check for collision between the players and the platforms
 function collision() {
   for (let i = 0; i < platformArray.length; i++) {
     const platform = platformArray[i];
@@ -249,16 +241,10 @@ function collision() {
   }
 }
 
+// getting the names for the player from the sessionStorage
 let name1 = sessionStorage.getItem("name");
 if (name1 === null) {
   name1 = "";
-}
-
-function firstPlayer() {
-  textSize(20);
-  text(name1, player.position.x + 15, player.position.y - 10);
-
-  player.update();
 }
 
 let name2 = sessionStorage.getItem("name2");
@@ -266,6 +252,15 @@ if (name2 === null) {
   name2 = "";
 }
 
+// creating a function for the first player (drawing the character and the name)
+function firstPlayer() {
+  textSize(20);
+  text(name1, player.position.x + 15, player.position.y - 10);
+
+  player.update();
+}
+
+// creating a function for the second player (drawing the character and the name)
 function secondPlayer() {
   textSize(20);
   text(name2, player2.position.x + 15, player2.position.y - 10);
@@ -274,13 +269,16 @@ function secondPlayer() {
 }
 
 //creating an always repeating animation
+
+// drawing everyting and calling the functions
 function draw() {
   // window.requestAnimationFrame(animate);
   background(0, 0, 0);
-  //rect(0, 0, canvas.width, canvas.height);
-  // platformDraw();
   firstPlayer();
   secondPlayer();
+  collision();
+  platformDraw();
+  collectStars();
 
   player.velocity.x = 0;
   if (keys.d.pressed === true) {
@@ -295,14 +293,28 @@ function draw() {
   } else if (keys.ArrowLeft.pressed === true) {
     player2.velocity.x = -6;
   }
-  collision();
-  platformDraw();
-  collectStars();
 }
-
 window.draw = draw;
+
+//creating values to check if the key was pressed in order to later state that the key can be pressed only once
 let isWKeyPressed = false;
 let isUpKeyPressed = false;
+
+// keys
+const keys = {
+  d: {
+    pressed: false,
+  },
+  a: {
+    pressed: false,
+  },
+  ArrowRight: {
+    pressed: false,
+  },
+  ArrowLeft: {
+    pressed: false,
+  },
+};
 
 //player1 keys
 window.addEventListener("keydown", (event) => {
