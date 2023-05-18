@@ -3,6 +3,7 @@ let canvasHeight = window.innerHeight;
 const gravity = 1;
 
 //player object
+
 export default class Player {
   constructor(position, firstColor, secondColor) {
     this.position = position;
@@ -10,8 +11,8 @@ export default class Player {
       x: 0,
       y: 1,
     };
-    this.height = 100;
-    this.width = 100;
+    this.height = 175;
+    this.width = 45;
 
     // a string with all the animation frames needed with their color as a parameter
     this.animationFrameFunctions = [
@@ -900,13 +901,7 @@ export default class Player {
     this.draw();
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
-    if (
-      this.position.y + this.height + this.velocity.y <
-      canvasHeight - 75
-      //|| this.position.x < 0 ||
-      //this.position.y < 0 ||
-      //this.position.x + this.width + this.velocity.x < canvasWidth
-    ) {
+    if (this.position.y + this.height + this.velocity.y < canvasHeight - 10) {
       this.velocity.y += gravity;
     } else {
       this.velocity.y = 0;
