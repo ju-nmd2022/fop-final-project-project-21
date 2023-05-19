@@ -405,7 +405,6 @@ function secondPlayer() {
 
 // drawing everyting and calling the functions
 function draw() {
-  // window.requestAnimationFrame(animate);
   background(0, 0, 0);
   firstPlayer();
   secondPlayer();
@@ -413,6 +412,7 @@ function draw() {
   //platformDraw();
   collectStars();
   displayArray();
+  timer();
 
   player.velocity.x = 0;
   if (keys.d.pressed === true) {
@@ -515,3 +515,36 @@ window.addEventListener("keyup", (event) => {
       }
   }
 });
+
+let targetTime = 22 * 6000;
+// clockInterval = setInterval(timer, 100);
+
+// from what time the timer starts
+let timeCounter = 21.7 * 6000;
+
+// Function to update the clock display
+function timer() {
+  const hours = Math.floor(timeCounter / 6000)
+    .toString()
+    .padStart(2, "0");
+  let minutes = (timeCounter % 6000).toString().padStart(2, "0");
+  let minutesDisplayed = `${minutes}`;
+  minutesDisplayed = minutesDisplayed / 100;
+  function financial(x) {
+    return Number.parseFloat(x).toFixed(0);
+  }
+  minutes = financial(minutesDisplayed);
+
+  // getting rid of desimals
+
+  textSize(20);
+  fill(255, 255, 255);
+  text(`${hours}:${minutes}`, canvasWidth - 80, 40);
+
+  // Check if target time reached
+  if (timeCounter >= targetTime) {
+    alert("Times up!");
+  }
+
+  timeCounter++; // Increment the custom time counter
+}
