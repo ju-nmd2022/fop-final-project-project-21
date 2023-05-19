@@ -16,13 +16,14 @@ let canvasHeight = window.innerHeight + 500;
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
   frameRate(30);
-
   // starting the scrolling from the bottom https://stackoverflow.com/questions/11715646/scroll-automatically-to-the-bottom-of-the-page
   window.scrollTo(
     0,
     document.body.scrollHeight || document.documentElement.scrollHeight
   );
 }
+
+window.setup = setup;
 
 // listening for window resizing to addjust the canvas
 window.addEventListener("resize", setup);
