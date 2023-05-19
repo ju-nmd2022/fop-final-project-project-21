@@ -244,17 +244,6 @@ const platform7 = new Platform(
   15
 );
 
-//drawing the platforms
-/*function platformDraw() {
-  platform.draw();
-  platform2.draw();
-  platform3.draw();
-  platform4.draw();
-  platform5.draw();
-  platform6.draw();
-  platform7.draw();
-}*/
-
 // creating arrays for the platforms
 
 // level1
@@ -268,6 +257,7 @@ let platformArrayLevel2 = [
   platform7,
 ];
 
+// checking which level was chosen, drawing the platforms and pushing them in ana array
 function displayArray() {
   let array = sessionStorage.getItem("platformArray");
   if (array === "platformArray") {
@@ -409,7 +399,6 @@ function draw() {
   firstPlayer();
   secondPlayer();
   collision();
-  //platformDraw();
   collectStars();
   displayArray();
   timer();
