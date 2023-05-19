@@ -1,5 +1,5 @@
 // setup
-let canvasHeight = window.innerHeight;
+let canvasHeight = window.innerHeight + 500;
 const gravity = 1;
 
 //player object
