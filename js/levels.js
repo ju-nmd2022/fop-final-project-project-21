@@ -13,3 +13,26 @@ if (starDisplayed === null) {
 } else if ((starDisplayed = "3")) {
   threeStar.style.display = "block";
 }
+
+const level1 = document.getElementById("level1");
+const level2 = document.getElementById("level2");
+
+level1.addEventListener("click", () => {
+  sessionStorage.setItem("platformArray", "platformArray");
+});
+
+level2.addEventListener("click", () => {
+  sessionStorage.setItem("platformArray", "platformArrayLevel2");
+});
+
+level1.addEventListener("click", () => {
+  let platformArray = sessionStorage.getItem("platformArray") || "";
+  platformArray = platformArray.replace(" platformArrayLevel2", ""); // remove "platformArrayLevel2" if present
+  sessionStorage.setItem("platformArray", platformArray); // add "platformArray"
+});
+
+level2.addEventListener("click", () => {
+  let platformArray = sessionStorage.getItem("platformArray") || "";
+  platformArray = platformArray.replace(" platformArray", ""); // remove "platformArray" if present
+  sessionStorage.setItem("platformArray", platformArray); // add "platformArrayLevel2"
+});

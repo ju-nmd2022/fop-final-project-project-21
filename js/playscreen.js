@@ -232,22 +232,65 @@ const platform5 = new Platform(
   15
 );
 
-//drawing the platforms
-function platformDraw() {
-  platform.draw();
-  platform2.draw();
-  platform3.draw();
-  platform4.draw();
-  platform5.draw();
-}
+const platform6 = new Platform(
+  {
+    x: 500,
+    y: 700,
+  },
+  700,
+  15
+);
 
-// creating an array for the platforms
+const platform7 = new Platform(
+  {
+    x: 20,
+    y: 100,
+  },
+  400,
+  15
+);
+
+// creating arrays for the platforms
+
+// level1
 let platformArray = [platform, platform2, platform3, platform4, platform5];
+// level2
+let platformArrayLevel2 = [
+  platform,
+  platform2,
+  platform3,
+  platform6,
+  platform7,
+];
+
+// checking which level was chosen, drawing the platforms and pushing them in ana array
+function displayArray() {
+  let array = sessionStorage.getItem("platformArray");
+  if (array === "platformArray") {
+    platform.draw();
+    platform2.draw();
+    platform3.draw();
+    platform4.draw();
+    platform5.draw();
+    platformArray = [platform, platform2, platform3, platform4, platform5];
+  } else if (array === "platformArrayLevel2") {
+    platform.draw();
+    platform2.draw();
+    platform3.draw();
+    platform6.draw();
+    platform7.draw();
+    platformArray = platformArrayLevel2;
+  }
+}
 
 // creating a function to check for collision between the players and the platforms
 function collision() {
-  for (let i = 0; i < platformArray.length; i++) {
-    const platform = platformArray[i];
+  const currentPlatformArray =
+    sessionStorage.getItem("platformArray") === "platformArray"
+      ? platformArray
+      : platformArrayLevel2;
+  for (let i = 0; i < currentPlatformArray.length; i++) {
+    const platform = currentPlatformArray[i];
 
     // check collision for player1
     if (
@@ -362,8 +405,8 @@ function draw() {
   firstPlayer();
   secondPlayer();
   collision();
-  platformDraw();
   collectStars();
+  displayArray();
   timer();
 
   player.velocity.x = 0;
