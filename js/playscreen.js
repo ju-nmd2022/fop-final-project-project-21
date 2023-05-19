@@ -25,6 +25,17 @@ function setup() {
 
 window.setup = setup;
 
+// disabling the up and down arrow keys from scrolling the canvas  source https://stackoverflow.com/questions/8916620/disable-arrow-key-scrolling-in-users-browser
+window.addEventListener(
+  "keydown",
+  function (e) {
+    if (["ArrowUp", "ArrowDown"].indexOf(e.code) > -1) {
+      e.preventDefault();
+    }
+  },
+  false
+);
+
 // listening for window resizing to addjust the canvas
 window.addEventListener("resize", setup);
 
@@ -186,99 +197,53 @@ const player2 = new Player(
 );
 
 //  seting values for the platforms
-const platform = new Platform(
-  {
-    x: 0,
-    y: canvasHeight - 15,
-  },
-  canvasWidth,
-  15
-);
-
-const platform2 = new Platform(
-  {
-    x: 0,
-    y: 0,
-  },
-  15,
-  canvasHeight
-);
-
-const platform3 = new Platform(
-  {
-    x: canvasWidth - 15,
-    y: 0,
-  },
-  15,
-  canvasHeight
-);
-
-const platform4 = new Platform(
-  {
-    x: 120,
-    y: 650,
-  },
-  200,
-  15
-);
-
-const platform5 = new Platform(
-  {
-    x: 120,
-    y: 300,
-  },
-  400,
-  15
-);
-
-const platform6 = new Platform(
-  {
-    x: 500,
-    y: 700,
-  },
-  700,
-  15
-);
-
-const platform7 = new Platform(
-  {
-    x: 20,
-    y: 100,
-  },
-  400,
-  15
-);
-
-// creating arrays for the platforms
-
-// level1
-let platformArray = [platform, platform2, platform3, platform4, platform5];
-// level2
-let platformArrayLevel2 = [
-  platform,
-  platform2,
-  platform3,
-  platform6,
-  platform7,
+// common platforms between all levels (sides and bottom)
+let commonPlatforms = [
+  new Platform({ x: 0, y: canvasHeight - 15 }, canvasWidth, 15),
+  new Platform({ x: 0, y: 0 }, 15, canvasHeight),
+  new Platform({ x: canvasWidth - 15, y: 0 }, 15, canvasHeight),
 ];
 
-// checking which level was chosen, drawing the platforms and pushing them in ana array
+// first levels platroms
+let fistLevelPlatforms = [
+  new Platform({ x: 120, y: 1150 }, 200, 15),
+  new Platform({ x: 120, y: 300 }, 400, 15),
+];
+
+//second levels platforms
+let secondLevelPlatforms = [
+  new Platform({ x: 500, y: 700 }, 700, 15),
+  new Platform({ x: 20, y: 100 }, 400, 15),
+];
+
+// combinign the common level platforms to all other levels
+let platformArrayLevel1 = fistLevelPlatforms.concat(commonPlatforms);
+let platformArrayLevel2 = secondLevelPlatforms.concat(commonPlatforms);
+
+// looping trough the platforms to draw them
+function drawFirstLevelPlatrom() {
+  for (let i = 0; i < platformArrayLevel1.length; i++) {
+    platformArrayLevel1[i].draw();
+  }
+}
+
+// looping trough the platforms to draw them
+function drawSecondLevelPlatrom() {
+  for (let i = 0; i < platformArrayLevel2.length; i++) {
+    platformArrayLevel2[i].draw();
+  }
+}
+
+// checking which level was chosen, drawing the platforms and pushing them in an array
 function displayArray() {
   let array = sessionStorage.getItem("platformArray");
   if (array === "platformArray") {
-    platform.draw();
-    platform2.draw();
-    platform3.draw();
-    platform4.draw();
-    platform5.draw();
-    platformArray = [platform, platform2, platform3, platform4, platform5];
+    // calling the drawing function
+    drawFirstLevelPlatrom();
   } else if (array === "platformArrayLevel2") {
-    platform.draw();
-    platform2.draw();
-    platform3.draw();
-    platform6.draw();
-    platform7.draw();
-    platformArray = platformArrayLevel2;
+    // calling the drawing function
+    drawSecondLevelPlatrom();
+    platformArrayLevel1 = platformArrayLevel2;
   }
 }
 
@@ -286,7 +251,7 @@ function displayArray() {
 function collision() {
   const currentPlatformArray =
     sessionStorage.getItem("platformArray") === "platformArray"
-      ? platformArray
+      ? platformArrayLevel1
       : platformArrayLevel2;
   for (let i = 0; i < currentPlatformArray.length; i++) {
     const platform = currentPlatformArray[i];
@@ -395,8 +360,6 @@ function secondPlayer() {
 
   player2.update();
 }
-
-//creating an always repeating animation
 
 // drawing everyting and calling the functions
 function draw() {
