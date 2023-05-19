@@ -115,10 +115,6 @@ function collectStars() {
   }
 }
 
-// getting the information on what color ovve the player has chosen
-const firtPlayerColor = sessionStorage.getItem("color");
-const secondPlayerColor = sessionStorage.getItem("color2");
-
 // all the color options
 const colorOptions = {
   yellow: { light: "#fff100", dark: "#d7c700" },
@@ -134,46 +130,26 @@ let firstPlayerDarkColor;
 let secondPlayerDarkColor;
 let secondPlayerLightColor;
 
-// function asking what the first person chose and applying the corresponding color
-if (firtPlayerColor === null) {
+// asking what the first person chose and applying the corresponding color
+const firstPlayerColor = sessionStorage.getItem("color");
+if (firstPlayerColor) {
+  firstPlayerLightColor = colorOptions[firstPlayerColor].light;
+  firstPlayerDarkColor = colorOptions[firstPlayerColor].dark;
+} else {
+  // default color
   firstPlayerLightColor = colorOptions.yellow.light;
   firstPlayerDarkColor = colorOptions.yellow.dark;
-} else if (firtPlayerColor === "yellow") {
-  firstPlayerLightColor = colorOptions.yellow.light;
-  firstPlayerDarkColor = colorOptions.yellow.dark;
-} else if (firtPlayerColor === "green") {
-  firstPlayerLightColor = colorOptions.green.light;
-  firstPlayerDarkColor = colorOptions.green.dark;
-} else if (firtPlayerColor === "blue") {
-  firstPlayerLightColor = colorOptions.blue.light;
-  firstPlayerDarkColor = colorOptions.blue.dark;
-} else if (firtPlayerColor === "red") {
-  firstPlayerLightColor = colorOptions.red.light;
-  firstPlayerDarkColor = colorOptions.red.dark;
-} else if (firtPlayerColor === "white") {
-  firstPlayerLightColor = colorOptions.white.light;
-  firstPlayerDarkColor = colorOptions.white.dark;
 }
 
-// function asking what the first person chose and applying the corresponding color
-if (secondPlayerColor === null) {
+// asking what the second person chose and applying the corresponding color
+const secondPlayerColor = sessionStorage.getItem("color2");
+if (secondPlayerColor) {
+  secondPlayerLightColor = colorOptions[secondPlayerColor].light;
+  secondPlayerDarkColor = colorOptions[secondPlayerColor].dark;
+} else {
+  // default color
   secondPlayerLightColor = colorOptions.yellow.light;
   secondPlayerDarkColor = colorOptions.yellow.dark;
-} else if (secondPlayerColor === "yellow") {
-  secondPlayerLightColor = colorOptions.yellow.light;
-  secondPlayerDarkColor = colorOptions.yellow.dark;
-} else if (secondPlayerColor === "green") {
-  secondPlayerLightColor = colorOptions.green.light;
-  secondPlayerDarkColor = colorOptions.green.dark;
-} else if (secondPlayerColor === "blue") {
-  secondPlayerLightColor = colorOptions.blue.light;
-  secondPlayerDarkColor = colorOptions.blue.dark;
-} else if (secondPlayerColor === "red") {
-  secondPlayerLightColor = colorOptions.red.light;
-  secondPlayerDarkColor = colorOptions.red.dark;
-} else if (secondPlayerColor === "white") {
-  secondPlayerLightColor = colorOptions.white.light;
-  secondPlayerDarkColor = colorOptions.white.dark;
 }
 
 // first players starting possition, and color
@@ -503,6 +479,5 @@ function timer() {
     targetTime = 22 * 6000;
     timeCounter = 21.7 * 6000;
   }
-
   timeCounter++; // Increment the custom time counter
 }
