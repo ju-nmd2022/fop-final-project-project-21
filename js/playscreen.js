@@ -4,24 +4,104 @@ import Platform from "./platform.js";
 
 // styling the body element to get rid of scroll bars and wiggling of the sreen
 const documentBody = document.querySelector("body");
-documentBody.style.overflow = "hidden";
+// documentBody.style.overflow = "hidden";
 documentBody.style.padding = "0px";
 documentBody.style.margin = "0px";
 
 // getting the proportions of the window
-var canvasWidth = window.innerWidth;
-var canvasHeight = window.innerHeight;
+let canvasWidth = window.innerWidth;
+let canvasHeight = window.innerHeight + 500;
 
 // setting up a canvas
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
   frameRate(30);
-}
 
-window.setup = setup;
+  // starting the scrolling from the bottom https://stackoverflow.com/questions/11715646/scroll-automatically-to-the-bottom-of-the-page
+  window.scrollTo(
+    0,
+    document.body.scrollHeight || document.documentElement.scrollHeight
+  );
+}
 
 // listening for window resizing to addjust the canvas
 window.addEventListener("resize", setup);
+
+// creating container for the images of the stars
+const starsContainer = document.getElementById("stars");
+
+// defining the number of the images and the source
+const starsCount = 3;
+const imageSources = [
+  "images/star-filling.png",
+  "images/star-filling.png",
+  "images/star-filling.png",
+];
+
+// creating an array to store the star object and a counter for the number of stars collected
+const stars = [];
+let starsCollected = 0;
+
+// a loop to create the stars and to display them on random positions
+for (let i = 0; i < starsCount; i++) {
+  const star = document.createElement("img");
+  star.src = imageSources[i];
+
+  const randomX = Math.floor(Math.random() * (canvasWidth - 100) + 100);
+  const randomY = Math.floor(Math.random() * (canvasHeight - 100) + 100);
+
+  star.style.position = "absolute";
+  star.style.left = randomX + "px";
+  star.style.top = randomY + "px";
+  star.style.width = "30px";
+  star.style.height = "30px";
+
+  //dataset - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
+  star.dataset.x = randomX;
+  star.dataset.y = randomY;
+
+  starsContainer.appendChild(star);
+
+  // store the star object in the array
+  stars.push(star);
+}
+
+// creating a function to detect collision between the player and the star object
+// removing a star from the array if the player collects the star
+// updating the starsCollected counter
+// saving the information to sessionStorage
+function collectStars() {
+  for (let i = 0; i < stars.length; i++) {
+    const star = stars[i];
+
+    if (
+      star.dataset.x < player.position.x + player.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player.position.x &&
+      star.dataset.y < player.position.y + player.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) > player.position.y
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollected++;
+      sessionStorage.setItem("starsCollected", starsCollected);
+      i--;
+    } else if (
+      star.dataset.x < player2.position.x + player2.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player2.position.x &&
+      star.dataset.y < player2.position.y + player2.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) >
+        player2.position.y
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollected++;
+      sessionStorage.setItem("starsCollected", starsCollected);
+      i--;
+    }
+  }
+}
 
 // getting the information on what color ovve the player has chosen
 const firtPlayerColor = sessionStorage.getItem("color");
@@ -514,26 +594,27 @@ let timeCounter = 21.7 * 6000;
 
 // Function to update the clock display
 function timer() {
+  const timerElement = document.getElementById("timer");
   const hours = Math.floor(timeCounter / 6000)
     .toString()
     .padStart(2, "0");
   let minutes = (timeCounter % 6000).toString().padStart(2, "0");
   let minutesDisplayed = `${minutes}`;
   minutesDisplayed = minutesDisplayed / 100;
-  function financial(x) {
+  function shortenNumber(x) {
     return Number.parseFloat(x).toFixed(0);
   }
-  minutes = financial(minutesDisplayed);
 
-  // getting rid of desimals
+  // source for removing numbers from the end https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
+  minutes = shortenNumber(minutesDisplayed);
 
-  textSize(20);
-  fill(255, 255, 255);
-  text(`${hours}:${minutes}`, canvasWidth - 80, 40);
+  timerElement.textContent = `${hours}:${minutes}`;
 
   // Check if target time reached
   if (timeCounter >= targetTime) {
     alert("Times up!");
+    targetTime = 22 * 6000;
+    timeCounter = 21.7 * 6000;
   }
 
   timeCounter++; // Increment the custom time counter
