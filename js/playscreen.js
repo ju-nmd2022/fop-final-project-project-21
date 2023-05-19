@@ -4,24 +4,30 @@ import Platform from "./platform.js";
 
 // styling the body element to get rid of scroll bars and wiggling of the sreen
 const documentBody = document.querySelector("body");
-documentBody.style.overflow = "hidden";
+// documentBody.style.overflow = "hidden";
 documentBody.style.padding = "0px";
 documentBody.style.margin = "0px";
 
 // getting the proportions of the window
-var canvasWidth = window.innerWidth;
-var canvasHeight = window.innerHeight;
+let canvasWidth = window.innerWidth;
+let canvasHeight = window.innerHeight + 500;
 
 // setting up a canvas
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
   frameRate(30);
-}
 
-window.setup = setup;
+  // starting the scrolling from the bottom https://stackoverflow.com/questions/11715646/scroll-automatically-to-the-bottom-of-the-page
+  window.scrollTo(
+    0,
+    document.body.scrollHeight || document.documentElement.scrollHeight
+  );
+}
 
 // listening for window resizing to addjust the canvas
 window.addEventListener("resize", setup);
+
+window.setup = setup;
 
 // creating container for the images of the stars
 const starsContainer = document.getElementById("stars");
@@ -470,26 +476,27 @@ let timeCounter = 21.7 * 6000;
 
 // Function to update the clock display
 function timer() {
+  const timerElement = document.getElementById("timer");
   const hours = Math.floor(timeCounter / 6000)
     .toString()
     .padStart(2, "0");
   let minutes = (timeCounter % 6000).toString().padStart(2, "0");
   let minutesDisplayed = `${minutes}`;
   minutesDisplayed = minutesDisplayed / 100;
-  function financial(x) {
+  function shortenNumber(x) {
     return Number.parseFloat(x).toFixed(0);
   }
-  minutes = financial(minutesDisplayed);
 
-  // getting rid of desimals
+  // source for removing numbers from the end https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
+  minutes = shortenNumber(minutesDisplayed);
 
-  textSize(20);
-  fill(255, 255, 255);
-  text(`${hours}:${minutes}`, canvasWidth - 80, 40);
+  timerElement.textContent = `${hours}:${minutes}`;
 
   // Check if target time reached
   if (timeCounter >= targetTime) {
     alert("Times up!");
+    targetTime = 22 * 6000;
+    timeCounter = 21.7 * 6000;
   }
 
   timeCounter++; // Increment the custom time counter
