@@ -1,4 +1,4 @@
-let starDisplayed = sessionStorage.getItem("starsCollected");
+let starDisplayed = sessionStorage.getItem("starsCollectedLevel1");
 let nullStar = document.querySelector(".null");
 let oneStar = document.querySelector(".one");
 let twoStar = document.querySelector(".two");
