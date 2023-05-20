@@ -98,11 +98,12 @@ button.addEventListener("click", function () {
   if (player1.value != "") {
     let firsttext = player1.value;
     sessionStorage.setItem("name", firsttext);
-    alert(firsttext);
+    // alert(firsttext);
     setName.innerHTML = firsttext;
   } else {
     alert("Enter player's name");
   }
+  player1.value = "";
 });
 
 let button2 = document.getElementById("second_button2");
@@ -117,9 +118,10 @@ button2.addEventListener("click", function () {
   if (player2.value != "") {
     let secondtext = player2.value;
     sessionStorage.setItem("name2", secondtext);
-    alert(secondtext);
+    // alert(secondtext);
     setName2.innerHTML = secondtext;
   } else {
     alert("Enter player's name");
   }
+  player2.value = "";
 });

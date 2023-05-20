@@ -460,7 +460,7 @@ function timer() {
   timeCounter++; // Increment the custom time counter
 }
 
-// the guard walking back and forth
+// the guard
 const guard = new Player(
   {
     x: canvasWidth / 2,
@@ -490,24 +490,36 @@ function theGuard() {
       }
     }
   }
+
   // walking back and forth
-  let walkingSpeed = 0;
+  // 250, 300 }, canvasWidth / 1.5,
+  let walkingSpeed = 4;
   let direction = "right";
 
   if (direction === "right") {
-    if (guard.position.x < 600) {
+    if (guard.position.x < canvasWidth / 1.5 + 200) {
       walkingSpeed = 4;
     } else {
       direction = "left";
     }
   } else if (direction === "left") {
-    walkingSpeed = 10;
+    if (guard.position.x < 200) {
+      walkingSpeed = -4;
+    } else {
+      direction = "right";
+    }
+  }
+
+  if (direction === "left") {
+    walkingSpeed = -4;
+  } else if (direction === "right") {
+    walkingSpeed = 4;
   }
 
   guard.velocity.x = walkingSpeed;
 
   guard.update();
-  console.log(direction);
+  // console.log(direction);
 }
 
 // drawing everyting and calling the functions
