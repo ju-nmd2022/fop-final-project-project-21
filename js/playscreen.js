@@ -183,7 +183,8 @@ let commonPlatforms = [
 // first levels platroms
 let fistLevelPlatforms = [
   new Platform({ x: 120, y: 1150 }, 200, 15),
-  new Platform({ x: 120, y: 300 }, 400, 15),
+  new Platform({ x: 300, y: 600 }, 400, 15),
+  new Platform({ x: 250, y: 300 }, canvasWidth / 1.5, 15),
 ];
 
 //second levels platforms
@@ -337,32 +338,6 @@ function secondPlayer() {
   player2.update();
 }
 
-// drawing everyting and calling the functions
-function draw() {
-  background(0, 0, 0);
-  firstPlayer();
-  secondPlayer();
-  collision();
-  collectStars();
-  displayArray();
-  timer();
-
-  player.velocity.x = 0;
-  if (keys.d.pressed === true) {
-    player.velocity.x = 6;
-  } else if (keys.a.pressed === true) {
-    player.velocity.x = -6;
-  }
-
-  player2.velocity.x = 0;
-  if (keys.ArrowRight.pressed === true) {
-    player2.velocity.x = 6;
-  } else if (keys.ArrowLeft.pressed === true) {
-    player2.velocity.x = -6;
-  }
-}
-window.draw = draw;
-
 //creating values to check if the key was pressed in order to later state that the key can be pressed only once
 let isWKeyPressed = false;
 let isUpKeyPressed = false;
@@ -449,11 +424,10 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
-let targetTime = 22 * 6000;
-// clockInterval = setInterval(timer, 100);
-
+// timer
 // from what time the timer starts
 let timeCounter = 21.7 * 6000;
+let targetTime = 22 * 6000;
 
 // Function to update the clock display
 function timer() {
@@ -473,11 +447,91 @@ function timer() {
 
   timerElement.textContent = `${hours}:${minutes}`;
 
+  if (minutes === "60") {
+    timerElement.textContent = "22:00";
+  }
+
   // Check if target time reached
-  if (timeCounter >= targetTime) {
+  if (timeCounter > targetTime) {
     alert("Times up!");
     targetTime = 22 * 6000;
     timeCounter = 21.7 * 6000;
   }
   timeCounter++; // Increment the custom time counter
 }
+
+// the guard walking back and forth
+const guard = new Player(
+  {
+    x: canvasWidth / 2,
+    y: 100,
+  },
+  "#414141",
+  "#565656"
+);
+
+function theGuard() {
+  // staying on its lil platform
+  for (let i = 0; i < platformArrayLevel1.length; i++) {
+    const platform = platformArrayLevel1[i];
+    if (
+      guard.position.x + guard.width >= platform.position.x &&
+      guard.position.x <= platform.position.x + platform.width &&
+      guard.position.y + guard.height >= platform.position.y &&
+      guard.position.y <= platform.position.y + platform.height
+    ) {
+      if (
+        guard.position.y + guard.height <=
+        platform.position.y + guard.velocity.y
+      ) {
+        // player1 is colliding from the top
+        guard.position.y = platform.position.y - guard.height;
+        guard.velocity.y = 0;
+      }
+    }
+  }
+  // walking back and forth
+  let walkingSpeed = 0;
+  let direction = "right";
+
+  if (direction === "right") {
+    if (guard.position.x < 600) {
+      walkingSpeed = 4;
+    } else {
+      direction = "left";
+    }
+  } else if (direction === "left") {
+    walkingSpeed = 10;
+  }
+
+  guard.velocity.x = walkingSpeed;
+
+  guard.update();
+  console.log(direction);
+}
+
+// drawing everyting and calling the functions
+function draw() {
+  background(0, 0, 0);
+  firstPlayer();
+  secondPlayer();
+  collision();
+  collectStars();
+  displayArray();
+  timer();
+  theGuard();
+
+  player.velocity.x = 0;
+  if (keys.d.pressed === true) {
+    player.velocity.x = 6;
+  } else if (keys.a.pressed === true) {
+    player.velocity.x = -6;
+  }
+  player2.velocity.x = 0;
+  if (keys.ArrowRight.pressed === true) {
+    player2.velocity.x = 6;
+  } else if (keys.ArrowLeft.pressed === true) {
+    player2.velocity.x = -6;
+  }
+}
+window.draw = draw;
