@@ -39,82 +39,6 @@ window.addEventListener(
 // listening for window resizing to addjust the canvas
 window.addEventListener("resize", setup);
 
-// creating container for the images of the stars
-const starsContainer = document.getElementById("stars");
-
-// defining the number of the images and the source
-const starsCount = 3;
-const imageSources = [
-  "images/star-filling.png",
-  "images/star-filling.png",
-  "images/star-filling.png",
-];
-
-// creating an array to store the star object and a counter for the number of stars collected
-const stars = [];
-let starsCollected = 0;
-
-// a loop to create the stars and to display them on random positions
-for (let i = 0; i < starsCount; i++) {
-  const star = document.createElement("img");
-  star.src = imageSources[i];
-
-  const randomX = Math.floor(Math.random() * (canvasWidth - 100) + 100);
-  const randomY = Math.floor(Math.random() * (canvasHeight - 100) + 100);
-
-  star.style.position = "absolute";
-  star.style.left = randomX + "px";
-  star.style.top = randomY + "px";
-  star.style.width = "30px";
-  star.style.height = "30px";
-
-  //dataset - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
-  star.dataset.x = randomX;
-  star.dataset.y = randomY;
-
-  starsContainer.appendChild(star);
-
-  // store the star object in the array
-  stars.push(star);
-}
-
-// creating a function to detect collision between the player and the star object
-// removing a star from the array if the player collects the star
-// updating the starsCollected counter
-// saving the information to sessionStorage
-function collectStars() {
-  for (let i = 0; i < stars.length; i++) {
-    const star = stars[i];
-
-    if (
-      star.dataset.x < player.position.x + player.width &&
-      parseInt(star.dataset.x) + parseInt(star.style.width) >
-        player.position.x &&
-      star.dataset.y < player.position.y + player.height &&
-      parseInt(star.dataset.y) + parseInt(star.style.height) > player.position.y
-    ) {
-      starsContainer.removeChild(star);
-      stars.splice(i, 1);
-      starsCollected++;
-      sessionStorage.setItem("starsCollected", starsCollected);
-      i--;
-    } else if (
-      star.dataset.x < player2.position.x + player2.width &&
-      parseInt(star.dataset.x) + parseInt(star.style.width) >
-        player2.position.x &&
-      star.dataset.y < player2.position.y + player2.height &&
-      parseInt(star.dataset.y) + parseInt(star.style.height) >
-        player2.position.y
-    ) {
-      starsContainer.removeChild(star);
-      stars.splice(i, 1);
-      starsCollected++;
-      sessionStorage.setItem("starsCollected", starsCollected);
-      i--;
-    }
-  }
-}
-
 // all the color options
 const colorOptions = {
   yellow: { light: "#fff100", dark: "#d7c700" },
@@ -311,6 +235,115 @@ function collision() {
   }
 }
 
+// creating container for the images of the stars
+const starsContainer = document.getElementById("stars");
+
+// defining the number of the images and the source
+const starsCount = 3;
+const imageSources = [
+  "images/star-filling.png",
+  "images/star-filling.png",
+  "images/star-filling.png",
+];
+
+// creating an array to store the star object and a counter for the number of stars collected
+const stars = [];
+let starsCollectedLevel1 = 0;
+let starsCollectedLevel2 = 0;
+
+// a loop to create the stars and to display them on random positions
+for (let i = 0; i < starsCount; i++) {
+  const star = document.createElement("img");
+  star.src = imageSources[i];
+
+  const randomX = Math.floor(Math.random() * (canvasWidth - 100) + 100);
+  const randomY = Math.floor(Math.random() * (canvasHeight - 100) + 100);
+
+  star.style.position = "absolute";
+  star.style.left = randomX + "px";
+  star.style.top = randomY + "px";
+  star.style.width = "30px";
+  star.style.height = "30px";
+
+  //dataset - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
+  star.dataset.x = randomX;
+  star.dataset.y = randomY;
+
+  starsContainer.appendChild(star);
+
+  // store the star object in the array
+  stars.push(star);
+}
+
+// creating a function to detect collision between the player and the star object
+// removing a star from the array if the player collects the star
+// updating the starsCollectedLevel1 counter
+// saving the information to sessionStorage
+function collectStars() {
+  for (let i = 0; i < stars.length; i++) {
+    const star = stars[i];
+    let array = sessionStorage.getItem("platformArray");
+
+    if (
+      star.dataset.x < player.position.x + player.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player.position.x &&
+      star.dataset.y < player.position.y + player.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) >
+        player.position.y &&
+      array === "platformArray"
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollectedLevel1++;
+      sessionStorage.setItem("starsCollectedLevel1", starsCollectedLevel1);
+      i--;
+    } else if (
+      star.dataset.x < player2.position.x + player2.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player2.position.x &&
+      star.dataset.y < player2.position.y + player2.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) >
+        player2.position.y &&
+      array === "platformArray"
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollectedLevel1++;
+      sessionStorage.setItem("starsCollectedLevel1", starsCollectedLevel1);
+      i--;
+    } else if (
+      star.dataset.x < player.position.x + player.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player.position.x &&
+      star.dataset.y < player.position.y + player.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) >
+        player.position.y &&
+      array === "platformArrayLevel2"
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollectedLevel2++;
+      sessionStorage.setItem("starsCollectedLevel2", starsCollectedLevel2);
+      i--;
+    } else if (
+      star.dataset.x < player2.position.x + player2.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player2.position.x &&
+      star.dataset.y < player2.position.y + player2.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) >
+        player2.position.y &&
+      array === "platformArrayLevel2"
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollectedLevel2++;
+      sessionStorage.setItem("starsCollectedLevel2", starsCollectedLevel2);
+      i--;
+    }
+  }
+}
+
 // getting the names for the player from the sessionStorage
 let name1 = sessionStorage.getItem("name");
 if (name1 === null) {
@@ -325,7 +358,7 @@ if (name2 === null) {
 // creating a function for the first player (drawing the character and the name)
 function firstPlayer() {
   textSize(20);
-  text(name1, player.position.x + 15, player.position.y - 10);
+  text(name1, player.position.x - 5, player.position.y - 10);
 
   player.update();
 }
@@ -333,7 +366,7 @@ function firstPlayer() {
 // creating a function for the second player (drawing the character and the name)
 function secondPlayer() {
   textSize(20);
-  text(name2, player2.position.x + 15, player2.position.y - 10);
+  text(name2, player2.position.x - 5, player2.position.y - 10);
 
   player2.update();
 }
@@ -546,4 +579,5 @@ function draw() {
     player2.velocity.x = -6;
   }
 }
+
 window.draw = draw;

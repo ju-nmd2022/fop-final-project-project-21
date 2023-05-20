@@ -200,6 +200,13 @@
   display: none;
 }
 
+.null2,
+.one2,
+.two2,
+.three2 {
+  display: none;
+}
+
 /* horizontal scroll source https://www.youtube.com/watch?v=pNPkVQD7vlM  */
 .levelFlexContainer {
   width: 100%;
