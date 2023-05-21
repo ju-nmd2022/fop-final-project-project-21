@@ -106,9 +106,16 @@ let commonPlatforms = [
 
 // first levels platroms
 let fistLevelPlatforms = [
-  new Platform({ x: 120, y: 1150 }, 200, 15),
-  new Platform({ x: 300, y: 600 }, 400, 15),
-  new Platform({ x: 250, y: 300 }, canvasWidth / 1.5, 15),
+  new Platform({ x: 200, y: canvasHeight - 200 }, 200, 15),
+  new Platform({ x: canvasWidth - 400, y: canvasHeight - 200 }, 200, 15),
+  new Platform({ x: canvasWidth / 3, y: canvasHeight - 400 }, 500, 15),
+  new Platform({ x: canvasWidth / 2, y: canvasHeight - 800 }, 15, 400),
+  new Platform({ x: canvasWidth - 400, y: canvasHeight - 600 }, 200, 15),
+  new Platform({ x: 200, y: canvasHeight - 600 }, 200, 15),
+  new Platform({ x: canvasWidth - 200, y: canvasHeight - 800 }, 200, 15),
+  new Platform({ x: 0, y: canvasHeight - 800 }, 200, 15),
+
+  new Platform({ x: 250, y: 350 }, canvasWidth / 1.5, 15),
 ];
 
 //second levels platforms
