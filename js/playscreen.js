@@ -116,7 +116,8 @@ let fistLevelPlatforms = [
   new Platform({ x: canvasWidth - 200, y: canvasHeight - 800 }, 200, 15),
   new Platform({ x: 0, y: canvasHeight - 800 }, 200, 15),
 
-  new Platform({ x: 250, y: 350 }, canvasWidth / 1.5, 15),
+  // the lange platform on top
+  new Platform({ x: 270, y: 350 }, canvasWidth / 1.6, 15),
 ];
 
 //second levels platforms
@@ -501,16 +502,6 @@ function timer() {
   timeCounter++; // Increment the custom time counter
 }
 
-// the guard
-// const guard = new Player(
-//   {
-//     x: canvasWidth / 2,
-//     y: 100,
-//   },
-//   "#414141",
-//   "#565656"
-// );
-
 const properGuard = new Guard({
   x: canvasWidth / 2,
   y: 100,
@@ -536,35 +527,26 @@ function theGuard() {
       }
     }
   }
+}
 
+// wich direction the quard is walking
+let walkingDirection = "right";
+
+function guardWalking() {
   // walking back and forth
-  // 250, 300 }, canvasWidth / 1.5,
-  // let walkingSpeed = 4;
-  // let direction = "right";
-
-  // if (direction === "right") {
-  //   if (properGuard.position.x < canvasWidth / 1.5 + 200) {
-  //     walkingSpeed = 4;
-  //   } else {
-  //     direction = "left";
-  //   }
-  // } else if (direction === "left") {
-  //   if (properGuard.position.x < 200) {
-  //     walkingSpeed = -4;
-  //   } else {
-  //     direction = "right";
-  //   }
-  // }
-
-  // if (direction === "left") {
-  //   walkingSpeed = -4;
-  // } else if (direction === "right") {
-  //   walkingSpeed = 4;
-  // }
-
-  // properGuard.velocity.x = walkingSpeed;
-
-  // console.log(direction);
+  if (walkingDirection === "right") {
+    if (properGuard.position.x < canvasWidth / 1.6) {
+      properGuard.velocity.x = 4;
+    } else {
+      walkingDirection = "left";
+    }
+  } else if (walkingDirection === "left") {
+    if (properGuard.position.x > 350) {
+      properGuard.velocity.x = -4;
+    } else {
+      walkingDirection = "right";
+    }
+  }
 }
 
 // drawing everyting and calling the functions
@@ -577,6 +559,9 @@ function draw() {
   displayArray();
   timer();
   theGuard();
+  guardWalking();
+
+  properGuard.update();
 
   player.velocity.x = 0;
   if (keys.d.pressed === true) {

@@ -9,27 +9,32 @@ export default class Guard {
       x: 0,
       y: 1,
     };
-    this.height = 175;
-    this.width = 45;
+    this.height = 220;
+    this.width = 100;
 
+    // values needed for animation
     this.animationFrameRate = 5;
     this.currentFrame = 0;
-
     this.frameChangeCounter = 0;
 
+    // all the animation frames
     this.animationFrameFunctions = [
-      this.firstGuard,
-      this.secondGuard,
-      this.thirdGuard,
-      this.fourthGuard,
-      this.fifthGuard,
+      () => this.firstGuard(),
+      () => this.secondGuard(),
+      () => this.thirdGuard(),
+      () => this.fourthGuard(),
+      () => this.fifthGuard(),
     ];
+
+    // flipping the animation when walking to the left, changin the x value of "scale" to a negative to mirror the drawing, correcting the placement of the image after mirroring
+    this.direction = 0.1;
+    this.placeCorrection = 0;
   }
 
   firstGuard() {
     push();
-    scale(0.1, 0.1);
-    translate(0, 160);
+    scale(this.direction, 0.1);
+    translate(this.placeCorrection, 160);
     stroke("rgba(0,0,0,0)");
     strokeCap(PROJECT);
     strokeJoin(MITER);
@@ -182,8 +187,8 @@ export default class Guard {
 
   secondGuard() {
     push();
-    scale(0.1, 0.1);
-    translate(0, 240);
+    scale(this.direction, 0.1);
+    translate(this.placeCorrection, 240);
     stroke("rgba(0,0,0,0)");
     strokeCap(PROJECT);
     strokeJoin(MITER);
@@ -346,8 +351,8 @@ export default class Guard {
 
   thirdGuard() {
     push();
-    scale(0.1, 0.1);
-    translate(0, 120);
+    scale(this.direction, 0.1);
+    translate(this.placeCorrection, 120);
     stroke("rgba(0,0,0,0)");
     stroke(1);
     strokeCap(PROJECT);
@@ -522,7 +527,8 @@ export default class Guard {
 
   fourthGuard() {
     push();
-    scale(0.1, 0.1);
+    scale(this.direction, 0.1);
+    translate(this.placeCorrection, 0);
     stroke("rgba(0,0,0,0)");
     stroke(1);
     strokeCap(PROJECT);
@@ -692,8 +698,8 @@ export default class Guard {
 
   fifthGuard() {
     push();
-    scale(0.1, 0.1);
-    translate(0, 150);
+    scale(this.direction, 0.1);
+    translate(this.placeCorrection, 150);
     stroke("rgba(0,0,0,0)");
     stroke(1);
     strokeCap(PROJECT);
@@ -874,21 +880,21 @@ export default class Guard {
     this.characterAnimation();
   }
 
-  update() {
-    this.draw();
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
-    if (this.position.y + this.height + this.velocity.y < canvasHeight - 10) {
-      this.velocity.y += gravity;
-    } else {
-      this.velocity.y = 0;
-    }
-  }
-
   draw() {
+    scale(1.1, 1.1);
     push();
     translate(this.position.x, this.position.y);
-    this.animate();
+
+    if (this.velocity.x > 0) {
+      this.animate();
+      this.direction = 0.1;
+      this.placeCorrection = 0;
+    } else if (this.velocity.x < 0) {
+      this.animate();
+      this.direction = -0.1;
+      this.placeCorrection = -400;
+    }
+
     pop();
   }
 
