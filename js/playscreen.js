@@ -3,18 +3,14 @@ import Player from "./player.js";
 import Platform from "./platform.js";
 import Guard from "./guard-class.js";
 
-// styling the body element to get rid of scroll bars and wiggling of the sreen
-const documentBody = document.querySelector("body");
-// documentBody.style.overflow = "hidden";
-documentBody.style.padding = "0px";
-documentBody.style.margin = "0px";
-
 // getting the proportions of the window
 let canvasWidth = window.innerWidth;
 let canvasHeight = window.innerHeight + 500;
 
 // setting up a canvas
 function setup() {
+  canvasWidth = window.innerWidth;
+  canvasHeight = window.innerHeight + 500;
   createCanvas(canvasWidth, canvasHeight);
   frameRate(30);
   // starting the scrolling from the bottom https://stackoverflow.com/questions/11715646/scroll-automatically-to-the-bottom-of-the-page
@@ -25,6 +21,9 @@ function setup() {
 }
 
 window.setup = setup;
+
+// listening for window resizing to addjust the canvas
+window.addEventListener("resize", setup);
 
 // disabling the up and down arrow keys from scrolling the canvas  source https://stackoverflow.com/questions/8916620/disable-arrow-key-scrolling-in-users-browser
 window.addEventListener(
@@ -37,10 +36,7 @@ window.addEventListener(
   false
 );
 
-// listening for window resizing to addjust the canvas
-window.addEventListener("resize", setup);
-
-// all the color options
+// all the overall color options
 const colorOptions = {
   yellow: { light: "#fff100", dark: "#d7c700" },
   green: { light: "#009245", dark: "#005129" },
@@ -49,33 +45,23 @@ const colorOptions = {
   white: { light: "#FFFFFF", dark: "#BEBEBE" },
 };
 
-// variables that need to be changes to change the color
-let firstPlayerLightColor;
-let firstPlayerDarkColor;
-let secondPlayerDarkColor;
-let secondPlayerLightColor;
+// asking what the players chose as their color
+let firstPlayerColor = sessionStorage.getItem("color");
+let secondPlayerColor = sessionStorage.getItem("color2");
 
-// asking what the first person chose and applying the corresponding color
-const firstPlayerColor = sessionStorage.getItem("color");
-if (firstPlayerColor) {
-  firstPlayerLightColor = colorOptions[firstPlayerColor].light;
-  firstPlayerDarkColor = colorOptions[firstPlayerColor].dark;
-} else {
-  // default color
-  firstPlayerLightColor = colorOptions.yellow.light;
-  firstPlayerDarkColor = colorOptions.yellow.dark;
+// in case they stuck with the default yellow
+if (!colorOptions[firstPlayerColor]) {
+  firstPlayerColor = "yellow";
+}
+if (!colorOptions[secondPlayerColor]) {
+  secondPlayerColor = "yellow";
 }
 
-// asking what the second person chose and applying the corresponding color
-const secondPlayerColor = sessionStorage.getItem("color2");
-if (secondPlayerColor) {
-  secondPlayerLightColor = colorOptions[secondPlayerColor].light;
-  secondPlayerDarkColor = colorOptions[secondPlayerColor].dark;
-} else {
-  // default color
-  secondPlayerLightColor = colorOptions.yellow.light;
-  secondPlayerDarkColor = colorOptions.yellow.dark;
-}
+// applying the corresponding colors
+const firstPlayerLightColor = colorOptions[firstPlayerColor].light;
+const firstPlayerDarkColor = colorOptions[firstPlayerColor].dark;
+const secondPlayerLightColor = colorOptions[secondPlayerColor].light;
+const secondPlayerDarkColor = colorOptions[secondPlayerColor].dark;
 
 // first players starting possition, and color
 const player = new Player(
@@ -97,12 +83,42 @@ const player2 = new Player(
   secondPlayerLightColor
 );
 
+// the guard that walks in front of the door
+const properGuard = new Guard({
+  x: canvasWidth / 2,
+  y: 120,
+});
+
+// source for guardWalking function https://www.youtube.com/watch?v=Rz4GS51dRTA&t=2s
+// wich direction the quard is walking
+let walkingDirection = "right";
+
+function guardWalking() {
+  // walking back and forth
+  if (walkingDirection === "right") {
+    if (properGuard.position.x < canvasWidth / 1.6) {
+      properGuard.velocity.x = 4;
+    } else {
+      walkingDirection = "left";
+    }
+  } else if (walkingDirection === "left") {
+    if (properGuard.position.x > 350) {
+      properGuard.velocity.x = -4;
+    } else {
+      walkingDirection = "right";
+    }
+  }
+}
+
 //  seting values for the platforms
 // common platforms between all levels (sides and bottom)
 let commonPlatforms = [
   new Platform({ x: 0, y: canvasHeight - 15 }, canvasWidth, 15),
   new Platform({ x: 0, y: 0 }, 15, canvasHeight),
   new Platform({ x: canvasWidth - 15, y: 0 }, 15, canvasHeight),
+
+  // the lange platform on top
+  new Platform({ x: 270, y: 350 }, canvasWidth / 1.6, 15),
 ];
 
 // first levels platroms
@@ -115,9 +131,6 @@ let fistLevelPlatforms = [
   new Platform({ x: 200, y: canvasHeight - 600 }, 200, 15),
   new Platform({ x: canvasWidth - 200, y: canvasHeight - 800 }, 200, 15),
   new Platform({ x: 0, y: canvasHeight - 800 }, 200, 15),
-
-  // the lange platform on top
-  new Platform({ x: 270, y: 350 }, canvasWidth / 1.6, 15),
 ];
 
 //second levels platforms
@@ -126,25 +139,25 @@ let secondLevelPlatforms = [
   new Platform({ x: 20, y: 100 }, 400, 15),
 ];
 
-// combinign the common level platforms to all other levels
+// adding the common level platforms to all other levels
 let platformArrayLevel1 = fistLevelPlatforms.concat(commonPlatforms);
 let platformArrayLevel2 = secondLevelPlatforms.concat(commonPlatforms);
 
-// looping trough the platforms to draw them
+// looping trough the platforms to draw them, first level
 function drawFirstLevelPlatrom() {
   for (let i = 0; i < platformArrayLevel1.length; i++) {
     platformArrayLevel1[i].draw();
   }
 }
 
-// looping trough the platforms to draw them
+// looping trough the platforms to draw them, second level
 function drawSecondLevelPlatrom() {
   for (let i = 0; i < platformArrayLevel2.length; i++) {
     platformArrayLevel2[i].draw();
   }
 }
 
-// checking which level was chosen, drawing the platforms and pushing them in an array
+// checking which level was chosen, drawing the platforms
 function displayArray() {
   let array = sessionStorage.getItem("platformArray");
   if (array === "platformArray") {
@@ -158,90 +171,213 @@ function displayArray() {
 }
 
 // creating a function to check for collision between the players and the platforms
+// function collision() {
+//   const currentPlatformArray =
+//     sessionStorage.getItem("platformArray") === "platformArray"
+//       ? platformArrayLevel1
+//       : platformArrayLevel2;
+//   for (let i = 0; i < currentPlatformArray.length; i++) {
+//     const platform = currentPlatformArray[i];
+
+//     // check collision for player1
+//     if (
+//       player.position.x + player.width >= platform.position.x &&
+//       player.position.x <= platform.position.x + platform.width &&
+//       player.position.y + player.height >= platform.position.y &&
+//       player.position.y <= platform.position.y + platform.height
+//     ) {
+//       if (
+//         player.position.y + player.height <=
+//         platform.position.y + player.velocity.y
+//       ) {
+//         // player1 is colliding from the top
+//         player.position.y = platform.position.y - player.height;
+//         player.velocity.y = 0;
+//       } else if (
+//         player.position.y >=
+//         platform.position.y + platform.height + player.velocity.y
+//       ) {
+//         // player1 is colliding from the bottom
+//         player.position.y = platform.position.y + platform.height;
+//         player.velocity.y = 0;
+//       } else if (
+//         player.position.x + player.width <=
+//         platform.position.x + player.velocity.x
+//       ) {
+//         // player1 is colliding from the left
+//         player.position.x = platform.position.x - player.width;
+//         player.velocity.x = 0;
+//       } else if (
+//         player.position.x >=
+//         platform.position.x + platform.width + player.velocity.x
+//       ) {
+//         // player1 is colliding from the right
+//         player.position.x = platform.position.x + platform.width;
+//         player.velocity.x = 0;
+//       }
+//     }
+
+//     // checking collision for player2
+//     if (
+//       player2.position.x + player2.width >= platform.position.x &&
+//       player2.position.x <= platform.position.x + platform.width &&
+//       player2.position.y + player2.height >= platform.position.y &&
+//       player2.position.y <= platform.position.y + platform.height
+//     ) {
+//       if (
+//         player2.position.y + player2.height <=
+//         platform.position.y + player2.velocity.y
+//       ) {
+//         //player2 is colliding from the top
+//         player2.position.y = platform.position.y - player2.height;
+//         player2.velocity.y = 0;
+//       } else if (
+//         player2.position.y >=
+//         platform.position.y + platform.height + player2.velocity.y
+//       ) {
+//         //player2 is colliding from the bottom
+//         player2.position.y = platform.position.y + platform.height;
+//         player2.velocity.y = 0;
+//       } else if (
+//         player2.position.x + player2.width <=
+//         platform.position.x + player2.velocity.x
+//       ) {
+//         // player2 is colliding from the left
+//         player2.position.x = platform.position.x - player2.width;
+//         player2.velocity.x = 0;
+//       } else if (
+//         player2.position.x >=
+//         platform.position.x + platform.width + player2.velocity.x
+//       ) {
+//         //player2 is colliding from the right
+//         player2.position.x = platform.position.x + platform.width;
+//         player2.velocity.x = 0;
+//       }
+//     }
+//     if (
+//       properGuard.position.x + properGuard.width >= platform.position.x &&
+//       properGuard.position.x <= platform.position.x + platform.width &&
+//       properGuard.position.y + properGuard.height >= platform.position.y &&
+//       properGuard.position.y <= platform.position.y + platform.height
+//     ) {
+//       if (
+//         properGuard.position.y + properGuard.height <=
+//         platform.position.y + properGuard.velocity.y
+//       ) {
+//         // the quard is colliding the platforms from the top
+//         properGuard.position.y = platform.position.y - properGuard.height;
+//         properGuard.velocity.y = 0;
+//       }
+//     }
+//   }
+// }
+
 function collision() {
   const currentPlatformArray =
     sessionStorage.getItem("platformArray") === "platformArray"
       ? platformArrayLevel1
       : platformArrayLevel2;
+
+  const checkCollision = (object, platform) => {
+    if (
+      object.position.x + object.width >= platform.position.x &&
+      object.position.x <= platform.position.x + platform.width &&
+      object.position.y + object.height >= platform.position.y &&
+      object.position.y <= platform.position.y + platform.height
+    ) {
+      if (
+        object.position.y + object.height <=
+        platform.position.y + object.velocity.y
+      ) {
+        // colliding from the top
+        object.position.y = platform.position.y - object.height;
+        object.velocity.y = 0;
+      } else if (
+        object.position.y >=
+        platform.position.y + platform.height + object.velocity.y
+      ) {
+        // colliding from the bottom
+        object.position.y = platform.position.y + platform.height;
+        object.velocity.y = 0;
+      } else if (
+        object.position.x + object.width <=
+        platform.position.x + object.velocity.x
+      ) {
+        // colliding from the left
+        object.position.x = platform.position.x - object.width;
+        object.velocity.x = 0;
+      } else if (
+        object.position.x >=
+        platform.position.x + platform.width + object.velocity.x
+      ) {
+        // colliding from the right
+        object.position.x = platform.position.x + platform.width;
+        object.velocity.x = 0;
+      }
+    }
+  };
+
   for (let i = 0; i < currentPlatformArray.length; i++) {
     const platform = currentPlatformArray[i];
-
-    // check collision for player1
-    if (
-      player.position.x + player.width >= platform.position.x &&
-      player.position.x <= platform.position.x + platform.width &&
-      player.position.y + player.height >= platform.position.y &&
-      player.position.y <= platform.position.y + platform.height
-    ) {
-      if (
-        player.position.y + player.height <=
-        platform.position.y + player.velocity.y
-      ) {
-        // player1 is colliding from the top
-        player.position.y = platform.position.y - player.height;
-        player.velocity.y = 0;
-      } else if (
-        player.position.y >=
-        platform.position.y + platform.height + player.velocity.y
-      ) {
-        // player1 is colliding from the bottom
-        player.position.y = platform.position.y + platform.height;
-        player.velocity.y = 0;
-      } else if (
-        player.position.x + player.width <=
-        platform.position.x + player.velocity.x
-      ) {
-        // player1 is colliding from the left
-        player.position.x = platform.position.x - player.width;
-        player.velocity.x = 0;
-      } else if (
-        player.position.x >=
-        platform.position.x + platform.width + player.velocity.x
-      ) {
-        // player1 is colliding from the right
-        player.position.x = platform.position.x + platform.width;
-        player.velocity.x = 0;
-      }
-    }
-
-    // checking collision for player2
-    if (
-      player2.position.x + player2.width >= platform.position.x &&
-      player2.position.x <= platform.position.x + platform.width &&
-      player2.position.y + player2.height >= platform.position.y &&
-      player2.position.y <= platform.position.y + platform.height
-    ) {
-      if (
-        player2.position.y + player2.height <=
-        platform.position.y + player2.velocity.y
-      ) {
-        //player2 is colliding from the top
-        player2.position.y = platform.position.y - player2.height;
-        player2.velocity.y = 0;
-      } else if (
-        player2.position.y >=
-        platform.position.y + platform.height + player2.velocity.y
-      ) {
-        //player2 is colliding from the bottom
-        player2.position.y = platform.position.y + platform.height;
-        player2.velocity.y = 0;
-      } else if (
-        player2.position.x + player2.width <=
-        platform.position.x + player2.velocity.x
-      ) {
-        // player2 is colliding from the left
-        player2.position.x = platform.position.x - player2.width;
-        player2.velocity.x = 0;
-      } else if (
-        player2.position.x >=
-        platform.position.x + platform.width + player2.velocity.x
-      ) {
-        //player2 is colliding from the right
-        player2.position.x = platform.position.x + platform.width;
-        player2.velocity.x = 0;
-      }
-    }
+    checkCollision(player, platform);
+    checkCollision(player2, platform);
+    checkCollision(properGuard, platform);
   }
+}
+
+function guardCollision() {
+  // collision between guard and player
+  const checkGuardCollision = (aPlayer, theGueard) => {
+    if (
+      aPlayer.position.x + aPlayer.width >= theGueard.position.x &&
+      aPlayer.position.x <= theGueard.position.x + theGueard.width &&
+      aPlayer.position.y + aPlayer.height >= theGueard.position.y &&
+      aPlayer.position.y <= theGueard.position.y + theGueard.height
+    ) {
+      if (
+        aPlayer.position.y + aPlayer.height <=
+        theGueard.position.y + aPlayer.velocity.y
+      ) {
+        // colliding from the top
+        aPlayer.position.y = theGueard.position.y - aPlayer.height;
+        aPlayer.velocity.y = 0;
+        theGueard.velocity.y = 0;
+        alert("You got caught by the guard!");
+      } else if (
+        aPlayer.position.y >=
+        theGueard.position.y + theGueard.height + aPlayer.velocity.y
+      ) {
+        // colliding from the bottom
+        aPlayer.position.y = theGueard.position.y + theGueard.height;
+        aPlayer.velocity.y = 0;
+        theGueard.velocity.y = 0;
+        alert("You got caught by the guard!");
+      } else if (
+        aPlayer.position.x + aPlayer.width <=
+        theGueard.position.x + aPlayer.velocity.x
+      ) {
+        // colliding from the left
+        aPlayer.position.x = theGueard.position.x - aPlayer.width;
+        aPlayer.velocity.x = 0;
+        theGueard.velocity.y = 0;
+        alert("You got caught by the guard!");
+      } else if (
+        aPlayer.position.x >=
+        theGueard.position.x + theGueard.width + aPlayer.velocity.x
+      ) {
+        // colliding from the right
+        aPlayer.position.x = theGueard.position.x + theGueard.width;
+        aPlayer.velocity.x = 0;
+        theGueard.velocity.y = 0;
+        alert("You got caught by the guard!");
+      }
+    }
+  };
+
+  checkGuardCollision(player, properGuard);
+  checkGuardCollision(player2, properGuard);
+  checkGuardCollision(properGuard, player);
+  checkGuardCollision(properGuard, player2);
 }
 
 // creating container for the images of the stars
@@ -354,30 +490,20 @@ function collectStars() {
 }
 
 // getting the names for the player from the sessionStorage
-let name1 = sessionStorage.getItem("name");
-if (name1 === null) {
-  name1 = "";
-}
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing
+let name1 = sessionStorage.getItem("name") ?? "";
+let name2 = sessionStorage.getItem("name2") ?? "";
 
-let name2 = sessionStorage.getItem("name2");
-if (name2 === null) {
-  name2 = "";
-}
-
-// creating a function for the first player (drawing the character and the name)
-function firstPlayer() {
-  textSize(20);
+// function to draw the character and the names + the guard
+function drawThePlayers() {
+  push();
+  textSize(16);
   text(name1, player.position.x - 5, player.position.y - 10);
-
-  player.update();
-}
-
-// creating a function for the second player (drawing the character and the name)
-function secondPlayer() {
-  textSize(20);
   text(name2, player2.position.x - 5, player2.position.y - 10);
-
+  pop();
+  player.update();
   player2.update();
+  properGuard.update();
 }
 
 //creating values to check if the key was pressed in order to later state that the key can be pressed only once
@@ -467,12 +593,14 @@ window.addEventListener("keyup", (event) => {
 });
 
 // timer
-// from what time the timer starts
+// from what time the timer starts from
 let timeCounter = 21.7 * 6000;
+// the target time is 22:00 o'clock
 let targetTime = 22 * 6000;
 
-// Function to update the clock display
+// function to update the clock display (chatGPT)
 function timer() {
+  // timer div from html
   const timerElement = document.getElementById("timer");
   const hours = Math.floor(timeCounter / 6000)
     .toString()
@@ -480,88 +608,41 @@ function timer() {
   let minutes = (timeCounter % 6000).toString().padStart(2, "0");
   let minutesDisplayed = `${minutes}`;
   minutesDisplayed = minutesDisplayed / 100;
+  // source for removing numbers from the end https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
   function shortenNumber(x) {
     return Number.parseFloat(x).toFixed(0);
   }
-
-  // source for removing numbers from the end https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
   minutes = shortenNumber(minutesDisplayed);
 
+  // dispalying the time
   timerElement.textContent = `${hours}:${minutes}`;
 
+  // getting rid of  the clock displaying 21:60
   if (minutes === "60") {
     timerElement.textContent = "22:00";
   }
 
-  // Check if target time reached
+  // checking if target time is reached
   if (timeCounter > targetTime) {
     alert("Times up!");
     targetTime = 22 * 6000;
     timeCounter = 21.7 * 6000;
   }
-  timeCounter++; // Increment the custom time counter
-}
 
-const properGuard = new Guard({
-  x: canvasWidth / 2,
-  y: 100,
-});
-
-function theGuard() {
-  // staying on its lil platform
-  for (let i = 0; i < platformArrayLevel1.length; i++) {
-    const platform = platformArrayLevel1[i];
-    if (
-      properGuard.position.x + properGuard.width >= platform.position.x &&
-      properGuard.position.x <= platform.position.x + platform.width &&
-      properGuard.position.y + properGuard.height >= platform.position.y &&
-      properGuard.position.y <= platform.position.y + platform.height
-    ) {
-      if (
-        properGuard.position.y + properGuard.height <=
-        platform.position.y + properGuard.velocity.y
-      ) {
-        // player1 is colliding from the top
-        properGuard.position.y = platform.position.y - properGuard.height;
-        properGuard.velocity.y = 0;
-      }
-    }
-  }
-}
-
-// wich direction the quard is walking
-let walkingDirection = "right";
-
-function guardWalking() {
-  // walking back and forth
-  if (walkingDirection === "right") {
-    if (properGuard.position.x < canvasWidth / 1.6) {
-      properGuard.velocity.x = 4;
-    } else {
-      walkingDirection = "left";
-    }
-  } else if (walkingDirection === "left") {
-    if (properGuard.position.x > 350) {
-      properGuard.velocity.x = -4;
-    } else {
-      walkingDirection = "right";
-    }
-  }
+  // making time go forward
+  timeCounter++;
 }
 
 // drawing everyting and calling the functions
 function draw() {
   background(0, 0, 0);
-  firstPlayer();
-  secondPlayer();
+  drawThePlayers();
   collision();
+  guardCollision();
   collectStars();
   displayArray();
   timer();
-  theGuard();
   guardWalking();
-
-  properGuard.update();
 
   player.velocity.x = 0;
   if (keys.d.pressed === true) {

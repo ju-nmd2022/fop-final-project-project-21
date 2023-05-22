@@ -881,10 +881,12 @@ export default class Guard {
   }
 
   draw() {
-    scale(1.1, 1.1);
     push();
+    // making the guard slightly bigger
+    scale(1.1, 1.1);
+    // moving the x and y possition of the drawing
     translate(this.position.x, this.position.y);
-
+    // checking weather the guard is walking left or right, corresponding animation
     if (this.velocity.x > 0) {
       this.animate();
       this.direction = 0.1;
@@ -894,7 +896,6 @@ export default class Guard {
       this.direction = -0.1;
       this.placeCorrection = -400;
     }
-
     pop();
   }
 
