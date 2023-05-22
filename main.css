@@ -276,6 +276,7 @@ a {
   right: 2em;
   top: 1em;
   font-family: "Orbitron", sans-serif;
+  padding: 0.2em 0.5em;
 }
 /* hiding the scroll bar without loosing scrolling https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-still-being-able-to-scroll */
 .level-body {

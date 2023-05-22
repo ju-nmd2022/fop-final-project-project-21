@@ -1,6 +1,7 @@
 // importing elements needed to build the game
 import Player from "./player.js";
 import Platform from "./platform.js";
+import Guard from "./guard-class.js";
 
 // styling the body element to get rid of scroll bars and wiggling of the sreen
 const documentBody = document.querySelector("body");
@@ -501,64 +502,68 @@ function timer() {
 }
 
 // the guard
-const guard = new Player(
-  {
-    x: canvasWidth / 2,
-    y: 100,
-  },
-  "#414141",
-  "#565656"
-);
+// const guard = new Player(
+//   {
+//     x: canvasWidth / 2,
+//     y: 100,
+//   },
+//   "#414141",
+//   "#565656"
+// );
+
+const properGuard = new Guard({
+  x: canvasWidth / 2,
+  y: 100,
+});
 
 function theGuard() {
   // staying on its lil platform
   for (let i = 0; i < platformArrayLevel1.length; i++) {
     const platform = platformArrayLevel1[i];
     if (
-      guard.position.x + guard.width >= platform.position.x &&
-      guard.position.x <= platform.position.x + platform.width &&
-      guard.position.y + guard.height >= platform.position.y &&
-      guard.position.y <= platform.position.y + platform.height
+      properGuard.position.x + properGuard.width >= platform.position.x &&
+      properGuard.position.x <= platform.position.x + platform.width &&
+      properGuard.position.y + properGuard.height >= platform.position.y &&
+      properGuard.position.y <= platform.position.y + platform.height
     ) {
       if (
-        guard.position.y + guard.height <=
-        platform.position.y + guard.velocity.y
+        properGuard.position.y + properGuard.height <=
+        platform.position.y + properGuard.velocity.y
       ) {
         // player1 is colliding from the top
-        guard.position.y = platform.position.y - guard.height;
-        guard.velocity.y = 0;
+        properGuard.position.y = platform.position.y - properGuard.height;
+        properGuard.velocity.y = 0;
       }
     }
   }
 
   // walking back and forth
   // 250, 300 }, canvasWidth / 1.5,
-  let walkingSpeed = 4;
-  let direction = "right";
+  // let walkingSpeed = 4;
+  // let direction = "right";
 
-  if (direction === "right") {
-    if (guard.position.x < canvasWidth / 1.5 + 200) {
-      walkingSpeed = 4;
-    } else {
-      direction = "left";
-    }
-  } else if (direction === "left") {
-    if (guard.position.x < 200) {
-      walkingSpeed = -4;
-    } else {
-      direction = "right";
-    }
-  }
+  // if (direction === "right") {
+  //   if (properGuard.position.x < canvasWidth / 1.5 + 200) {
+  //     walkingSpeed = 4;
+  //   } else {
+  //     direction = "left";
+  //   }
+  // } else if (direction === "left") {
+  //   if (properGuard.position.x < 200) {
+  //     walkingSpeed = -4;
+  //   } else {
+  //     direction = "right";
+  //   }
+  // }
 
-  if (direction === "left") {
-    walkingSpeed = -4;
-  } else if (direction === "right") {
-    walkingSpeed = 4;
-  }
+  // if (direction === "left") {
+  //   walkingSpeed = -4;
+  // } else if (direction === "right") {
+  //   walkingSpeed = 4;
+  // }
 
-  guard.velocity.x = walkingSpeed;
+  // properGuard.velocity.x = walkingSpeed;
 
-  guard.update();
   // console.log(direction);
 }
 
