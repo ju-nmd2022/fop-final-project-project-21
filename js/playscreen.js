@@ -1,6 +1,9 @@
 // importing elements needed to build the game
 import Player from "./player.js";
 import Platform from "./platform.js";
+import Button from "./button.js";
+import MovingPlatform from "./moving-platform.js";
+import DisapearingPlatform from "./disapearing-platform.js";
 
 // styling the body element to get rid of scroll bars and wiggling of the sreen
 const documentBody = document.querySelector("body");
@@ -96,37 +99,148 @@ const player2 = new Player(
   secondPlayerLightColor
 );
 
-//  seting values for the platforms
+// the button
+let button = new Button(
+  {
+    x: canvasWidth - 300,
+    y: canvasHeight - 25,
+  },
+  10,
+  "red"
+);
+
+let button2 = new Button(
+  {
+    x: canvasWidth / 3 + 100,
+    y: canvasHeight / 2 + 21,
+  },
+  10,
+  "red"
+);
+
+let button3 = new Button(
+  {
+    x: canvasWidth / 2 - 700,
+    y: canvasHeight / 2 + 121,
+  },
+  10,
+  "red"
+);
+
+let button4 = new Button(
+  {
+    x: canvasWidth / 2 - 100,
+    y: canvasHeight / 2 + 21,
+  },
+  10,
+  "blue"
+);
+
+let button5 = new Button(
+  {
+    x: canvasWidth / 2 - 300,
+    y: 340,
+  },
+  10,
+  "blue"
+);
+
+// the moving platform
+let movingPlatform = new MovingPlatform(
+  { x: 150, y: canvasHeight - 50 },
+  "red"
+);
+let movingPlatform2 = new MovingPlatform(
+  {
+    x: canvasWidth - 350,
+    y: canvasHeight - 220,
+  },
+  "red"
+);
+
+let movingPlatform3 = new MovingPlatform(
+  {
+    x: canvasWidth / 2 - 350,
+    y: 700,
+  },
+  "blue"
+);
+
+let movingPlatform4 = new MovingPlatform(
+  {
+    x: canvasWidth / 2 + 150,
+    y: 700,
+  },
+  "blue"
+);
+
+let disapearingPlatform = new DisapearingPlatform(
+  {
+    x: canvasWidth - 450,
+    y: 1000,
+  },
+  "rgb(60, 60, 60)"
+);
+
+// seting values for the platforms
 // common platforms between all levels (sides and bottom)
 let commonPlatforms = [
   new Platform({ x: 0, y: canvasHeight - 15 }, canvasWidth, 15),
   new Platform({ x: 0, y: 0 }, 15, canvasHeight),
   new Platform({ x: canvasWidth - 15, y: 0 }, 15, canvasHeight),
+  new Platform({ x: 250, y: 350 }, canvasWidth / 1.5, 15),
 ];
 
 // first levels platroms
 let fistLevelPlatforms = [
   new Platform({ x: 200, y: canvasHeight - 200 }, 200, 15),
   new Platform({ x: canvasWidth - 400, y: canvasHeight - 200 }, 200, 15),
-  new Platform({ x: canvasWidth / 3, y: canvasHeight - 400 }, 500, 15),
+  new Platform({ x: canvasWidth / 3 - 50, y: canvasHeight - 400 }, 650, 15),
   new Platform({ x: canvasWidth / 2, y: canvasHeight - 800 }, 15, 400),
   new Platform({ x: canvasWidth - 400, y: canvasHeight - 600 }, 200, 15),
   new Platform({ x: 200, y: canvasHeight - 600 }, 200, 15),
   new Platform({ x: canvasWidth - 200, y: canvasHeight - 800 }, 200, 15),
   new Platform({ x: 0, y: canvasHeight - 800 }, 200, 15),
 
-  new Platform({ x: 250, y: 350 }, canvasWidth / 1.5, 15),
+  //new Platform({ x: 250, y: 350 }, canvasWidth / 1.5, 15),
 ];
 
 //second levels platforms
 let secondLevelPlatforms = [
   new Platform({ x: 500, y: 700 }, 700, 15),
-  new Platform({ x: 20, y: 100 }, 400, 15),
+  new Platform({ x: 15, y: 500 }, 100, 15),
+  new Platform({ x: canvasWidth - 115, y: 500 }, 100, 15),
+  movingPlatform,
+  button,
+  button2,
+  movingPlatform2,
+];
+
+let thirdLevelPlatforms = [
+  new Platform({ x: canvasWidth / 2 - 150, y: 700 }, 300, 15),
+  new Platform({ x: canvasWidth / 2 - 300, y: 1200 }, 200, 15),
+  new Platform({ x: canvasWidth / 2 - 650, y: 1000 }, 300, 15),
+  new Platform({ x: canvasWidth / 2 - 750, y: 800 }, 200, 15),
+  new Platform({ x: canvasWidth - 700, y: 1200 }, 200, 15),
+  disapearingPlatform,
+  new Platform({ x: canvasWidth - 250, y: 800 }, 200, 15),
+  button3,
+  button4,
+  movingPlatform3,
+  button5,
+  movingPlatform4,
+];
+
+let forthLevelPlatforms = [
+  new Platform({ x: canvasWidth - 250, y: 800 }, 200, 15),
+  new Platform({ x: canvasWidth / 2 - 650, y: 1000 }, 300, 15),
 ];
 
 // combinign the common level platforms to all other levels
 let platformArrayLevel1 = fistLevelPlatforms.concat(commonPlatforms);
 let platformArrayLevel2 = secondLevelPlatforms.concat(commonPlatforms);
+let platformArrayLevel3 = thirdLevelPlatforms.concat(commonPlatforms);
+let platformArrayLevel4 = forthLevelPlatforms.concat(commonPlatforms);
 
 // looping trough the platforms to draw them
 function drawFirstLevelPlatrom() {
@@ -142,6 +256,18 @@ function drawSecondLevelPlatrom() {
   }
 }
 
+function drawThirdLevelPlatform() {
+  for (let i = 0; i < platformArrayLevel3.length; i++) {
+    platformArrayLevel3[i].draw();
+  }
+}
+
+function drawForthLevelPlatforms() {
+  for (let i = 0; i < platformArrayLevel4.length; i++) {
+    platformArrayLevel4[i].draw();
+  }
+}
+
 // checking which level was chosen, drawing the platforms and pushing them in an array
 function displayArray() {
   let array = sessionStorage.getItem("platformArray");
@@ -152,6 +278,12 @@ function displayArray() {
     // calling the drawing function
     drawSecondLevelPlatrom();
     platformArrayLevel1 = platformArrayLevel2;
+  } else if (array === "platformArrayLevel3") {
+    drawThirdLevelPlatform();
+    platformArrayLevel1 = platformArrayLevel3;
+  } else if (array === "platformArrayLevel4") {
+    drawForthLevelPlatforms();
+    platformArrayLevel1 = platformArrayLevel4;
   }
 }
 
@@ -160,7 +292,11 @@ function collision() {
   const currentPlatformArray =
     sessionStorage.getItem("platformArray") === "platformArray"
       ? platformArrayLevel1
-      : platformArrayLevel2;
+      : sessionStorage.getItem("platformArray") === "platformArrayLevel2"
+      ? platformArrayLevel2
+      : sessionStorage.getItem("platformArray") === "platformArrayLevel3"
+      ? platformArrayLevel3
+      : platformArrayLevel4;
   for (let i = 0; i < currentPlatformArray.length; i++) {
     const platform = currentPlatformArray[i];
 
@@ -239,6 +375,140 @@ function collision() {
         player2.velocity.x = 0;
       }
     }
+
+    // stay on top of moving platform
+    /*if (
+      player.position.y + player.height <=
+      movingPlatform.position.y + player.velocity.y
+    ) {
+      player.position.y = player.position.y =
+        movingPlatform.position.y -
+        (player.position.y - movingPlatform.position.y);
+      player.velocity.y = 0;
+    }*/
+
+    // check collision with button
+    if (
+      player2.position.x + player2.width >= button.position.x &&
+      player2.position.x <= button.position.x + button.width &&
+      player2.position.y + player2.height >= button.position.y &&
+      player2.position.y <= button.position.y + button.height
+    ) {
+      button.position.y = canvasHeight - 17;
+      button.height = 2;
+      movingPlatform.position.y -= 0.5;
+    } else {
+      button.position.y = canvasHeight - 25;
+      button.height = 10;
+    }
+    //check collision with button2
+    if (
+      player.position.x + player.width >= button2.position.x &&
+      player.position.x <= button2.position.x + button2.width &&
+      player.position.y + player.height >= button2.position.y &&
+      player.position.y <= button2.position.y + button2.height
+    ) {
+      button2.position.y = canvasHeight / 2 + 29;
+      button2.height = 2;
+      movingPlatform2.position.y -= 0.5;
+    } else {
+      button2.position.y = canvasHeight / 2 + 21;
+      button2.height = 10;
+    }
+    // collison with button3 and displaying platform
+    if (
+      player.position.x + player.width >= button3.position.x &&
+      player.position.x <= button3.position.x + button3.width &&
+      player.position.y + player.height >= button3.position.y &&
+      player.position.y <= button3.position.y + button3.height
+    ) {
+      button3.height = 2;
+      button3.position.y = canvasHeight / 2 + 129;
+      disapearingPlatform.color = "white";
+      /*if (
+        player2.position.x + player2.width >= disapearingPlatform.position.x &&
+        player2.position.x <=
+          disapearingPlatform.position.x + disapearingPlatform.width &&
+        player2.position.y + player2.height >= disapearingPlatform.position.y &&
+        player2.position.y <=
+          disapearingPlatform.position.y + disapearingPlatform.height
+      ) {
+        if (
+          player2.position.y + player2.height <=
+          disapearingPlatform.position.y + player2.velocity.y
+        ) {
+          //player2 is colliding from the top
+          player2.position.y = disapearingPlatform.position.y - player2.height;
+          player2.velocity.y = 0;
+        } else if (
+          player2.position.y >=
+          disapearingPlatform.position.y +
+            disapearingPlatform.height +
+            player2.velocity.y
+        ) {
+          //player2 is colliding from the bottom
+          player2.position.y =
+            disapearingPlatform.position.y + disapearingPlatform.height;
+          player2.velocity.y = 0;
+        } else if (
+          player2.position.x + player2.width <=
+          disapearingPlatform.position.x + player2.velocity.x
+        ) {
+          // player2 is colliding from the left
+          player2.position.x = disapearingPlatform.position.x - player2.width;
+          player2.velocity.x = 0;
+        } else if (
+          player2.position.x >=
+          disapearingPlatform.position.x +
+            disapearingPlatform.width +
+            player2.velocity.x
+        ) {
+          //player2 is colliding from the right
+          player2.position.x =
+            disapearingPlatform.position.x + disapearingPlatform.width;
+          player2.velocity.x = 0;
+        }*/
+    } else {
+      button3.height = 10;
+      button3.position.y = canvasHeight / 2 + 121;
+      disapearingPlatform.color = "rgb(60, 60, 60)";
+    }
+
+    //collisun button4
+    if (
+      player2.position.x + player2.width >= button4.position.x &&
+      player2.position.x <= button4.position.x + button4.width &&
+      player2.position.y + player2.height >= button4.position.y &&
+      player2.position.y <= button4.position.y + button4.height
+    ) {
+      button4.position.y = canvasHeight / 2 + 29;
+      button4.height = 2;
+      if (movingPlatform3.position.x > 15) {
+        movingPlatform3.position.x -= 0.5;
+        movingPlatform3.position.y -= 0.15;
+      }
+    } else {
+      button4.position.y = canvasHeight / 2 + 21;
+      button4.height = 10;
+    }
+
+    //collisun button5
+    if (
+      player.position.x + player.width >= button5.position.x &&
+      player.position.x <= button5.position.x + button5.width &&
+      player.position.y + player.height >= button5.position.y &&
+      player.position.y <= button5.position.y + button5.height
+    ) {
+      button5.position.y = 348;
+      button5.height = 2;
+      if (movingPlatform4.position.x > canvasWidth - 215) {
+        movingPlatform4.position.x += 0.5;
+        movingPlatform4.position.y -= 0.15;
+      }
+    } else {
+      button5.position.y = 340;
+      button5.height = 10;
+    }
   }
 }
 
@@ -257,6 +527,8 @@ const imageSources = [
 const stars = [];
 let starsCollectedLevel1 = 0;
 let starsCollectedLevel2 = 0;
+let starsCollectedLevel3 = 0;
+let starsCollectedLevel4 = 0;
 
 // a loop to create the stars and to display them on random positions
 for (let i = 0; i < starsCount; i++) {
@@ -346,6 +618,62 @@ function collectStars() {
       stars.splice(i, 1);
       starsCollectedLevel2++;
       sessionStorage.setItem("starsCollectedLevel2", starsCollectedLevel2);
+      i--;
+    } else if (
+      star.dataset.x < player.position.x + player.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player.position.x &&
+      star.dataset.y < player.position.y + player.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) >
+        player.position.y &&
+      array === "platformArrayLevel3"
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollectedLevel3++;
+      sessionStorage.setItem("starsCollectedLevel3", starsCollectedLevel3);
+      i--;
+    } else if (
+      star.dataset.x < player2.position.x + player2.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player2.position.x &&
+      star.dataset.y < player2.position.y + player2.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) >
+        player2.position.y &&
+      array === "platformArrayLevel3"
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollectedLevel3++;
+      sessionStorage.setItem("starsCollectedLevel3", starsCollectedLevel3);
+      i--;
+    } else if (
+      star.dataset.x < player.position.x + player.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player.position.x &&
+      star.dataset.y < player.position.y + player.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) >
+        player.position.y &&
+      array === "platformArrayLevel4"
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollectedLevel4++;
+      sessionStorage.setItem("starsCollectedLevel4", starsCollectedLevel4);
+      i--;
+    } else if (
+      star.dataset.x < player2.position.x + player2.width &&
+      parseInt(star.dataset.x) + parseInt(star.style.width) >
+        player2.position.x &&
+      star.dataset.y < player2.position.y + player2.height &&
+      parseInt(star.dataset.y) + parseInt(star.style.height) >
+        player2.position.y &&
+      array === "platformArrayLevel4"
+    ) {
+      starsContainer.removeChild(star);
+      stars.splice(i, 1);
+      starsCollectedLevel4++;
+      sessionStorage.setItem("starsCollectedLevel4", starsCollectedLevel4);
       i--;
     }
   }

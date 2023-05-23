@@ -196,14 +196,19 @@
 .null,
 .one,
 .two,
-.three {
-  display: none;
-}
-
+.three,
 .null2,
 .one2,
 .two2,
-.three2 {
+.three2,
+.null3,
+.one3,
+.two3,
+.three3,
+.null4,
+.one4,
+.two4,
+.three4 {
   display: none;
 }
 
