@@ -1,18 +1,25 @@
 * {
   padding: 0;
-  background-color: #191919;
+  margin: 0;
   /* background-color: darkgray; */
-  font-family: "Josefin Sans", sans-serif;
+  /* font-family: "Josefin Sans", sans-serif; */
+  font-family: "Roboto", sans-serif;
 }
 
 /* index page */
+
+.index-body {
+  background-image: linear-gradient(#000, #191919);
+  width: 100vw;
+  height: 100vh;
+}
 .indexContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   height: 95vh;
-  color: aliceblue;
+  color: #d1d2d4;
 }
 
 .game-logo {
@@ -21,12 +28,51 @@
 }
 
 .description-text {
-  font-size: 1.1em;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.05em;
   margin: 3rem;
   width: 55vw;
+  line-height: 1.5em;
 }
 
+/* source for the button design  */
+/* https://getcssscan.com/css-buttons-examples */
 .startButton {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  align-items: center;
+  border: 2px solid #d1d2d4;
+  box-sizing: border-box;
+  color: #d1d2d4;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.2em;
+  font-weight: 600;
+  height: 48px;
+  justify-content: center;
+  padding: 0.5em 2em;
+  text-align: center;
+  transition: all 0.3s;
+  background-color: #000;
+}
+
+.startButton:focus {
+  color: #171e29;
+}
+
+.startButton:hover {
+  border-color: #f0e282;
+  color: #f0e282;
+  fill: #f0e282;
+}
+
+.startButton:active {
+  border-color: #f0e282;
+  color: #f0e282;
+  fill: #f0e282;
+}
+
+/* .startButton {
   display: grid;
   grid-area: startButton;
   align-self: center;
@@ -39,8 +85,22 @@
   outline: 2px solid white;
   outline-offset: 3.2px;
   margin-top: 1rem;
-}
+} */
 /* end of index page  */
+
+/* start of decision page  */
+.decision-body {
+  background-color: #191919;
+}
+
+.decision-title {
+  color: #484848;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+  font-size: 1.5em;
+}
 
 .playerGrid {
   display: grid;
@@ -57,6 +117,7 @@
 .key1 {
   display: grid;
   grid-area: playerOne;
+  font-weight: 400;
 }
 
 .player {
@@ -65,6 +126,7 @@
   justify-content: center;
   align-items: center;
   color: white;
+  font-weight: 400;
 }
 
 .playertwo,
@@ -75,11 +137,14 @@
   grid-area: playerTwo;
 }
 
+#playertwo {
+  font-weight: 400;
+}
 .player-heading {
   justify-self: center;
 }
 
-.startButton2 {
+/* .startButton2 {
   display: grid;
   grid-area: startButton;
   align-items: center;
@@ -92,7 +157,7 @@
   outline: 2px solid white;
   outline-offset: 3.2px;
   margin-top: 1rem;
-}
+} */
 
 .startButton2position {
   display: grid;
@@ -107,8 +172,10 @@
 
 .inputField {
   padding: 0.25em 0.5em;
-  background-color: white;
+  background-color: #d1d2d4;
   font-size: 1em;
+  margin-top: 0.5em;
+  outline: none;
 }
 
 .input_section {
@@ -119,11 +186,22 @@
 }
 
 .second_button {
-  outline: 1px solid white;
-  background-color: gold;
-  color: white;
+  /* outline: 1px solid white; */
+  /* background-color: gold; */
+  background-color: #191919;
+  border: none;
   padding: 0.5em;
   cursor: pointer;
+  color: #d1d2d4;
+  font-size: 0.9em;
+}
+
+.second_button:hover {
+  color: #f0e282;
+}
+
+.second_button:active {
+  color: #f0e282;
 }
 
 /* image carousel */
@@ -132,6 +210,11 @@
   height: 350px;
   width: 60%;
   margin: 0 auto;
+  background-color: #191919;
+}
+
+.carousel-button {
+  background-color: #191919;
 }
 
 .carousel-image {
@@ -142,7 +225,6 @@
 
 .carousel-track-container {
   height: 100%;
-  background-color: blue;
   position: relative;
   overflow: hidden;
 }
@@ -180,6 +262,12 @@
 /* end of image carousel  */
 
 /* levels screen  */
+
+.levels-body {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(#000, #191919);
+}
 .little-game-logo {
   display: flex;
   width: 10em;
@@ -254,6 +342,9 @@ section.levelSection:nth-of-type(4) {
   padding-left: 1em;
   padding-right: 1em;
   cursor: pointer;
+  /* background-image: linear-gradient(#000, #191919); */
+  background-color: #0a0a0a;
+  font-weight: 900;
 }
 
 .levels:hover {
@@ -290,3 +381,18 @@ a {
   display: none; /* Safari and Chrome */
 }
 /* end of game sscreen  */
+
+/* levels locked or unlocked  */
+.locked {
+  opacity: 0.3;
+}
+
+.lockedTitle {
+  color: #888888;
+}
+
+.lockedTitle:hover {
+  color: #888888;
+  text-shadow: none;
+  cursor: default;
+}
