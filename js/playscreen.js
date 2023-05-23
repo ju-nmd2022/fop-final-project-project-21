@@ -4,13 +4,13 @@ import Platform from "./platform.js";
 import Button from "./button.js";
 import MovingPlatform from "./moving-platform.js";
 import DisapearingPlatform from "./disapearing-platform.js";
+import Guard from "./guard-class.js";
 
 // styling the body element to get rid of scroll bars and wiggling of the sreen
 const documentBody = document.querySelector("body");
 // documentBody.style.overflow = "hidden";
 documentBody.style.padding = "0px";
 documentBody.style.margin = "0px";
-import Guard from "./guard-class.js";
 
 // getting the proportions of the window
 let canvasWidth = window.innerWidth;
@@ -175,7 +175,6 @@ let disapearingPlatform = new DisapearingPlatform(
   "rgb(60, 60, 60)"
 );
 
-// seting values for the platforms
 // the guard that walks in front of the door
 const properGuard = new Guard({
   x: canvasWidth / 2,
