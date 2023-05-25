@@ -77,3 +77,25 @@ level3.addEventListener("click", () => {
   platformArray = platformArray.replace(" platformArray", ""); // remove "platformArray" if present
   sessionStorage.setItem("platformArray", platformArray); // add "platformArrayLevel2"
 });
+
+let isLevelComplete = sessionStorage.getItem("levelsComplete");
+let levelTwoImageElement = document.getElementById("secondLevelImage");
+let levelTreeImageElement = document.getElementById("thirdLevelImage");
+
+if (isLevelComplete === "firstLevelComplete") {
+  // display the the second level as open
+  levelTwoImageElement.classList.remove("locked");
+  level2.classList.remove("lockedTitle");
+  level2.addEventListener("click", function () {
+    window.location.href = "playscreen.html";
+  });
+} else if (isLevelComplete === "secondLevelComplete") {
+  levelTwoImageElement.classList.remove("locked");
+  level2.classList.remove("lockedTitle");
+  levelTreeImageElement.classList.remove("locked");
+  level3.classList.remove("lockedTitle");
+  level3.addEventListener("click", function () {
+    window.location.href = "playscreen.html";
+  });
+} else if (isLevelComplete === "thirdLevelComplete") {
+}

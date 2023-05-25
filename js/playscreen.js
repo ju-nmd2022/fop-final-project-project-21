@@ -1159,6 +1159,17 @@ function draw() {
       push();
       theDoor.update();
       pop();
+
+      // wich level was won
+      let currentLevel = sessionStorage.getItem("platformArray");
+      if (currentLevel === "platformArray") {
+        sessionStorage.setItem("levelsComplete", "firstLevelComplete");
+      } else if (currentLevel === "platformArrayLevel2") {
+        sessionStorage.setItem("levelsComplete", "secondLevelComplete");
+      } else if (currentLevel === "platformArrayLevel3") {
+        sessionStorage.setItem("levelsComplete", "thirdLevelComplete");
+        cosole.log("level 3 completed");
+      }
     }
   }
 

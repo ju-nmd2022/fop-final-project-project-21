@@ -290,8 +290,8 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 60vw;
-  height: 60vh;
+  width: 30vw;
+  height: 20vh;
   transform: translate(-50%, -50%);
   padding: 3em;
   display: flex;
@@ -318,13 +318,13 @@
 .guard-loose p {
   color: #d1d2d4;
   font-size: 1.8em;
-  margin: 2em;
+  margin: 1em;
 }
 
 .win .startButton,
 .time-up .startButton,
 .guard-loose .startButton {
-  margin: 0em 15em;
+  margin: 0em 4em;
 }
 
 .null,
