@@ -724,6 +724,8 @@ function collision() {
 }
 
 function guardCollision() {
+  let loose = document.querySelector(".guard-loose");
+
   // collision between guard and player
   const checkGuardCollision = (aPlayer, theGueard) => {
     if (
@@ -740,7 +742,8 @@ function guardCollision() {
         aPlayer.position.y = theGueard.position.y - aPlayer.height;
         aPlayer.velocity.y = 0;
         theGueard.velocity.y = 0;
-        alert("You got caught by the guard!");
+        loose.style.display = "block";
+        //alert("You got caught by the guard!");
       } else if (
         aPlayer.position.y >=
         theGueard.position.y + theGueard.height + aPlayer.velocity.y
@@ -749,7 +752,8 @@ function guardCollision() {
         aPlayer.position.y = theGueard.position.y + theGueard.height;
         aPlayer.velocity.y = 0;
         theGueard.velocity.y = 0;
-        alert("You got caught by the guard!");
+        loose.style.display = "block";
+        //alert("You got caught by the guard!");
       } else if (
         aPlayer.position.x + aPlayer.width <=
         theGueard.position.x + aPlayer.velocity.x
@@ -758,7 +762,8 @@ function guardCollision() {
         aPlayer.position.x = theGueard.position.x - aPlayer.width;
         aPlayer.velocity.x = 0;
         theGueard.velocity.y = 0;
-        alert("You got caught by the guard!");
+        loose.style.display = "block";
+        //alert("You got caught by the guard!");
       } else if (
         aPlayer.position.x >=
         theGueard.position.x + theGueard.width + aPlayer.velocity.x
@@ -767,7 +772,8 @@ function guardCollision() {
         aPlayer.position.x = theGueard.position.x + theGueard.width;
         aPlayer.velocity.x = 0;
         theGueard.velocity.y = 0;
-        alert("You got caught by the guard!");
+        loose.style.display = "block";
+        //alert("You got caught by the guard!");
       }
     }
   };
@@ -1117,6 +1123,7 @@ let targetTime = 22 * 6000;
 // function to update the clock display (chatGPT)
 function timer() {
   // timer div from html
+  let timeIsUp = document.querySelector(".time-up");
   const timerElement = document.getElementById("timer");
   const hours = Math.floor(timeCounter / 6000)
     .toString()
@@ -1140,7 +1147,7 @@ function timer() {
 
   // checking if target time is reached
   if (timeCounter > targetTime) {
-    alert("Times up!");
+    timeIsUp.style.display = "block";
     targetTime = 22 * 6000;
     timeCounter = 21.7 * 6000;
   }
@@ -1160,7 +1167,7 @@ function draw() {
   theDoor.draw();
   drawThePlayers();
   collision();
-  // guardCollision();
+  //guardCollision();
   collectStars();
   displayArray();
   timer();
@@ -1188,15 +1195,13 @@ function draw() {
   }
 
   function standInFrontOfDoor() {
+    let win = document.querySelector(".win");
     if (
       player.position.x + 20 > theDoor.position.x + 85 &&
       player.position.x + 20 < theDoor.position.x - 85 + theDoor.width &&
-      player.position.y > theDoor.position.y + theDoor.height
+      player.position.y < theDoor.position.y + theDoor.height
     ) {
-      alert("win!");
-      console.log("nej");
-    } else {
-      console.log("yay");
+      win.style.display = "block";
     }
   }
 
@@ -1206,9 +1211,6 @@ function draw() {
   pop();
 
   standInFrontOfDoor();
-  // console.log(theDoor.position.x);
-  console.log(player.position.x);
-  console.log(theDoor.position.x);
 }
 
 window.draw = draw;
