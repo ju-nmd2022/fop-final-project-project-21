@@ -307,6 +307,108 @@ function displayArray() {
   }
 }
 
+// creating a function to check for collision between the players and the platforms
+// function collision() {
+//   const currentPlatformArray =
+//     sessionStorage.getItem("platformArray") === "platformArray"
+//       ? platformArrayLevel1
+//       : platformArrayLevel2;
+//   for (let i = 0; i < currentPlatformArray.length; i++) {
+//     const platform = currentPlatformArray[i];
+
+//     // check collision for player1
+//     if (
+//       player.position.x + player.width >= platform.position.x &&
+//       player.position.x <= platform.position.x + platform.width &&
+//       player.position.y + player.height >= platform.position.y &&
+//       player.position.y <= platform.position.y + platform.height
+//     ) {
+//       if (
+//         player.position.y + player.height <=
+//         platform.position.y + player.velocity.y
+//       ) {
+//         // player1 is colliding from the top
+//         player.position.y = platform.position.y - player.height;
+//         player.velocity.y = 0;
+//       } else if (
+//         player.position.y >=
+//         platform.position.y + platform.height + player.velocity.y
+//       ) {
+//         // player1 is colliding from the bottom
+//         player.position.y = platform.position.y + platform.height;
+//         player.velocity.y = 0;
+//       } else if (
+//         player.position.x + player.width <=
+//         platform.position.x + player.velocity.x
+//       ) {
+//         // player1 is colliding from the left
+//         player.position.x = platform.position.x - player.width;
+//         player.velocity.x = 0;
+//       } else if (
+//         player.position.x >=
+//         platform.position.x + platform.width + player.velocity.x
+//       ) {
+//         // player1 is colliding from the right
+//         player.position.x = platform.position.x + platform.width;
+//         player.velocity.x = 0;
+//       }
+//     }
+
+//     // checking collision for player2
+//     if (
+//       player2.position.x + player2.width >= platform.position.x &&
+//       player2.position.x <= platform.position.x + platform.width &&
+//       player2.position.y + player2.height >= platform.position.y &&
+//       player2.position.y <= platform.position.y + platform.height
+//     ) {
+//       if (
+//         player2.position.y + player2.height <=
+//         platform.position.y + player2.velocity.y
+//       ) {
+//         //player2 is colliding from the top
+//         player2.position.y = platform.position.y - player2.height;
+//         player2.velocity.y = 0;
+//       } else if (
+//         player2.position.y >=
+//         platform.position.y + platform.height + player2.velocity.y
+//       ) {
+//         //player2 is colliding from the bottom
+//         player2.position.y = platform.position.y + platform.height;
+//         player2.velocity.y = 0;
+//       } else if (
+//         player2.position.x + player2.width <=
+//         platform.position.x + player2.velocity.x
+//       ) {
+//         // player2 is colliding from the left
+//         player2.position.x = platform.position.x - player2.width;
+//         player2.velocity.x = 0;
+//       } else if (
+//         player2.position.x >=
+//         platform.position.x + platform.width + player2.velocity.x
+//       ) {
+//         //player2 is colliding from the right
+//         player2.position.x = platform.position.x + platform.width;
+//         player2.velocity.x = 0;
+//       }
+//     }
+//     if (
+//       properGuard.position.x + properGuard.width >= platform.position.x &&
+//       properGuard.position.x <= platform.position.x + platform.width &&
+//       properGuard.position.y + properGuard.height >= platform.position.y &&
+//       properGuard.position.y <= platform.position.y + platform.height
+//     ) {
+//       if (
+//         properGuard.position.y + properGuard.height <=
+//         platform.position.y + properGuard.velocity.y
+//       ) {
+//         // the quard is colliding the platforms from the top
+//         properGuard.position.y = platform.position.y - properGuard.height;
+//         properGuard.velocity.y = 0;
+//       }
+//     }
+//   }
+// }
+
 function collision() {
   const currentPlatformArray =
     sessionStorage.getItem("platformArray") === "platformArray"
@@ -435,7 +537,50 @@ function collision() {
       button3.height = 2;
       button3.position.y = canvasHeight / 2 + 129;
       disapearingPlatform.color = "white";
-
+      //platformArrayLevel3.push("disapearingPlatform");
+      /*if (
+        player2.position.x + player2.width >= disapearingPlatform.position.x &&
+        player2.position.x <=
+          disapearingPlatform.position.x + disapearingPlatform.width &&
+        player2.position.y + player2.height >= disapearingPlatform.position.y &&
+        player2.position.y <=
+          disapearingPlatform.position.y + disapearingPlatform.height
+      ) {
+      if (
+        player2.position.y + player2.height <=
+        disapearingPlatform.position.y + player2.velocity.y
+      ) {
+        //player2 is colliding from the top
+        player2.position.y = disapearingPlatform.position.y - player2.height;
+        player2.velocity.y = 0;
+      } else if (
+        player2.position.y >=
+        disapearingPlatform.position.y +
+          disapearingPlatform.height +
+          player2.velocity.y
+      ) {
+        //player2 is colliding from the bottom
+        player2.position.y =
+          disapearingPlatform.position.y + disapearingPlatform.height;
+        player2.velocity.y = 0;
+      } else if (
+        player2.position.x + player2.width <=
+        disapearingPlatform.position.x + player2.velocity.x
+      ) {
+        // player2 is colliding from the left
+        player2.position.x = disapearingPlatform.position.x - player2.width;
+        player2.velocity.x = 0;
+      } else if (
+        player2.position.x >=
+        disapearingPlatform.position.x +
+          disapearingPlatform.width +
+          player2.velocity.x
+      ) {
+        //player2 is colliding from the right
+        player2.position.x =
+          disapearingPlatform.position.x + disapearingPlatform.width;
+        player2.velocity.x = 0;
+      }*/
       if (
         player2.position.x + player2.width >= disapearingPlatform.position.x &&
         player2.position.x <=
@@ -935,6 +1080,10 @@ function timer() {
   // making time go forward
   timeCounter++;
 }
+
+// x bigger than 408
+// x smaller than 525
+// y smaller than 176
 
 // drawing everyting and calling the functions
 function draw() {
