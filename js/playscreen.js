@@ -944,6 +944,7 @@ let name2 = sessionStorage.getItem("name2") ?? "";
 function drawThePlayers() {
   push();
   textSize(16);
+  fill("#fff");
   text(name1, player.position.x - 5, player.position.y - 10);
   text(name2, player2.position.x - 5, player2.position.y - 10);
   pop();
@@ -1093,7 +1094,9 @@ function draw() {
   drawThePlayers();
   collision();
   collectStars();
+  push();
   displayArray();
+  pop();
   timer();
   guardWalking();
 
