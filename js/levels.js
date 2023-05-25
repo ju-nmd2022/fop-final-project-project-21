@@ -1,7 +1,6 @@
 let starsDesplayedLevel1 = sessionStorage.getItem("starsCollectedLevel1");
 let starsDesplayedLevel2 = sessionStorage.getItem("starsCollectedLevel2");
 let starsDisplayedLevel3 = sessionStorage.getItem("starsCollectedLevel3");
-let starsDisplayedLevel4 = sessionStorage.getItem("starsCollectedLevel4");
 let nullStar = document.querySelector(".null");
 let oneStar = document.querySelector(".one");
 let twoStar = document.querySelector(".two");
@@ -14,10 +13,6 @@ let nullStar3 = document.querySelector(".null3");
 let oneStar3 = document.querySelector(".one3");
 let twoStar3 = document.querySelector(".two3");
 let threeStar3 = document.querySelector(".three3");
-let nullStar4 = document.querySelector(".null4");
-let oneStar4 = document.querySelector(".one4");
-let twoStar4 = document.querySelector(".two4");
-let threeStar4 = document.querySelector(".three4");
 
 if (starsDesplayedLevel1 === null) {
   nullStar.style.display = "block";
@@ -47,16 +42,6 @@ if (starsDisplayedLevel3 === null) {
   twoStar3.style.display = "block";
 } else if (starsDesplayedLevel2 === "3") {
   threeStar3.style.display = "block";
-}
-
-if (starsDisplayedLevel4 === null) {
-  nullStar4.style.display = "block";
-} else if (starsDesplayedLevel2 === "1") {
-  oneStar4.style.display = "block";
-} else if ((starsDesplayedLevel2 = "2")) {
-  twoStar4.style.display = "block";
-} else if ((starsDesplayedLevel2 = "3")) {
-  threeStar4.style.display = "block";
 }
 
 const level1 = document.getElementById("level1");

@@ -922,34 +922,6 @@ function collectStars() {
       starsCollectedLevel3++;
       sessionStorage.setItem("starsCollectedLevel3", starsCollectedLevel3);
       i--;
-    } else if (
-      star.dataset.x < player.position.x + player.width &&
-      parseInt(star.dataset.x) + parseInt(star.style.width) >
-        player.position.x &&
-      star.dataset.y < player.position.y + player.height &&
-      parseInt(star.dataset.y) + parseInt(star.style.height) >
-        player.position.y &&
-      array === "platformArrayLevel4"
-    ) {
-      starsContainer.removeChild(star);
-      stars.splice(i, 1);
-      starsCollectedLevel4++;
-      sessionStorage.setItem("starsCollectedLevel4", starsCollectedLevel4);
-      i--;
-    } else if (
-      star.dataset.x < player2.position.x + player2.width &&
-      parseInt(star.dataset.x) + parseInt(star.style.width) >
-        player2.position.x &&
-      star.dataset.y < player2.position.y + player2.height &&
-      parseInt(star.dataset.y) + parseInt(star.style.height) >
-        player2.position.y &&
-      array === "platformArrayLevel4"
-    ) {
-      starsContainer.removeChild(star);
-      stars.splice(i, 1);
-      starsCollectedLevel4++;
-      sessionStorage.setItem("starsCollectedLevel4", starsCollectedLevel4);
-      i--;
     }
   }
 }
