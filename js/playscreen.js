@@ -229,12 +229,11 @@ let fistLevelPlatforms = [
 
 //second levels platforms
 let secondLevelPlatforms = [
-  new Platform({ x: 500, y: 700 }, 700, 15),
+  new Platform({ x: 400, y: 700 }, 800, 15),
   new Platform({ x: 15, y: 500 }, 100, 15),
   new Platform({ x: canvasWidth - 115, y: 500 }, 100, 15),
+  new Platform({ x: canvasWidth / 2 - 7.5, y: 350 }, 15, 1000),
   movingPlatform,
-  button,
-  button2,
   movingPlatform2,
 ];
 
@@ -244,25 +243,20 @@ let thirdLevelPlatforms = [
   new Platform({ x: canvasWidth / 2 - 650, y: 1000 }, 300, 15),
   new Platform({ x: canvasWidth / 2 - 750, y: 800 }, 200, 15),
   new Platform({ x: canvasWidth - 700, y: 1200 }, 200, 15),
-  disapearingPlatform,
+  new Platform({ x: canvasWidth / 2 - 7.5, y: 715 }, 15, 610),
   new Platform({ x: canvasWidth - 250, y: 800 }, 200, 15),
-  button3,
-  button4,
   movingPlatform3,
-  button5,
   movingPlatform4,
 ];
 
-let forthLevelPlatforms = [
-  new Platform({ x: canvasWidth - 250, y: 800 }, 200, 15),
-  new Platform({ x: canvasWidth / 2 - 650, y: 1000 }, 300, 15),
-];
+let buttonArrayLevel2 = [button, button2];
+let buttonArrayLevel3 = [button3, button4, button5];
+let disapearingPlatformArray = [disapearingPlatform];
 
 // adding the common level platforms to all other levels
 let platformArrayLevel1 = fistLevelPlatforms.concat(commonPlatforms);
 let platformArrayLevel2 = secondLevelPlatforms.concat(commonPlatforms);
 let platformArrayLevel3 = thirdLevelPlatforms.concat(commonPlatforms);
-let platformArrayLevel4 = forthLevelPlatforms.concat(commonPlatforms);
 
 // looping trough the platforms to draw them, first level
 function drawFirstLevelPlatrom() {
@@ -276,17 +270,20 @@ function drawSecondLevelPlatrom() {
   for (let i = 0; i < platformArrayLevel2.length; i++) {
     platformArrayLevel2[i].draw();
   }
+  for (let i = 0; i < buttonArrayLevel2.length; i++) {
+    buttonArrayLevel2[i].draw();
+  }
 }
 
 function drawThirdLevelPlatform() {
   for (let i = 0; i < platformArrayLevel3.length; i++) {
     platformArrayLevel3[i].draw();
   }
-}
-
-function drawForthLevelPlatforms() {
-  for (let i = 0; i < platformArrayLevel4.length; i++) {
-    platformArrayLevel4[i].draw();
+  for (let i = 0; i < buttonArrayLevel3.length; i++) {
+    buttonArrayLevel3[i].draw();
+  }
+  for (let i = 0; i < disapearingPlatformArray.length; i++) {
+    disapearingPlatformArray[i].draw();
   }
 }
 
@@ -304,9 +301,6 @@ function displayArray() {
   } else if (array === "platformArrayLevel3") {
     drawThirdLevelPlatform();
     platformArrayLevel1 = platformArrayLevel3;
-  } else if (array === "platformArrayLevel4") {
-    drawForthLevelPlatforms();
-    platformArrayLevel1 = platformArrayLevel4;
   }
 }
 
@@ -500,17 +494,6 @@ function collision() {
       }
     }
 
-    // stay on top of moving platform
-    /*if (
-      player.position.y + player.height <=
-      movingPlatform.position.y + player.velocity.y
-    ) {
-      player.position.y = player.position.y =
-        movingPlatform.position.y -
-        (player.position.y - movingPlatform.position.y);
-      player.velocity.y = 0;
-    }*/
-
     // check collision with button
     if (
       player2.position.x + player2.width >= button.position.x &&
@@ -521,6 +504,7 @@ function collision() {
       button.position.y = canvasHeight - 17;
       button.height = 2;
       movingPlatform.position.y -= 0.5;
+      player.position.y -= 0.5;
     } else {
       button.position.y = canvasHeight - 25;
       button.height = 10;
@@ -535,6 +519,7 @@ function collision() {
       button2.position.y = canvasHeight / 2 + 29;
       button2.height = 2;
       movingPlatform2.position.y -= 0.5;
+      player2.position.y -= 0.5;
     } else {
       button2.position.y = canvasHeight / 2 + 21;
       button2.height = 10;
@@ -549,7 +534,51 @@ function collision() {
       button3.height = 2;
       button3.position.y = canvasHeight / 2 + 129;
       disapearingPlatform.color = "white";
+      //platformArrayLevel3.push("disapearingPlatform");
       /*if (
+        player2.position.x + player2.width >= disapearingPlatform.position.x &&
+        player2.position.x <=
+          disapearingPlatform.position.x + disapearingPlatform.width &&
+        player2.position.y + player2.height >= disapearingPlatform.position.y &&
+        player2.position.y <=
+          disapearingPlatform.position.y + disapearingPlatform.height
+      ) {
+      if (
+        player2.position.y + player2.height <=
+        disapearingPlatform.position.y + player2.velocity.y
+      ) {
+        //player2 is colliding from the top
+        player2.position.y = disapearingPlatform.position.y - player2.height;
+        player2.velocity.y = 0;
+      } else if (
+        player2.position.y >=
+        disapearingPlatform.position.y +
+          disapearingPlatform.height +
+          player2.velocity.y
+      ) {
+        //player2 is colliding from the bottom
+        player2.position.y =
+          disapearingPlatform.position.y + disapearingPlatform.height;
+        player2.velocity.y = 0;
+      } else if (
+        player2.position.x + player2.width <=
+        disapearingPlatform.position.x + player2.velocity.x
+      ) {
+        // player2 is colliding from the left
+        player2.position.x = disapearingPlatform.position.x - player2.width;
+        player2.velocity.x = 0;
+      } else if (
+        player2.position.x >=
+        disapearingPlatform.position.x +
+          disapearingPlatform.width +
+          player2.velocity.x
+      ) {
+        //player2 is colliding from the right
+        player2.position.x =
+          disapearingPlatform.position.x + disapearingPlatform.width;
+        player2.velocity.x = 0;
+      }*/
+      if (
         player2.position.x + player2.width >= disapearingPlatform.position.x &&
         player2.position.x <=
           disapearingPlatform.position.x + disapearingPlatform.width &&
@@ -561,7 +590,7 @@ function collision() {
           player2.position.y + player2.height <=
           disapearingPlatform.position.y + player2.velocity.y
         ) {
-          //player2 is colliding from the top
+          // player2 is colliding from the top
           player2.position.y = disapearingPlatform.position.y - player2.height;
           player2.velocity.y = 0;
         } else if (
@@ -570,7 +599,7 @@ function collision() {
             disapearingPlatform.height +
             player2.velocity.y
         ) {
-          //player2 is colliding from the bottom
+          // player1 is colliding from the bottom
           player2.position.y =
             disapearingPlatform.position.y + disapearingPlatform.height;
           player2.velocity.y = 0;
@@ -578,20 +607,21 @@ function collision() {
           player2.position.x + player2.width <=
           disapearingPlatform.position.x + player2.velocity.x
         ) {
-          // player2 is colliding from the left
+          // player1 is colliding from the left
           player2.position.x = disapearingPlatform.position.x - player2.width;
-          player2.velocity.x = 0;
+          player.velocity.x = 0;
         } else if (
           player2.position.x >=
           disapearingPlatform.position.x +
             disapearingPlatform.width +
             player2.velocity.x
         ) {
-          //player2 is colliding from the right
+          // player1 is colliding from the right
           player2.position.x =
             disapearingPlatform.position.x + disapearingPlatform.width;
           player2.velocity.x = 0;
-        }*/
+        }
+      }
     } else {
       button3.height = 10;
       button3.position.y = canvasHeight / 2 + 121;
@@ -610,6 +640,8 @@ function collision() {
       if (movingPlatform3.position.x > 15) {
         movingPlatform3.position.x -= 0.5;
         movingPlatform3.position.y -= 0.15;
+        player.position.x -= 0.5;
+        player.position.y -= 0.15;
       }
     } else {
       button4.position.y = canvasHeight / 2 + 21;
@@ -628,6 +660,8 @@ function collision() {
       if (movingPlatform4.position.x > canvasWidth - 215) {
         movingPlatform4.position.x += 0.5;
         movingPlatform4.position.y -= 0.15;
+        player2.position.x += 0.5;
+        player2.position.y -= 0.15;
       }
     } else {
       button5.position.y = 340;
