@@ -1097,7 +1097,6 @@ function draw() {
   push();
   displayArray();
   pop();
-  timer();
   guardWalking();
 
   function moving() {
@@ -1162,6 +1161,8 @@ function draw() {
       push();
       theDoor.update();
       pop();
+    } else {
+      timer();
 
       // wich level was won
       let currentLevel = sessionStorage.getItem("platformArray");
