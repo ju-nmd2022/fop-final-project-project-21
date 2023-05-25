@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- css  -->
+    <link rel="stylesheet" href="main.css" />
+    <!-- fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- favicon  -->
+    <link rel="icon" type="image/x-icon" href="images/aka-rush-favicon.png" />
+    <title>Levels</title>
+  </head>
+
+  <body class="levels-body">
+    <!-- previous page arrow -->
+    <div class="back-arrow-decision">
+      <a href="decision.html"
+        ><img src="images/arrow-buttons/left-arrow.svg" alt=""
+      /></a>
+    </div>
+
+    <!-- logo  -->
+    <img class="little-game-logo" src="images/AkaRushLogo.png" alt="GameLogo" />
+    <div class="levelFlexContainer">
+      <!-- first level  -->
+      <section class="levelSection">
+        <a href="playscreen.html">
+          <h1 class="levels" id="level1">LEVEL 1</h1></a
+        >
+        <img
+          class="stars-stroke null"
+          src="images/stars-stroke.png"
+          alt="stars-stroke"
+        />
+        <img class="stars-stroke one" src="images/oneStar.png" alt="oneStar" />
+        <img class="stars-stroke two" src="images/twoStar.png" alt="twoStars" />
+        <img
+          class="stars-stroke three"
+          src="images/threeStar.png"
+          alt="threeStars"
+        />
+      </section>
+
+      <!-- second level  -->
+      <section class="levelSection">
+        <h1 class="levels lockedTitle" id="level2">LEVEL 2</h1>
+        <img
+          id="secondLevelImage"
+          class="stars-stroke null2 locked"
+          src="images/stars-stroke.png"
+          alt="stars-stroke"
+        />
+        <img class="stars-stroke one2" src="images/oneStar.png" alt="oneStar" />
+        <img
+          class="stars-stroke two2"
+          src="images/twoStar.png"
+          alt="twoStars"
+        />
+        <img
+          class="stars-stroke three2"
+          src="images/threeStar.png"
+          alt="threeStars"
+        />
+      </section>
+
+      <!-- third level  -->
+      <section class="levelSection">
+        <h1 class="levels lockedTitle" id="level3">LEVEL 3</h1>
+        <img
+          id="thirdLevelImage"
+          class="stars-stroke locked null3"
+          src="images/stars-stroke.png"
+          alt="stars-stroke"
+        />
+        <img class="stars-stroke one3" src="images/oneStar.png" alt="oneStar" />
+        <img
+          class="stars-stroke two3"
+          src="images/twoStar.png"
+          alt="twoStars"
+        />
+        <img
+          class="stars-stroke three3"
+          src="images/threeStar.png"
+          alt="threeStars"
+        />
+      </section>
+
+      <!-- fourth level  -->
+      <section class="levelSection">
+        <p id="coming-soon">Coming soon!</p>
+        <h1 class="levels lockedTitle" id="level4">LEVEL 4</h1>
+        <img
+          class="stars-stroke locked"
+          src="images/stars-stroke.png"
+          alt="stars-stroke"
+        />
+      </section>
+    </div>
+    <script type="module" src="./js/levels.js"></script>
+    <script type="module" src="./js/playscreen.js"></script>
+  </body>
+</html>

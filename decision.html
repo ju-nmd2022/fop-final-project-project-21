@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Character details</title>
+    <!-- css  -->
+    <link rel="stylesheet" href="main.css" />
+    <!-- fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- favicon  -->
+    <link rel="icon" type="image/x-icon" href="images/aka-rush-favicon.png" />
+  </head>
+  <body class="decision-body">
+    <h1 class="decision-title">CHOOSE YOUR OVERALLS</h1>
+    <main>
+      <div class="playerGrid">
+        <div class="player">
+          <h2 class="playerone" id="playerone">PLAYER ONE</h2>
+          <div class="input_section input1">
+            <section id="first_section" class="first_input">
+              <input
+                class="inputField"
+                type="text"
+                placeholder="Players name"
+                id="firsttext"
+              />
+            </section>
+
+            <section id="first_section_button">
+              <button type="button" class="second_button" id="second_button">
+                SAVE
+              </button>
+            </section>
+          </div>
+
+          <!-- source for the carousel https://www.youtube.com/watch?v=VYsVOamdB0g -->
+          <div class="carousel courosel1-grid">
+            <!-- button to move images right  -->
+            <button
+              onclick="firstPlayerMoveImageRight();"
+              id="firstPlayerLeft"
+              class="carousel-button carousel-button-left"
+            >
+              <img src="images/arrow-buttons/left-arrow.svg" alt="" />
+            </button>
+
+            <div class="carousel-track-container">
+              <ul class="carousel-track">
+                <li class="carousel-slide">
+                  <!-- the overall dispalyed for palyer one  -->
+                  <img
+                    id="firstPlayerOverall"
+                    class="carousel-image"
+                    width="400"
+                    height="800"
+                    src="images/ovve-colours/ovve-colours-01.png"
+                  />
+                </li>
+              </ul>
+            </div>
+            <!-- button to move images left -->
+            <button
+              onclick="firstPlayerMoveImageLeft();"
+              id="firstPlayerRight"
+              class="carousel-button carousel-button-right"
+            >
+              <img src="images/arrow-buttons/right-arrow.svg" alt="" />
+            </button>
+          </div>
+
+          <!-- image of the keys the player one shoud use  -->
+          <img
+            class="key-images key1"
+            src="images/Keys/akarush-keys-01.png"
+            alt="wasd-keys"
+          />
+        </div>
+
+        <div class="player">
+          <h2 id="playertwo">PLAYER TWO</h2>
+          <div class="input_section input2">
+            <section id="second_section" class="second_section">
+              <input
+                class="inputField"
+                type="text"
+                placeholder="Players name"
+                id="secondtext"
+              />
+            </section>
+            <section id="button">
+              <button type="button" class="second_button" id="second_button2">
+                SAVE
+              </button>
+            </section>
+          </div>
+
+          <div class="carousel courosel1-grid">
+            <!-- button to move images right  -->
+            <button
+              onclick="secondPlayerMoveImageRight();"
+              id="secondPlayerLeft"
+              class="carousel-button carousel-button-left"
+            >
+              <img src="images/arrow-buttons/left-arrow.svg" alt="" />
+            </button>
+
+            <div class="carousel-track-container">
+              <ul class="carousel-track" id="track">
+                <li class="carousel-slide">
+                  <!-- overall color displayed for palyer two  -->
+                  <img
+                    id="secondPlayerOverall"
+                    class="carousel-image"
+                    width="400"
+                    height="800"
+                    src="images/ovve-colours/ovve-colours-01.png"
+                  />
+                </li>
+              </ul>
+            </div>
+
+            <!-- button to move images left -->
+            <button
+              onclick="secondPlayerMoveImageLeft();"
+              id="secondPlayerRight"
+              class="carousel-button carousel-button-right"
+            >
+              <img src="images/arrow-buttons/right-arrow.svg" alt="" />
+            </button>
+          </div>
+          <!-- image of the keys player two should use  -->
+          <img
+            class="key-images key2"
+            src="images/Keys/akarush-keys-02.png"
+            alt="arrow-keys"
+          />
+        </div>
+        <div class="startButton2position">
+          <a href="levels.html">
+            <button class="startButton">CONTINUE</button></a
+          >
+        </div>
+      </div>
+    </main>
+    <script src="./js/akarush.js" defer></script>
+  </body>
+</html>

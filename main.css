@@ -1,0 +1,485 @@
+* {
+  padding: 0;
+  margin: 0;
+  /* background-color: darkgray; */
+  /* font-family: "Josefin Sans", sans-serif; */
+  font-family: "Roboto", sans-serif;
+}
+
+/* index page */
+
+.index-body {
+  background-image: linear-gradient(#000, #191919);
+  width: 100vw;
+  height: 100vh;
+}
+.indexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 95vh;
+  color: #d1d2d4;
+}
+
+.game-logo {
+  height: 17em;
+  margin-bottom: 2em;
+  width: auto;
+}
+
+.description-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.05em;
+  margin-bottom: 3em;
+  width: 50vw;
+  line-height: 1.5em;
+}
+
+/* source for the button design  */
+/* https://getcssscan.com/css-buttons-examples */
+.startButton {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  align-items: center;
+  border: 2px solid #d1d2d4;
+  box-sizing: border-box;
+  color: #d1d2d4;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.2em;
+  font-weight: 600;
+  height: 48px;
+  justify-content: center;
+  padding: 0.5em 2em;
+  text-align: center;
+  transition: all 0.3s;
+  background-color: #000;
+}
+
+.startButton:focus {
+  color: #171e29;
+}
+
+.startButton:hover {
+  border-color: #f0e282;
+  color: #f0e282;
+  fill: #f0e282;
+}
+
+.startButton:active {
+  border-color: #f0e282;
+  color: #f0e282;
+  fill: #f0e282;
+}
+
+/* .startButton {
+  display: grid;
+  grid-area: startButton;
+  align-self: center;
+  cursor: pointer;
+  font-size: 20pt;
+  height: 30pt;
+  width: 70pt;
+  color: white;
+  background-color: gold;
+  outline: 2px solid white;
+  outline-offset: 3.2px;
+  margin-top: 1rem;
+} */
+/* end of index page  */
+
+/* start of decision page  */
+.decision-body {
+  background-color: #191919;
+}
+
+.decision-title {
+  color: #484848;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+  font-size: 1.5em;
+}
+
+.playerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 6fr 1fr;
+  grid-template-areas:
+    "playerOne playerTwo"
+    "startButton startButton";
+}
+
+.playerone,
+.input1,
+.carousel1-grid,
+.key1 {
+  display: grid;
+  grid-area: playerOne;
+  font-weight: 900;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 900;
+  font-size: 0.8em;
+}
+
+.playertwo,
+.input2,
+.carousel2-grid,
+.key2 {
+  display: grid;
+  grid-area: playerTwo;
+}
+
+.player-heading {
+  justify-self: center;
+}
+
+/* .startButton2 {
+  display: grid;
+  grid-area: startButton;
+  align-items: center;
+  justify-content: center;
+  font-size: 20pt;
+  height: 30pt;
+  width: 70pt;
+  color: white;
+  background-color: gold;
+  outline: 2px solid white;
+  outline-offset: 3.2px;
+  margin-top: 1rem;
+} */
+
+.startButton2position {
+  display: grid;
+  grid-area: startButton;
+  align-items: top;
+  justify-content: center;
+}
+
+.key-images {
+  max-width: 14em;
+}
+
+.inputField {
+  padding: 0.25em 0.5em;
+  background-color: #d1d2d4;
+  font-size: 1em;
+  margin-top: 0.5em;
+  outline: none;
+}
+
+.input_section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.second_button {
+  /* outline: 1px solid white; */
+  /* background-color: gold; */
+  background-color: #191919;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+  color: #d1d2d4;
+  font-size: 0.9em;
+}
+
+.second_button:hover {
+  color: #f0e282;
+}
+
+.second_button:active {
+  color: #f0e282;
+}
+
+/* image carousel */
+.carousel {
+  position: relative;
+  height: 350px;
+  width: 60%;
+  margin: 0 auto;
+  background-color: #191919;
+}
+
+.carousel-button {
+  background-color: #191919;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.carousel-track-container {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.carousel-track {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+  height: 100%;
+  transition: transform 250ms ease-in;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.carousel-button-left {
+  left: -25px;
+}
+.carousel-button-right {
+  right: -25px;
+}
+/* end of image carousel  */
+
+/* levels screen  */
+
+.levels-body {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(#000, #191919);
+}
+.little-game-logo {
+  display: flex;
+  width: 10em;
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stars-stroke {
+  width: 15em;
+  height: auto;
+}
+
+.finish-level {
+  background-color: aliceblue;
+  padding: 3rem;
+  color: black;
+  text-align: center;
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  background-color: #191919;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 30vw;
+  height: 30vh;
+  transform: translate(-50%, -50%);
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+}
+
+.win,
+.time-up,
+.guard-loose {
+  display: none;
+}
+
+.win {
+  box-shadow: 0 0 500px #f0e282;
+}
+
+.time-up,
+.guard-loose {
+  box-shadow: 0 0 500px red;
+}
+.win p,
+.time-up p,
+.guard-loose p {
+  color: #d1d2d4;
+  font-size: 1.8em;
+  margin: 2em;
+}
+
+.win .startButton,
+.time-up .startButton,
+.guard-loose .startButton {
+  margin: 0em 5em;
+}
+
+.null2,
+.null3 {
+  display: block;
+}
+
+.null,
+.one,
+.two,
+.three,
+.one2,
+.two2,
+.three2,
+.one3,
+.two3,
+.three3 {
+  display: none;
+}
+
+/* horizontal scroll source https://www.youtube.com/watch?v=pNPkVQD7vlM  */
+.levelFlexContainer {
+  width: 100%;
+  height: 100%;
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+  display: flex;
+}
+
+.levelFlexContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.levelSection {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 85vh;
+  scroll-snap-align: center;
+  scroll-margin-top: 10em;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) calc(50% - 2.5em),
+    #f0e282,
+    rgba(0, 0, 0, 0) calc(50% - 2.3em)
+  );
+}
+
+.levelSection:nth-of-type(1) {
+  margin-left: 60vw;
+  background: none;
+}
+
+section.levelSection:nth-of-type(4) {
+  padding-right: 20vw;
+}
+
+.levels {
+  color: #d1d2d4;
+  font-size: 4em;
+  margin-bottom: 0.2em;
+  padding-left: 1em;
+  padding-right: 1em;
+  cursor: pointer;
+  /* background-image: linear-gradient(#000, #191919); */
+  background-color: #0a0a0a;
+  font-weight: 900;
+}
+
+.levels:hover {
+  color: white;
+  text-shadow: 0 0 10px #f0e282, 0 0 20px #f0e282, 0 0 30px #f0e282;
+}
+
+/* removing styling from the links */
+a {
+  list-style: none;
+  text-decoration: none;
+}
+
+.back-arrow-decision {
+  position: fixed;
+  left: 2em;
+  top: 2em;
+}
+
+/* end of levels screen */
+
+/* start of game screen  */
+#timer {
+  color: white;
+  font-size: 1.2em;
+  position: fixed;
+  right: 2em;
+  top: 1em;
+  font-family: "Orbitron", sans-serif;
+  padding: 0.2em 0.5em;
+  background-color: #191919;
+}
+
+/* hidden on hover https://www.w3schools.com/howto/howto_css_display_element_hover.asp */
+.back-arrow {
+  position: fixed;
+  left: 2em;
+  top: 1em;
+}
+.hover-hidden {
+  color: #fff;
+  font-size: 0.5em;
+  visibility: hidden;
+  position: fixed;
+  left: 6em;
+  top: 2em;
+}
+
+.back-arrow:hover + .hover-hidden {
+  visibility: visible;
+}
+
+/* hiding the scroll bar without loosing scrolling https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-still-being-able-to-scroll */
+.level-body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+.level-body::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+/* end of game sscreen  */
+
+/* levels locked or unlocked  */
+.locked {
+  opacity: 0.3;
+}
+
+.lockedTitle {
+  color: #888888;
+}
+
+.lockedTitle:hover {
+  color: #888888;
+  text-shadow: none;
+  cursor: default;
+}
+
+#coming-soon {
+  color: #f0e282;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+  visibility: hidden;
+}
