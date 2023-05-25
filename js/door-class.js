@@ -211,22 +211,11 @@ export default class Door {
     translate(85, 0);
     this.doorClosed();
     pop();
-    // this.doorOpen();
     pop();
+  }
 
-    // push();
-    // fill("#fff");
-    // rect(this.position.x + 85, this.position.y, 5, 250);
-    // pop();
-
-    push();
-    fill("#fff");
-    rect(this.position.x + this.width, this.position.y, 5, 250);
-    pop();
-
-    push();
-    fill("#00ff00");
-    rect(this.position.x, this.position.y + this.height, 250, 100);
-    pop();
+  update() {
+    translate(this.position.x, this.position.y);
+    this.doorOpen();
   }
 }

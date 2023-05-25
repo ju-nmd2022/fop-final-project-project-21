@@ -1163,8 +1163,12 @@ function timer() {
 // drawing everyting and calling the functions
 function draw() {
   background(0, 0, 0);
-
+  push();
   theDoor.draw();
+  pop();
+  push();
+  theDoor.update();
+  pop();
   drawThePlayers();
   collision();
   //guardCollision();
@@ -1204,11 +1208,6 @@ function draw() {
       win.style.display = "block";
     }
   }
-
-  push();
-  fill("#fff");
-  rect(theDoor.position.x + 85, theDoor.position.y, 5, 250);
-  pop();
 
   standInFrontOfDoor();
 }

@@ -290,7 +290,53 @@
 .win,
 .time-up,
 .guard-loose {
-  display: none;
+  /* display: none;
+  color: #d1d2d4;
+  position: fixed;
+  transform: translate(50%, -50%);
+  top: 50%;
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  font-family: "Roboto", sans-serif;
+  background-color: #191919;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 60vw;
+  height: 60vh;
+  transform: translate(-50%, -50%);
+  padding: 3em;
+  /* opacity: 0; */
+  /* transition: 0.5s; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.win {
+  box-shadow: 0 0 500px #f0e282;
+}
+
+.time-up,
+.guard-loose {
+  box-shadow: 0 0 500px red;
+}
+.win p,
+.time-up p,
+.guard-loose p {
+  color: #d1d2d4;
+  font-size: 1.8em;
+  margin: 2em;
+}
+
+.win .startButton,
+.time-up .startButton,
+.guard-loose .startButton {
+  margin: 0em 15em;
 }
 
 .null,
