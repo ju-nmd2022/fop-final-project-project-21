@@ -46,6 +46,9 @@ window.addEventListener(
   false
 );
 
+// creating the door
+const theDoor = new Door({ x: canvasWidth / 2 - 150, y: 100 });
+
 // all the overall color options
 const colorOptions = {
   yellow: { light: "#fff100", dark: "#d7c700" },
@@ -76,8 +79,10 @@ const secondPlayerDarkColor = colorOptions[secondPlayerColor].dark;
 // first players starting possition, and color
 const player = new Player(
   {
-    x: 50,
-    y: canvasHeight - 200,
+    // x: 50,
+    // y: canvasHeight - 200,
+    x: 250,
+    y: 100,
   },
   firstPlayerDarkColor,
   firstPlayerLightColor
@@ -86,8 +91,10 @@ const player = new Player(
 // second players starting possition, and color
 const player2 = new Player(
   {
-    x: canvasWidth - 150,
-    y: canvasHeight - 200,
+    // x: canvasWidth - 150,
+    // y: canvasHeight - 200,
+    x: canvasWidth - 100,
+    y: 100,
   },
   secondPlayerDarkColor,
   secondPlayerLightColor
@@ -737,6 +744,53 @@ function guardCollision() {
   checkGuardCollision(properGuard, player2);
 }
 
+// collision with the door
+// function standInFrontOfDoor() {
+//   // collision between guard and player
+//   const checkForWin = (players, theDoor) => {
+//     if (
+//       players.position.x + players.width >= theDoor.position.x + 100 &&
+//       players.position.x <= theDoor.position.x + 100 + theDoor.width &&
+//       players.position.y + players.height >= theDoor.position.y &&
+//       players.position.y <= theDoor.position.y + theDoor.height
+//     ) {
+//       if (players.position.y + players.height <= theDoor.position.y) {
+//         // colliding from the top
+//         players.position.y = theDoor.position.y - players.height;
+//         players.velocity.y = 0;
+//         alert("Win!");
+//       } else if (
+//         players.position.y >=
+//         theDoor.position.y + theDoor.height + players.velocity.y
+//       ) {
+//         // colliding from the bottom
+//         players.position.y = theDoor.position.y + theDoor.height;
+//         players.velocity.y = 0;
+//         alert("Win!");
+//       } else if (
+//         players.position.x + players.width <=
+//         theDoor.position.x + players.velocity.x
+//       ) {
+//         // colliding from the left
+//         players.position.x = theDoor.position.x + 100 - players.width;
+//         players.velocity.x = 0;
+//         alert("Win!");
+//       } else if (
+//         players.position.x >=
+//         theDoor.position.x + 100 + theDoor.width + players.velocity.x
+//       ) {
+//         // colliding from the right
+//         players.position.x = theDoor.position.x + 100 + theDoor.width;
+//         players.velocity.x = 0;
+//         alert("Win!");
+//       }
+//     }
+//   };
+
+//   checkForWin(player, theDoor);
+//   checkForWin(player2, theDoor);
+// }
+
 // creating container for the images of the stars
 const starsContainer = document.getElementById("stars");
 
@@ -1061,17 +1115,22 @@ function timer() {
   timeCounter++;
 }
 
-function theDoor() {}
+// x bigger than 408
+// x smaller than 525
+// y smaller than 176
 
 // drawing everyting and calling the functions
 function draw() {
   background(0, 0, 0);
+
+  theDoor.draw();
   drawThePlayers();
   collision();
-  guardCollision();
+  // guardCollision();
   collectStars();
   displayArray();
   timer();
+
   guardWalking();
 
   player.velocity.x = 0;
@@ -1093,6 +1152,29 @@ function draw() {
   ) {
     scrolling();
   }
+
+  function standInFrontOfDoor() {
+    if (
+      player.position.x + 20 > theDoor.position.x + 85 &&
+      player.position.x + 20 < theDoor.position.x - 85 + theDoor.width &&
+      player.position.y > theDoor.position.y + theDoor.height
+    ) {
+      alert("win!");
+      console.log("nej");
+    } else {
+      console.log("yay");
+    }
+  }
+
+  push();
+  fill("#fff");
+  rect(theDoor.position.x + 85, theDoor.position.y, 5, 250);
+  pop();
+
+  standInFrontOfDoor();
+  // console.log(theDoor.position.x);
+  console.log(player.position.x);
+  console.log(theDoor.position.x);
 }
 
 window.draw = draw;

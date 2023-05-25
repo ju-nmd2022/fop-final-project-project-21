@@ -1,11 +1,13 @@
 export default class Door {
   constructor(position) {
     this.position = position;
+    this.width = 250;
+    this.height = 250;
   }
 
   doorClosed() {
     push();
-    scale(1, 1);
+    scale(0.7, 0.7);
     stroke("rgba(0,0,0,0)");
     stroke(1);
     fill("#5e2a2a");
@@ -95,7 +97,7 @@ export default class Door {
 
   doorOpen() {
     push();
-    scale(1, 1);
+    scale(0.7, 0.7);
     stroke("rgba(0,0,0,0)");
     strokeCap(PROJECT);
     strokeJoin(MITER);
@@ -203,12 +205,28 @@ export default class Door {
   }
 
   draw() {
+    push();
     translate(this.position.x, this.position.y);
-    doorClosed();
-    doorOpen();
-  }
+    push();
+    translate(85, 0);
+    this.doorClosed();
+    pop();
+    // this.doorOpen();
+    pop();
 
-  update() {
-    this.draw();
+    // push();
+    // fill("#fff");
+    // rect(this.position.x + 85, this.position.y, 5, 250);
+    // pop();
+
+    push();
+    fill("#fff");
+    rect(this.position.x + this.width, this.position.y, 5, 250);
+    pop();
+
+    push();
+    fill("#00ff00");
+    rect(this.position.x, this.position.y + this.height, 250, 100);
+    pop();
   }
 }
