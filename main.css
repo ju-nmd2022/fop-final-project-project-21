@@ -23,15 +23,15 @@
 }
 
 .game-logo {
-  height: 200pt;
+  height: 20em;
   width: auto;
 }
 
 .description-text {
   font-family: "Roboto", sans-serif;
   font-size: 1.05em;
-  margin: 3rem;
-  width: 55vw;
+  margin-bottom: 3em;
+  width: 50vw;
   line-height: 1.5em;
 }
 
