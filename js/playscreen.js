@@ -5,6 +5,7 @@ import Button from "./button.js";
 import MovingPlatform from "./moving-platform.js";
 import DisapearingPlatform from "./disapearing-platform.js";
 import Guard from "./guard-class.js";
+import Door from "./door-class.js";
 
 // styling the body element to get rid of scroll bars and wiggling of the sreen
 const documentBody = document.querySelector("body");
@@ -1054,6 +1055,8 @@ function timer() {
   // making time go forward
   timeCounter++;
 }
+
+function theDoor() {}
 
 // drawing everyting and calling the functions
 function draw() {
