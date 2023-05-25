@@ -760,8 +760,12 @@ for (let i = 0; i < starsCount; i++) {
   const star = document.createElement("img");
   star.src = imageSources[i];
 
-  const randomX = Math.floor(Math.random() * (canvasWidth - 100) + 100);
-  const randomY = Math.floor(Math.random() * (canvasHeight - 100) + 100);
+  const randomX = Math.floor(
+    Math.random() * (canvasWidth - 100 - 100 + 1) + 100
+  );
+  const randomY = Math.floor(
+    Math.random() * (canvasHeight - 100 - 100 + 1) + 100
+  );
 
   star.style.position = "absolute";
   star.style.left = randomX + "px";
@@ -904,6 +908,7 @@ function collectStars() {
   }
 }
 
+//https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
 function scrolling() {
   window.scroll({
     top: 0,
