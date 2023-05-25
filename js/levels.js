@@ -5,7 +5,7 @@ let starsDisplayedLevel4 = sessionStorage.getItem("starsCollectedLevel4");
 let nullStar = document.querySelector(".null");
 let oneStar = document.querySelector(".one");
 let twoStar = document.querySelector(".two");
-let threeStar = document.querySelector("three");
+let threeStar = document.querySelector(".three");
 let nullStar2 = document.querySelector(".null2");
 let oneStar2 = document.querySelector(".one2");
 let twoStar2 = document.querySelector(".two2");
@@ -23,9 +23,9 @@ if (starsDesplayedLevel1 === null) {
   nullStar.style.display = "block";
 } else if (starsDesplayedLevel1 === "1") {
   oneStar.style.display = "block";
-} else if ((starsDesplayedLevel1 = "2")) {
+} else if (starsDesplayedLevel1 === "2") {
   twoStar.style.display = "block";
-} else if ((starsDesplayedLevel1 = "3")) {
+} else if (starsDesplayedLevel1 === "3") {
   threeStar.style.display = "block";
 }
 
@@ -33,9 +33,9 @@ if (starsDesplayedLevel2 === null) {
   nullStar2.style.display = "block";
 } else if (starsDesplayedLevel2 === "1") {
   oneStar2.style.display = "block";
-} else if ((starsDesplayedLevel2 = "2")) {
+} else if (starsDesplayedLevel2 === "2") {
   twoStar2.style.display = "block";
-} else if ((starsDesplayedLevel2 = "3")) {
+} else if (starsDesplayedLevel2 === "3") {
   threeStar2.style.display = "block";
 }
 
@@ -43,9 +43,9 @@ if (starsDisplayedLevel3 === null) {
   nullStar3.style.display = "block";
 } else if (starsDesplayedLevel2 === "1") {
   oneStar3.style.display = "block";
-} else if ((starsDesplayedLevel2 = "2")) {
+} else if (starsDesplayedLevel2 === "2") {
   twoStar3.style.display = "block";
-} else if ((starsDesplayedLevel2 = "3")) {
+} else if (starsDesplayedLevel2 === "3") {
   threeStar3.style.display = "block";
 }
 
