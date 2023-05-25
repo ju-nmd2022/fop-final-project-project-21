@@ -16,12 +16,6 @@
     <script src="p5.min.js" defer></script>
   </head>
   <body class="level-body">
-    <div id="timer"></div>
-    <div class="back-arrow">
-      <a href="levels.html"
-        ><img src="images/arrow-buttons/left-arrow.svg" alt=""
-      /></a>
-    </div>
     <div class="finish-level win">
       <p>You made it!</p>
       <button onclick="window.location.href='levels.html'" class="startButton">
@@ -40,6 +34,13 @@
         BACK TO LEVELS
       </button>
     </div>
+    <div id="timer"></div>
+    <div class="back-arrow">
+      <a href="levels.html"
+        ><img src="images/arrow-buttons/left-arrow.svg" alt=""
+      /></a>
+    </div>
+
     <div class="hover-hidden"><h2>QUIT</h2></div>
     <div id="stars"></div>
     <script type="module" src="./js/playscreen.js"></script>
