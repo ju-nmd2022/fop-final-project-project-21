@@ -1016,8 +1016,6 @@ function draw() {
       push();
       theDoor.update();
       pop();
-    } else {
-      timer();
 
       // wich level was won
       let currentLevel = sessionStorage.getItem("platformArray");
@@ -1029,6 +1027,8 @@ function draw() {
         sessionStorage.setItem("levelsComplete", "thirdLevelComplete");
         cosole.log("level 3 completed");
       }
+    } else {
+      timer();
     }
   }
 
