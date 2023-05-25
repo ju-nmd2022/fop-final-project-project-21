@@ -471,3 +471,10 @@ a {
   text-shadow: none;
   cursor: default;
 }
+
+#coming-soon {
+  color: #f0e282;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+  visibility: hidden;
+}
