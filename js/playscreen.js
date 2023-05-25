@@ -79,10 +79,8 @@ const secondPlayerDarkColor = colorOptions[secondPlayerColor].dark;
 // first players starting possition, and color
 const player = new Player(
   {
-    // x: 50,
-    // y: canvasHeight - 200,
-    x: 250,
-    y: 100,
+    x: 50,
+    y: canvasHeight - 200,
   },
   firstPlayerDarkColor,
   firstPlayerLightColor
@@ -91,10 +89,8 @@ const player = new Player(
 // second players starting possition, and color
 const player2 = new Player(
   {
-    // x: canvasWidth - 150,
-    // y: canvasHeight - 200,
-    x: canvasWidth - 100,
-    y: 100,
+    x: canvasWidth - 150,
+    y: canvasHeight - 200,
   },
   secondPlayerDarkColor,
   secondPlayerLightColor
@@ -787,53 +783,6 @@ function secondPlayerGuardCollision() {
   checkGuardCollision(properGuard, player2);
 }
 
-// collision with the door
-// function standInFrontOfDoor() {
-//   // collision between guard and player
-//   const checkForWin = (players, theDoor) => {
-//     if (
-//       players.position.x + players.width >= theDoor.position.x + 100 &&
-//       players.position.x <= theDoor.position.x + 100 + theDoor.width &&
-//       players.position.y + players.height >= theDoor.position.y &&
-//       players.position.y <= theDoor.position.y + theDoor.height
-//     ) {
-//       if (players.position.y + players.height <= theDoor.position.y) {
-//         // colliding from the top
-//         players.position.y = theDoor.position.y - players.height;
-//         players.velocity.y = 0;
-//         alert("Win!");
-//       } else if (
-//         players.position.y >=
-//         theDoor.position.y + theDoor.height + players.velocity.y
-//       ) {
-//         // colliding from the bottom
-//         players.position.y = theDoor.position.y + theDoor.height;
-//         players.velocity.y = 0;
-//         alert("Win!");
-//       } else if (
-//         players.position.x + players.width <=
-//         theDoor.position.x + players.velocity.x
-//       ) {
-//         // colliding from the left
-//         players.position.x = theDoor.position.x + 100 - players.width;
-//         players.velocity.x = 0;
-//         alert("Win!");
-//       } else if (
-//         players.position.x >=
-//         theDoor.position.x + 100 + theDoor.width + players.velocity.x
-//       ) {
-//         // colliding from the right
-//         players.position.x = theDoor.position.x + 100 + theDoor.width;
-//         players.velocity.x = 0;
-//         alert("Win!");
-//       }
-//     }
-//   };
-
-//   checkForWin(player, theDoor);
-//   checkForWin(player2, theDoor);
-// }
-
 // creating container for the images of the stars
 const starsContainer = document.getElementById("stars");
 
@@ -1169,16 +1118,11 @@ function draw() {
   push();
   theDoor.draw();
   pop();
-  push();
-  theDoor.update();
-  pop();
   drawThePlayers();
   collision();
-
   collectStars();
   displayArray();
   timer();
-
   guardWalking();
 
   function moving() {
@@ -1240,6 +1184,9 @@ function draw() {
     if (gameFinishPlayer1 === true && gameFinishPlayer2 === true) {
       let win = document.querySelector(".win");
       win.style.display = "block";
+      push();
+      theDoor.update();
+      pop();
     }
   }
 

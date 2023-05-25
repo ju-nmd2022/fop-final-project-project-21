@@ -62,7 +62,6 @@ if (starsDisplayedLevel4 === null) {
 const level1 = document.getElementById("level1");
 const level2 = document.getElementById("level2");
 const level3 = document.getElementById("level3");
-const level4 = document.getElementById("level4");
 
 level1.addEventListener("click", () => {
   sessionStorage.setItem("platformArray", "platformArray");
@@ -74,10 +73,6 @@ level2.addEventListener("click", () => {
 
 level3.addEventListener("click", () => {
   sessionStorage.setItem("platformArray", "platformArrayLevel3");
-});
-
-level4.addEventListener("click", () => {
-  sessionStorage.setItem("platformArray", "platformArrayLevel4");
 });
 
 level1.addEventListener("click", () => {
@@ -93,12 +88,6 @@ level2.addEventListener("click", () => {
 });
 
 level3.addEventListener("click", () => {
-  let platformArray = sessionStorage.getItem("platformArray") || "";
-  platformArray = platformArray.replace(" platformArray", ""); // remove "platformArray" if present
-  sessionStorage.setItem("platformArray", platformArray); // add "platformArrayLevel2"
-});
-
-level4.addEventListener("click", () => {
   let platformArray = sessionStorage.getItem("platformArray") || "";
   platformArray = platformArray.replace(" platformArray", ""); // remove "platformArray" if present
   sessionStorage.setItem("platformArray", platformArray); // add "platformArrayLevel2"
