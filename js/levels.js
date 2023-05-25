@@ -90,6 +90,7 @@ level3.addEventListener("click", () => {
   sessionStorage.setItem("platformArray", platformArray); // add "platformArrayLevel2"
 });
 
+// get infromation from playscreen.js wich levels have been passsed
 let isLevelComplete = sessionStorage.getItem("levelsComplete");
 let levelTwoImageElement = document.getElementById("secondLevelImage");
 let levelTreeImageElement = document.getElementById("thirdLevelImage");
@@ -102,12 +103,34 @@ if (isLevelComplete === "firstLevelComplete") {
     window.location.href = "playscreen.html";
   });
 } else if (isLevelComplete === "secondLevelComplete") {
+  // keep displaying the second level as open
   levelTwoImageElement.classList.remove("locked");
   level2.classList.remove("lockedTitle");
   levelTreeImageElement.classList.remove("locked");
+  level2.addEventListener("click", function () {
+    window.location.href = "playscreen.html";
+  });
+
+  // display third level as open
   level3.classList.remove("lockedTitle");
   level3.addEventListener("click", function () {
     window.location.href = "playscreen.html";
   });
 } else if (isLevelComplete === "thirdLevelComplete") {
+  // keep displaying second level as open
+  levelTwoImageElement.classList.remove("locked");
+  level2.classList.remove("lockedTitle");
+  levelTreeImageElement.classList.remove("locked");
+  level2.addEventListener("click", function () {
+    window.location.href = "playscreen.html";
+  });
+
+  // keep displaying third level as open
+  level3.classList.remove("lockedTitle");
+  level3.addEventListener("click", function () {
+    window.location.href = "playscreen.html";
+  });
+
+  let comingSoonElement = document.getElementById("coming-soon");
+  comingSoonElement.style.visibility = "visible";
 }
