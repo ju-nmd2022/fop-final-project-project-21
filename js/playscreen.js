@@ -723,64 +723,67 @@ function collision() {
   }
 }
 
-function guardCollision() {
-  let loose = document.querySelector(".guard-loose");
+let loose = document.querySelector(".guard-loose");
 
-  // collision between guard and player
-  const checkGuardCollision = (aPlayer, theGueard) => {
+// collision between guard and player
+const checkGuardCollision = (aPlayer, theGueard) => {
+  if (
+    aPlayer.position.x + aPlayer.width >= theGueard.position.x &&
+    aPlayer.position.x <= theGueard.position.x + theGueard.width &&
+    aPlayer.position.y + aPlayer.height >= theGueard.position.y &&
+    aPlayer.position.y <= theGueard.position.y + theGueard.height
+  ) {
     if (
-      aPlayer.position.x + aPlayer.width >= theGueard.position.x &&
-      aPlayer.position.x <= theGueard.position.x + theGueard.width &&
-      aPlayer.position.y + aPlayer.height >= theGueard.position.y &&
-      aPlayer.position.y <= theGueard.position.y + theGueard.height
+      aPlayer.position.y + aPlayer.height <=
+      theGueard.position.y + aPlayer.velocity.y
     ) {
-      if (
-        aPlayer.position.y + aPlayer.height <=
-        theGueard.position.y + aPlayer.velocity.y
-      ) {
-        // colliding from the top
-        aPlayer.position.y = theGueard.position.y - aPlayer.height;
-        aPlayer.velocity.y = 0;
-        theGueard.velocity.y = 0;
-        loose.style.display = "block";
-        //alert("You got caught by the guard!");
-      } else if (
-        aPlayer.position.y >=
-        theGueard.position.y + theGueard.height + aPlayer.velocity.y
-      ) {
-        // colliding from the bottom
-        aPlayer.position.y = theGueard.position.y + theGueard.height;
-        aPlayer.velocity.y = 0;
-        theGueard.velocity.y = 0;
-        loose.style.display = "block";
-        //alert("You got caught by the guard!");
-      } else if (
-        aPlayer.position.x + aPlayer.width <=
-        theGueard.position.x + aPlayer.velocity.x
-      ) {
-        // colliding from the left
-        aPlayer.position.x = theGueard.position.x - aPlayer.width;
-        aPlayer.velocity.x = 0;
-        theGueard.velocity.y = 0;
-        loose.style.display = "block";
-        //alert("You got caught by the guard!");
-      } else if (
-        aPlayer.position.x >=
-        theGueard.position.x + theGueard.width + aPlayer.velocity.x
-      ) {
-        // colliding from the right
-        aPlayer.position.x = theGueard.position.x + theGueard.width;
-        aPlayer.velocity.x = 0;
-        theGueard.velocity.y = 0;
-        loose.style.display = "block";
-        //alert("You got caught by the guard!");
-      }
+      // colliding from the top
+      aPlayer.position.y = theGueard.position.y - aPlayer.height;
+      aPlayer.velocity.y = 0;
+      theGueard.velocity.y = 0;
+      loose.style.display = "block";
+      //alert("You got caught by the guard!");
+    } else if (
+      aPlayer.position.y >=
+      theGueard.position.y + theGueard.height + aPlayer.velocity.y
+    ) {
+      // colliding from the bottom
+      aPlayer.position.y = theGueard.position.y + theGueard.height;
+      aPlayer.velocity.y = 0;
+      theGueard.velocity.y = 0;
+      loose.style.display = "block";
+      //alert("You got caught by the guard!");
+    } else if (
+      aPlayer.position.x + aPlayer.width <=
+      theGueard.position.x + aPlayer.velocity.x
+    ) {
+      // colliding from the left
+      aPlayer.position.x = theGueard.position.x - aPlayer.width;
+      aPlayer.velocity.x = 0;
+      theGueard.velocity.y = 0;
+      loose.style.display = "block";
+      //alert("You got caught by the guard!");
+    } else if (
+      aPlayer.position.x >=
+      theGueard.position.x + theGueard.width + aPlayer.velocity.x
+    ) {
+      // colliding from the right
+      aPlayer.position.x = theGueard.position.x + theGueard.width;
+      aPlayer.velocity.x = 0;
+      theGueard.velocity.y = 0;
+      loose.style.display = "block";
+      //alert("You got caught by the guard!");
     }
-  };
+  }
+};
 
+function firstPlayerGuardCollision() {
   checkGuardCollision(player, properGuard);
-  checkGuardCollision(player2, properGuard);
   checkGuardCollision(properGuard, player);
+}
+
+function secondPlayerGuardCollision() {
+  checkGuardCollision(player2, properGuard);
   checkGuardCollision(properGuard, player2);
 }
 
@@ -1171,24 +1174,26 @@ function draw() {
   pop();
   drawThePlayers();
   collision();
-  //guardCollision();
+
   collectStars();
   displayArray();
   timer();
 
   guardWalking();
 
-  player.velocity.x = 0;
-  if (keys.d.pressed === true) {
-    player.velocity.x = 6;
-  } else if (keys.a.pressed === true) {
-    player.velocity.x = -6;
-  }
-  player2.velocity.x = 0;
-  if (keys.ArrowRight.pressed === true) {
-    player2.velocity.x = 6;
-  } else if (keys.ArrowLeft.pressed === true) {
-    player2.velocity.x = -6;
+  function moving() {
+    player.velocity.x = 0;
+    if (keys.d.pressed === true) {
+      player.velocity.x = 6;
+    } else if (keys.a.pressed === true) {
+      player.velocity.x = -6;
+    }
+    player2.velocity.x = 0;
+    if (keys.ArrowRight.pressed === true) {
+      player2.velocity.x = 6;
+    } else if (keys.ArrowLeft.pressed === true) {
+      player2.velocity.x = -6;
+    }
   }
 
   if (
@@ -1198,18 +1203,49 @@ function draw() {
     scrolling();
   }
 
-  function standInFrontOfDoor() {
-    let win = document.querySelector(".win");
+  let gameFinishPlayer1 = false;
+  let gameFinishPlayer2 = false;
+
+  function standInFrontOfDoorPlayer1() {
     if (
-      player.position.x + 20 > theDoor.position.x + 85 &&
-      player.position.x + 20 < theDoor.position.x - 85 + theDoor.width &&
+      player.position.x - 20 > theDoor.position.x + 85 &&
+      player.position.x - 20 < theDoor.position.x - 85 + theDoor.width &&
       player.position.y < theDoor.position.y + theDoor.height
     ) {
+      player.velocity.x = 0;
+      gameFinishPlayer1 = true;
+    } else {
+      moving();
+      firstPlayerGuardCollision();
+      gameFinishPlayer1 = false;
+    }
+  }
+
+  function standInFrontOfDoorPlayer2() {
+    if (
+      player2.position.x - 20 > theDoor.position.x + 85 &&
+      player2.position.x - 20 < theDoor.position.x - 85 + theDoor.width &&
+      player2.position.y < theDoor.position.y + theDoor.height
+    ) {
+      player2.velocity.x = 0;
+      gameFinishPlayer2 = true;
+    } else {
+      moving();
+      secondPlayerGuardCollision();
+      gameFinishPlayer2 = false;
+    }
+  }
+
+  function win() {
+    if (gameFinishPlayer1 === true && gameFinishPlayer2 === true) {
+      let win = document.querySelector(".win");
       win.style.display = "block";
     }
   }
 
-  standInFrontOfDoor();
+  standInFrontOfDoorPlayer1();
+  standInFrontOfDoorPlayer2();
+  win();
 }
 
 window.draw = draw;
