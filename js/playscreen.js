@@ -903,6 +903,14 @@ function collectStars() {
   }
 }
 
+function scrolling() {
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+}
+
 // getting the names for the player from the sessionStorage
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing
 let name1 = sessionStorage.getItem("name") ?? "";
@@ -1069,6 +1077,13 @@ function draw() {
     player2.velocity.x = 6;
   } else if (keys.ArrowLeft.pressed === true) {
     player2.velocity.x = -6;
+  }
+
+  if (
+    player.position.y < canvasHeight - 590 &&
+    player2.position.y < canvasHeight - 590
+  ) {
+    scrolling();
   }
 }
 
