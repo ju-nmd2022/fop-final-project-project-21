@@ -1,5 +1,5 @@
-let starsDesplayedLevel1 = sessionStorage.getItem("starsCollectedLevel1");
-let starsDesplayedLevel2 = sessionStorage.getItem("starsCollectedLevel2");
+let starsDisplayedLevel1 = sessionStorage.getItem("starsCollectedLevel1");
+let starsDisplayedLevel2 = sessionStorage.getItem("starsCollectedLevel2");
 let starsDisplayedLevel3 = sessionStorage.getItem("starsCollectedLevel3");
 let nullStar = document.querySelector(".null");
 let oneStar = document.querySelector(".one");
@@ -14,33 +14,45 @@ let oneStar3 = document.querySelector(".one3");
 let twoStar3 = document.querySelector(".two3");
 let threeStar3 = document.querySelector(".three3");
 
-if (starsDesplayedLevel1 === null) {
+if (starsDisplayedLevel1 === null) {
   nullStar.style.display = "block";
-} else if (starsDesplayedLevel1 === "1") {
+} else if (starsDisplayedLevel1 === "1") {
   oneStar.style.display = "block";
-} else if (starsDesplayedLevel1 === "2") {
+} else if (starsDisplayedLevel1 === "2") {
   twoStar.style.display = "block";
-} else if (starsDesplayedLevel1 === "3") {
+} else if (starsDisplayedLevel1 === "3") {
   threeStar.style.display = "block";
 }
+let win = sessionStorage.getItem("levelsComplete");
 
-if (starsDesplayedLevel2 === null) {
-  nullStar2.style.display = "block";
-} else if (starsDesplayedLevel2 === "1") {
+if (
+  (starsDisplayedLevel2 === "1" && win === "secondLevelComplete") ||
+  win === "thirdLevelComplete"
+) {
+  nullStar2.style.display = "none";
   oneStar2.style.display = "block";
-} else if (starsDesplayedLevel2 === "2") {
+} else if (
+  (starsDisplayedLevel2 === "2" && win === "secondLevelComplete") ||
+  win === "thirdLevelComplete"
+) {
+  nullStar2.style.display = "none";
   twoStar2.style.display = "block";
-} else if (starsDesplayedLevel2 === "3") {
+} else if (
+  (starsDisplayedLevel2 === "3" && win === "secondLevelComplete") ||
+  win === "thirdLevelComplete"
+) {
+  nullStar2.style.display = "none";
   threeStar2.style.display = "block";
 }
 
-if (starsDisplayedLevel3 === null) {
-  nullStar3.style.display = "block";
-} else if (starsDesplayedLevel2 === "1") {
+if (starsDisplayedLevel3 === "1" && win === "thirdLevelComplete") {
+  nullStar3.style.display = "none";
   oneStar3.style.display = "block";
-} else if (starsDesplayedLevel2 === "2") {
+} else if (starsDisplayedLevel3 === "2" && win === "thirdLevelComplete") {
+  nullStar3.style.display = "none";
   twoStar3.style.display = "block";
-} else if (starsDesplayedLevel2 === "3") {
+} else if (starsDisplayedLevel3 === "3" && win === "thirdLevelComplete") {
+  nullStar3.style.display = "none";
   threeStar3.style.display = "block";
 }
 

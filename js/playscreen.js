@@ -642,9 +642,9 @@ function collision() {
       button4.height = 2;
       if (movingPlatform3.position.x > 15) {
         movingPlatform3.position.x -= 0.5;
-        movingPlatform3.position.y -= 0.15;
+        movingPlatform3.position.y -= 0.2;
         player.position.x -= 0.5;
-        player.position.y -= 0.15;
+        player.position.y -= 0.2;
       }
     } else {
       button4.position.y = canvasHeight / 2 + 21;
@@ -660,11 +660,11 @@ function collision() {
     ) {
       button5.position.y = 348;
       button5.height = 2;
-      if (movingPlatform4.position.x > canvasWidth - 215) {
+      if (movingPlatform4.position.x < canvasWidth - 216) {
         movingPlatform4.position.x += 0.5;
-        movingPlatform4.position.y -= 0.15;
+        movingPlatform4.position.y -= 0.2;
         player2.position.x += 0.5;
-        player2.position.y -= 0.15;
+        player2.position.y -= 0.2;
       }
     } else {
       button5.position.y = 340;
@@ -799,7 +799,6 @@ const stars = [];
 let starsCollectedLevel1 = 0;
 let starsCollectedLevel2 = 0;
 let starsCollectedLevel3 = 0;
-let starsCollectedLevel4 = 0;
 
 // a loop to create the stars and to display them on random positions
 for (let i = 0; i < starsCount; i++) {
@@ -818,6 +817,7 @@ for (let i = 0; i < starsCount; i++) {
   star.style.top = randomY + "px";
   star.style.width = "30px";
   star.style.height = "30px";
+  star.style.zIndex = "0";
 
   //dataset - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
   star.dataset.x = randomX;
